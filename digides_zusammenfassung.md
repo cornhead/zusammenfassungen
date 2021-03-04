@@ -726,6 +726,7 @@ Testqualität:
 * wichtige Erkenntnis: 100% Test Coverage bedeuten nicht, dass man garantiert alle Fehler findet, sondern bestenfalls die, die vom Fehlermodell modelliert werden.
 
 Aufbau eines Testers:
+	
 * Test Pattern Generator
 * Response Analysis
 * Test Controller
