@@ -1,7 +1,7 @@
 # Sammlung von Zusammenfassungen und anderen Materialien
 
 Die Idee ist, eine Plattform zur Verfügung zu stellen, auf der alle Interessierten Zusammenfassungen von LVAs, Formelsammlungen oder Ausarbeitungen von Prüfungen erstellen und weiterentwickeln können. Hier sollen sie zwar 
-entwickelt werden, aber schlussendlich sollen die so entstandenen Dokumente im (VoWi)[https://vowi.fsinf.at/wiki/TU_Wien/Informatik] veröffentlicht werden.
+entwickelt werden, aber schlussendlich sollen die so entstandenen Dokumente im [VoWi](https://vowi.fsinf.at/wiki/TU_Wien/Informatik) veröffentlicht werden.
 
 ## Style Guide
 
