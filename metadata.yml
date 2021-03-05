@@ -1,0 +1,13 @@
+documentclass: article
+classoptions:
+    - oneside
+papersize: a4
+lang: de-AT
+
+hyperrefoptions:
+    - colorlinks=true
+    - linkcolor=black
+    - urlcolor=blue
+
+toc: true
+toc-title: Inhaltsverzeichnis

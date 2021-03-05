@@ -1,13 +1,11 @@
 ---
 title:  "**Zusammenfassung: Digital Design**"
-toc: true
-toc-title: Inhaltsverzeichnis
 ...
 
 
 ---
 
-An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [**Github**](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
+An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
 
 ---
 

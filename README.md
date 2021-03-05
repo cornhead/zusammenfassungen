@@ -5,18 +5,22 @@ entwickelt werden, aber schlussendlich sollen die so entstandenen Dokumente im [
 
 ## Style Guide
 
-Pandoc unterstützt Yaml-Metadaten-Header. Diese sollen auch genutzt werden, um den Titel des Dokuments (bitte fett geschrieben) anzugeben und -- falls gewünscht -- automatisch ein Inhaltsverzeichnis zu erstellen. Damit möglichst 
-viele Benutzer*innen des VoWis dazu animiert werden, auch an den Zusammenfassungen mitzuschreiben, empfiehlt es sich, nach dem Inhaltsverzeichnis einen Absatz wie den folgenden einzufügen:
+### Header und Metadaten
+Pandoc unterstützt Yaml-Metadaten-Header. Diese sollen auch genutzt werden, um den Titel des Dokuments anzugeben, vorzugsweise fett geschrieben. Standarmäßig wird automatisch ein Inhaltsverzeichnis erstellt. Sollte das nicht erwünscht sein, kann im Metadaten-Header `toc: false` angegeben werden. Damit möglichst viele Benutzer*innen des VoWis dazu animiert werden, auch an den Zusammenfassungen mitzuschreiben, empfiehlt es sich, nach dem Inhaltsverzeichnis -- i.e. direkt nach dem Metadaten-Header -- einen kurzen Disclaimer zwischen horizontalen Linien einzufügen, der zum Mitmachen auffordert und auf auf das Git-Repo verweist. Ein Dokument könnte also einen Header wie den folgenden haben:
 
 ```
 ---
+title: "**<Titel der Zusammenfassung>**"
+...
 
-An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [**Github**](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
+---
+
+An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
 
 ---
 ```
 
-Falls in den Dokumenten Links verwendet werden, sollten sie explizit durch eine entsprechende Formatierung hervorgehoben werden, da dies nicht automatisch passiert und die Links sonst aussehen wie gewöhnlicher Fließtext.
+Falls in einem Dokument Links auf andere Stellen im gleichen Dokument verwendet werden, müssen diese durch geeignete Formatierung hervorgehoben werden, denn standardmäßig erscheinen sie genau so wie der Fließtext.
 
 ## Tools
 
