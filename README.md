@@ -24,7 +24,7 @@ Falls in einem Dokument Links auf andere Stellen im gleichen Dokument verwendet 
 
 ## Tools
 
-Die empfohlenen Tools sind `pandoc` und `make`.
+Die empfohlenen Tools sind `pandoc` und `make`. Außerdem wird `pdflatex` benötigt gemeinsam mit einigen Paketen, die in `texlive`, `texlive-latex-extra` und `texlive-lang-german` enthalten sein sollten.
 
 Geschrieben werden die Zusammenfassungen und Formelsammlungen in Markdown, weil es sehr einsteigerfreundlich ist und dennoch gut formatierte Ausgaben erzeugen kann -- empfehlenswert ist das [Markdown Quick Reference Cheat 
 Sheet](https://wordpress.com/support/markdown-quick-reference/) von Wordpress. Um die Markdown-Files schließlich zu PDF zu parsen, wird Pandoc verwendet. Idealerweise wird Make verwendet um diesen Vorgang zu automatisieren.
@@ -32,6 +32,7 @@ Sheet](https://wordpress.com/support/markdown-quick-reference/) von Wordpress. U
 ## Todo:
 
 Momentan könnten folgende Punkte noch verbessert werden:
-* Rechtschreibung (insbesondere am Anfang habe ich auf Groß-/Kleinschreibung gänzlich verzichtet...)
-* Bilder: falls jemand eine gute Möglichkeit findet, Bilder und Skizzen einzubinden, wäre es bestimmt cool wenn neben all den erwähnten Schaltungen auch ein entsprechendes Bild zu sehen wäre.
-* Formelsammlung ergänzen: Ich habe gegen Ende vernachlässigt die Formeln auch in die Formelsammlung zu kopieren
+* Rechtschreibung & Ergänzung: besser geht immer
+* Bilder für DigiDes: falls jemand eine gute Möglichkeit findet, Bilder und Skizzen einzubinden, wäre es bestimmt cool wenn neben all den erwähnten Schaltungen auch ein entsprechendes Bild zu sehen wäre.
+* Formelsammlung fertigstellen: Ich habe gegen Ende vernachlässigt die Formeln auch in die Formelsammlung zu kopieren
+* Eigentlich sollte es möglich sein in Markdown eine Liste direkt nach einem Absatz zu machen, aber bislang verlang Pandoc eine Leerzeile dazwischen. Dadurch ist der Output nicht so schön. Vielleicht findet da jemand eine Lösung

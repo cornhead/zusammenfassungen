@@ -2,7 +2,7 @@ md2pdf = pandoc -s -f markdown+yaml_metadata_block+tex_math_dollars -t latex --m
 
 .PHONY: all
 
-all: digides_zusammenfassung.pdf risc_v_cheatsheet.pdf
+all: digides_zusammenfassung.pdf risc_v_cheatsheet.pdf depsys_zusammenfassung.pdf
 
 %.pdf: %.md metadata.yml
 	$(md2pdf) -o $@ $<
