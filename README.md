@@ -6,6 +6,9 @@ entwickelt werden, aber schlussendlich sollen die so entstandenen Dokumente im [
 ## Style Guide
 
 ### Header und Metadaten
+
+Dokumente sollten Überschriften haben im Format `<Dokumententyp>: <LVA-Name ohne LVA-Typ>`. So lautet etwa die Überschrift der Zusammenfassung der Vorlesung Digital Design "Zusammenfassung: Digital Design" und nicht "Zusammenfassung: VO Digital Design" und auch nicht "Digital Design -- Zusammenfassung".
+
 Pandoc unterstützt Yaml-Metadaten-Header. Diese sollen auch genutzt werden, um den Titel des Dokuments anzugeben, vorzugsweise fett geschrieben. Standarmäßig wird automatisch ein Inhaltsverzeichnis erstellt. Sollte das nicht erwünscht sein, kann im Metadaten-Header `toc: false` angegeben werden. Damit möglichst viele Benutzer*innen des VoWis dazu animiert werden, auch an den Zusammenfassungen mitzuschreiben, empfiehlt es sich, nach dem Inhaltsverzeichnis -- i.e. direkt nach dem Metadaten-Header -- einen kurzen Disclaimer zwischen horizontalen Linien einzufügen, der zum Mitmachen auffordert und auf auf das Git-Repo verweist. Ein Dokument könnte also einen Header wie den folgenden haben:
 
 ```
