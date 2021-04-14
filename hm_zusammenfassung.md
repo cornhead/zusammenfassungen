@@ -63,6 +63,6 @@ Der Unterschied zwischen (1) und (2) ist die Produktivitätslücke, der Untersch
 
 # VHDL
 
-
+Start des Kapitels 2. VHDL:
 
 # Hardware Modelling
