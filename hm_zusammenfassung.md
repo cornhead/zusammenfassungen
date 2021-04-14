@@ -176,7 +176,7 @@ end architecture;
 
 Signale die nicht über die Entity hinweg propagiert werden sollen, werden innerhalb der Architektur definiert.
 In Hardware kann man sich die Signale auch als benannte Leitungen (named wires) vorstellen. In diesem Fall geben wir den beiden 
-Leitungen (Wires), die zum `or`führen einen expliziten Namen.
+Leitungen (Wires), die zum `or` führen einen expliziten Namen.
 
 **Vektordatentypen**
 
@@ -333,7 +333,7 @@ configuration v1 of testbench is
               use entity MUX41(concurrent);
        end for;
   end for;
-end conguration v1;
+end configuration v1;
 ```
 
 Angenommen wir befinden uns in einer Architektur `beh` dort gibt es zwei Component Instantiations `SEL : MUX41Comp`
