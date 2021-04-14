@@ -5,6 +5,8 @@ entwickelt werden, aber schlussendlich sollen die so entstandenen Dokumente im [
 
 ## Style Guide
 
+Im Allgemeinen sollten Zusammenfassungen kurz und bündig sein. Sie dienen ja dazu, auf einen Blick viel Information zu bekommen, und nicht wie Skripten, um sich detailliert mit etwas auseinanderzusetzen. Das ist natürlich nicht immer leicht. Dieses Ziel wird aber z.B. dadurch unterstützt, dass man sich in Form von Stichwörtern oder Halbsätzen in Bullet-Lists ausdrückt. Natürlich können können Zusammenfassungen auch in ganzen Sätzen formuliert sein, aber sie sollten eben nicht zu Skripten ausarten.
+
 ### Header und Metadaten
 
 Dokumente sollten Überschriften haben im Format `<Dokumententyp>: <LVA-Name ohne LVA-Typ>`. So lautet etwa die Überschrift der Zusammenfassung der Vorlesung Digital Design "Zusammenfassung: Digital Design" und nicht "Zusammenfassung: VO Digital Design" und auch nicht "Digital Design -- Zusammenfassung".
@@ -32,10 +34,3 @@ Die empfohlenen Tools sind `pandoc` und `make`. Außerdem wird `pdflatex` benöt
 Geschrieben werden die Zusammenfassungen und Formelsammlungen in Markdown, weil es sehr einsteigerfreundlich ist und dennoch gut formatierte Ausgaben erzeugen kann -- empfehlenswert ist das [Markdown Quick Reference Cheat 
 Sheet](https://wordpress.com/support/markdown-quick-reference/) von Wordpress. Um die Markdown-Files schließlich zu PDF zu parsen, wird Pandoc verwendet. Idealerweise wird Make verwendet um diesen Vorgang zu automatisieren.
 
-## Todo:
-
-Momentan könnten folgende Punkte noch verbessert werden:
-* Rechtschreibung & Ergänzung: besser geht immer
-* Bilder für DigiDes: falls jemand eine gute Möglichkeit findet, Bilder und Skizzen einzubinden, wäre es bestimmt cool wenn neben all den erwähnten Schaltungen auch ein entsprechendes Bild zu sehen wäre.
-* Formelsammlung fertigstellen: Ich habe gegen Ende vernachlässigt die Formeln auch in die Formelsammlung zu kopieren
-* Eigentlich sollte es möglich sein in Markdown eine Liste direkt nach einem Absatz zu machen, aber bislang verlang Pandoc eine Leerzeile dazwischen. Dadurch ist der Output nicht so schön. Vielleicht findet da jemand eine Lösung
