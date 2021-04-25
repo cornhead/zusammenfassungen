@@ -75,38 +75,45 @@ gewünscht ist.
 
 ## VHDL-Sprachkonzepte
 
-In VHDL wird das Design über Entities aufgebaut. Eine `entity` ist ein Funktionsblock der eine gewisse Aufgabe im Design 
-übernimmt. Eine Entity kann zum Beispiel ein Synchronizer oder ein Parity-Erzeuger sein. Theoretisch kann das gesamte 
-Design auch in einer einzelnen Entity gelöst werden. Von dieser Vorgehensweise wird aufgrund von schlechter 
-Wartbarkeit/Skalierbarkeit abgeraten.
+### Entity ###
+Die `entity` ist quasi eine black box, sie beschreibt nur, wie ein Funktionsblock "von außen" aussieht, also seine Schnittstellen zum restlichen Design.
 
 **Deklaration einer Entity**
 
 Eine Entity wird wie folgt in einem VHDL-File (.vhd-Extension) deklariert.
 
 ```
-entity <entity-name> is 
-port 
-( 
-       <first-input-signal> : in STD_LOGIC; 
-       <second-input-signal> : in STD_LOGIC; 
-       
-       <first-output-signal> : out STD_LOGIC; 
-       <second-output-signal> : out STD_LOGIC; 
-       <third-output-signal> : out STDL_LOGIC
+entity <entity-name> is
+generic (
+        generic-list
 );
+port ( 
+       port-list
+);
+end entity;
 ```
 
-Die Ausdrücke(Identifier) in den Spitzklammern z.B. <entity-name> können beliebig vom Designer gewählt werden.
-Als Entity-Name kann beispielsweise `sync` für Synchronizer vergeben werden. 
+Identifier wie z.B. der entity-Name können (fast) beliebig vom Designer gewählt werden. Sie sollten klingend sein.
 
-Die Deklaration einer Entity beginnt mit dem Entity-Name, gefolgt von der Port-Map. Die Port-Map definiert die Schnittstelle
-zum restlichen Design. Unser Beispiel hat zwei Eingangs- und drei Ausgangssignale. Diese sind am Schlüsselwort `in` bzw `out`
-erkennbar. Es gibt auch Signale die gelesen und geschrieben werden können. Diese werden mit `inout` deklariert. Es 
-gibt auch noch weitere Port-Modes die in kleineren Designs nicht allzu häufig zur Anwendung kommen (vgl `linkage` und `buffer`).
+**Anmerkung zu Identifiers**
 
-Damit wäre die Schnittstelle der Entity definiert. Jetzt fehlt noch die tatsächliche Logig der Entity. Das
-wird über eine `architecture` implementiert. 
+Ein Identifier (z.B. Namer einer Entity, Signals oder Architektur) hat gewisse Einschränkungen in VHDL. 
+
+* Das erste Zeichen muss ein Buchstabe sein 
+* Das letzte Zeichen darf kein Unterstrich sein 
+* Es dürfen keine zwei Unterstriche aufeinanderfolgen
+
+Die Deklaration einer Entity beginnt mit dem Entity-Name, gefolgt von den generics (optional). Anschließend werden die Ports definiert, die Schnittstellen
+zum restlichen Design. 
+Die möglichen port modes sind:
+* **in** für Eingangssignale. Kann vom Modul gelesen, aber nicht geschrieben werden.
+* **out** für Ausgangssignale. Kann vom Modul geschrieben, aber nicht gelesen werden.
+* **buffer** bidirektional. Kann von innen gelesen und geschrieben werden, von außen nur geschrieben.
+* **inout** bidirektional. Kann von innen und außen geschrieben und gelesen werden.
+* **linkage**
+
+### Architecture ###
+Die entity beschreibt das Aussehen eines Funktionsblocks. Sein eigentliches Verhalten wird in der `architecture` definiert.
 
 **Deklaration einer Architecture**
 
@@ -138,14 +145,6 @@ end architecture;
 ```
 
 Signale werden über den Pfeiloperator `<=` zugewiesen. 
-
-**Anmerkung zu Identifiers**
-
-Ein Identifier (z.B. Namer einer Entity, Signals oder Architektur) hat gewisse Einschränkungen in VHDL. 
-
-* Das erste Zeichen muss ein Buchstabe sein 
-* Das letzte Zeichen darf kein Unterstrich sein 
-* Es dürfen keine zwei Unterstriche aufeinanderfolgen
 
 ## VHDL-Sprachmittel
 
