@@ -4,7 +4,8 @@ title: "Formelsammlung: Digital Design"
 
 ## Disclaimer
 
-An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
+### Mach mit!
+An dieser Formelsammlung und der zugehörigen Zusammenfassung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
 
 
 

@@ -1,6 +1,6 @@
 ---
 documentclass: beamer
-theme: Madrid
+theme: metropolis
 
 toc: false
 ...

@@ -10,8 +10,8 @@ Dokumente sollten Überschriften haben im Format `<Dokumententyp>: <LVA-Name ohn
 
 Standarmäßig wird automatisch ein Inhaltsverzeichnis erstellt. Sollte das nicht erwünscht sein, kann im Yaml-Metadaten-Header `toc: false` angegeben werden. Das Inhaltsverzeichnis beinhaltet Links zu den entsprechenden Kapiteln, die aber schwarz dargestellt werden. (Durch die Einstellung, die das bewirkt, ergibt sich auch, dass alle Links in einem Dokument auf andere Stellen in diesem Dokument ebenfalls schwarz dargestellt werden und erst durch entsprechende Formatierung gekennzeichnet werden müssen.)
 
-Um zu erreichen, dass möglichst viele begeisterte Student*innen an den Zusammenfassungen mitwirken, soll direkt nach dem Yaml-Metadaten-Header ein Disclaimer eingefügt werden, der zum Mitmachen auffordert und auf das Github-Repo verweist.
-Eine Zusammenfassung könnte also etwa einen Header haben wie den Folgenden:
+Um zu erreichen, dass möglichst viele begeisterte Student*innen an den Zusammenfassungen mitwirken, soll direkt am Anfang des Dokuments ein Disclaimer eingefügt werden, der zum Mitmachen auffordert und auf das Github-Repo verweist.
+Eine Zusammenfassung im Article-Stil könnte also etwa einen Header haben wie den Folgenden haben:
 
 ~~~
 ---
@@ -24,6 +24,22 @@ An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Gi
 
 ---
 ~~~
+
+Und eine Formelsammlung im Beamer-Stil könnte etwa folgenden Header haben:
+
+~~~
+---
+title: "**<Titel der Formelsammlung>**"
+...
+
+## Disclaimer
+
+### Mach mit!
+An dieser Formelsammlung und der zugehörigen Zusammenfassung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
+~~~
+
+In der Beamer-Präsentation wird die Überschrift auf Level 3 (`###`) also Box dargestellt (abhängig vom verwendeten Template).
+
 
 ## Textgestaltung und Formatierung
 
