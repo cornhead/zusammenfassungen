@@ -1,0 +1,9 @@
+---
+lang: de-AT
+
+hyperrefoptions:
+    - colorlinks=true
+    - linkcolor=black
+    - urlcolor=blue
+
+...
