@@ -179,32 +179,15 @@ Leitungen (Wires), die zum `or` führen einen expliziten Namen.
 
 **Vektordatentypen**
 
-Bis jetzt wurden nur Signale mit einer Breite von einem Bit verwendet. Um einen breiteren Datenbus zu implementieren, 
-müssen nicht manuell `n`-neue Signale bzw. Ports angelegt werden. 
-
+Signale mit einer Breite von mehr als einem Bit können ganz einfach als `STD_LOGIC_VECTOR` implementiert werden.
+Um die Breite festzulegen, gibt es zwei Möglichkeiten:
 ```
-entity MUX41 is 
-port 
-( 
-       I0, I1, I2, I3 : in STD_LOGIC; 
-       S : in STD_LOGIC_VECTOR(1 downto 0);
-       0 : in STD_LOGIC
-);
+signal <name> : STD_LOGIC_VECTOR(<lsb> to <msb>);
+
+signal <name> : STD_LOGIC_VECTOR(<msb> downto <lsb>);
 ```
 
-Hier sehen wir einen Multiplexer der aus vier Eingängen einen Ausgang auswählt. Dazu benötigen wir 2-Bit für
-das Select-Signal. Dieses definieren wir als STD_LOGIC_VECTOR mit einer Breite von 2 Bit. 
-
-Eine Entity mit einem Eingangsdatenbus von 8-Bit würde beispielsweise so aussehen: 
-
-```
-entity Example is 
-port 
-( 
-       I : in STD_LOGIC_VECTOR(7 downto 0); 
-       0 : in STD_LOGIC
-);
-```
+Achtung auf die Indexierung der einzelnen Bits des Vektors bei diesen beiden Möglichkeiten!
 
 **Konditionelle Zuweisung**
 
@@ -236,9 +219,8 @@ begin
 end architecture;
 ```
 
-Selected wählt aus einem Signal aus wohingegen die Conditional-Anweisung Boolsche-Ausdrücke evaluiert. Im Selected-
-Beispiel wird auch das Vektor-Literal verwendet. Ein Vektor kann in VHDL bequem über die Doppelhochkomma verglichen 
-werden. 
+Selected ist vergleichbar mit einem `case`-Statement in C, Conditional hingegen mit einem `if-else`.
+Wichtig: Immer ein `when others` oder ein finales `else` angeben, damit ALLE Möglichkeiten abgedeckt sind!
 
 **Generics**
 
@@ -344,5 +326,31 @@ Hier werden zwei Komponenten-Instanzen mit der gleichen Entity aber unterschiedl
 Auch ist es möglich das zwei Instanzen der gleichen Komponente mit unterschiedlichen Entities befüllt werden. 
 
 Die Component Configuration **kann weggelassen werden**, falls Entity und Archtiektur im Design eindeutig sind.
+
+## Simulation ##
+
+Um zu testen, ob das Design auch tut, wird es in einer **Testbench** simuliert.
+Diese ist eine spezielle entity, die quasi die gesamte Welt um das zu testende Design simulieren muss:
+```
+entity testbench is
+end;
+```
+
+In der zugehörigen architecture wird dann die Unit Under Test instanziert, und an sie Eingangssignale zum Testen angelegt, entweder direkt oder über einen `process`.
+Für die Simulation nicht benötigte Output Ports können in der Port Map als `open` deklariert werden.
+
+### Delay Modelle ###
+Beim direkten Anlegen von Signalen können verschiedene Delay Models verwendet werden.
+
+**Pure Delay**: Das angegebene Signal wird einfach um eine gewisse Zeit (hier 15ns) nach hinten verschoben.
+```
+O <= transport S after 15 ns;
+```
+**Inertial Delay**: Beim Inertial Delay werden zusätzlich kurze Pulse entfernt.
+```
+O <= reject 10 ns inertial S after 15 ns;
+```
+In diesem Beispiel wird an O ebenfalls das Signal S um 15ns verschoben angelegt, allerdings werden Pulse kürzer als 10ns entfernt (`reject`).
+Reject kann ausgelassen werden, dann wird der delay-Wert auch für reject verwendet.
 
 # Hardware Modelling
