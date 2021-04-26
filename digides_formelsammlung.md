@@ -1,5 +1,5 @@
 ---
-title: "Formelsammlung: Digital Design"
+title: "**Formelsammlung: Digital Design**"
 ...
 
 ## Disclaimer

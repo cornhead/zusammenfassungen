@@ -75,14 +75,14 @@ gewünscht ist.
 
 ## VHDL-Sprachkonzepte
 
-### Entity ###
+### Entity
 Die `entity` ist quasi eine black box, sie beschreibt nur, wie ein Funktionsblock "von außen" aussieht, also seine Schnittstellen zum restlichen Design.
 
-**Deklaration einer Entity**
+#### Deklaration einer Entity
 
 Eine Entity wird wie folgt in einem VHDL-File (.vhd-Extension) deklariert.
 
-```
+~~~ {.vhdl .number-lines}
 entity <entity-name> is
 generic (
         generic-list
@@ -91,11 +91,11 @@ port (
        port-list
 );
 end entity;
-```
+~~~
 
 Identifier wie z.B. der entity-Name können (fast) beliebig vom Designer gewählt werden. Sie sollten klingend sein.
 
-**Anmerkung zu Identifiers**
+#### Anmerkung zu Identifiers
 
 Ein Identifier (z.B. Namer einer Entity, Signals oder Architektur) hat gewisse Einschränkungen in VHDL. 
 
@@ -106,31 +106,32 @@ Ein Identifier (z.B. Namer einer Entity, Signals oder Architektur) hat gewisse E
 Die Deklaration einer Entity beginnt mit dem Entity-Name, gefolgt von den generics (optional). Anschließend werden die Ports definiert, die Schnittstellen
 zum restlichen Design. 
 Die möglichen port modes sind:
+
 * **in** für Eingangssignale. Kann vom Modul gelesen, aber nicht geschrieben werden.
 * **out** für Ausgangssignale. Kann vom Modul geschrieben, aber nicht gelesen werden.
 * **buffer** bidirektional. Kann von innen gelesen und geschrieben werden, von außen nur geschrieben.
 * **inout** bidirektional. Kann von innen und außen geschrieben und gelesen werden.
 * **linkage**
 
-### Architecture ###
+### Architecture
 Die entity beschreibt das Aussehen eines Funktionsblocks. Sein eigentliches Verhalten wird in der `architecture` definiert.
 
-**Deklaration einer Architecture**
+#### Deklaration einer Architecture
 
 Eine Architecture wird üblicherweise im gleichen VHDL-File wie die Entity deklariert.
 
-```
+~~~ {.vhdl .number-lines}
 architecture <architecture-name> of <entity-name> is
 begin 
        <logic> 
 end architecture; 
-```
+~~~
 
 Hierbei kann der Architekturname frei gewählt werden. Der Entity-Name muss der selbe wie bei der Entity-Deklaration sein. 
 
-**Beispiel: Multiplexer in VHDL**
+#### Beispiel: Multiplexer in VHDL
 
-```
+~~~ {.vhdl .number-lines}
 entity MUX21 is 
 port 
 ( 
@@ -142,7 +143,7 @@ architecture muxlogic of MUX21 is
 begin 
        O <= (I0 and (not S)) or (I1 and S)
 end architecture; 
-```
+~~~
 
 Signale werden über den Pfeiloperator `<=` zugewiesen. 
 
@@ -151,19 +152,19 @@ Signale werden über den Pfeiloperator `<=` zugewiesen.
 Bisweilen wurde nur einzelne Signal-Zuweisung mittels Boolscher-Operatoren betrachtet. Bei komplexerer Logik 
 wird diese aber auch schnell unübersichtlich. VHDL bietet einige Sprachmittel, um dies übersichtlicher zu gestalten. 
 
-**Interne Signale**
+### Interne Signale
 
 Wir betrachten folgende Architektur: 
 
-```
+~~~ {.vhdl .number-lines}
 architecture muxlogic of MUX21 is
 begin 
        O <= (I0 and (not S)) or (I1 and S)
 end architecture; 
-```
+~~~
 Diese kann auch geschrieben werden als: 
 
-```
+~~~ {.vhdl .number-lines}
 architecture muxlogic of MUX21 is
  signal A0, A1: STD_LOGIC;
 begin 
@@ -171,18 +172,18 @@ begin
        A1 <= (I1 and S)
        O <= A0 or A1
 end architecture; 
-```
+~~~
 
 Signale die nicht über die Entity hinweg propagiert werden sollen, werden innerhalb der Architektur definiert.
 In Hardware kann man sich die Signale auch als benannte Leitungen (named wires) vorstellen. In diesem Fall geben wir den beiden 
 Leitungen (Wires), die zum `or` führen einen expliziten Namen.
 
-**Vektordatentypen**
+### Vektordatentypen
 
 Bis jetzt wurden nur Signale mit einer Breite von einem Bit verwendet. Um einen breiteren Datenbus zu implementieren, 
 müssen nicht manuell `n`-neue Signale bzw. Ports angelegt werden. 
 
-```
+~~~ {.vhdl .number-lines}
 entity MUX41 is 
 port 
 ( 
@@ -190,30 +191,30 @@ port
        S : in STD_LOGIC_VECTOR(1 downto 0);
        0 : in STD_LOGIC
 );
-```
+~~~
 
 Hier sehen wir einen Multiplexer der aus vier Eingängen einen Ausgang auswählt. Dazu benötigen wir 2-Bit für
 das Select-Signal. Dieses definieren wir als STD_LOGIC_VECTOR mit einer Breite von 2 Bit. 
 
 Eine Entity mit einem Eingangsdatenbus von 8-Bit würde beispielsweise so aussehen: 
 
-```
+~~~ {.vhdl .number-lines}
 entity Example is 
 port 
 ( 
        I : in STD_LOGIC_VECTOR(7 downto 0); 
        0 : in STD_LOGIC
 );
-```
+~~~
 
-**Konditionelle Zuweisung**
+### Konditionelle Zuweisung
 
 Es ist auch möglich Fallunterscheidung bei der Signal-Zuweisung durchzuführen. Das geht mit dem `conditional` oder 
 `selected`-Statement.
 
 Zuweisung mit `conditional`. Hier wieder der 4-1 Mux als Beispiel.
 
-```
+~~~ {.vhdl .number-lines}
 architecture conditional of MUX41 is
 begin
        O <= I0 when S="00" else
@@ -221,11 +222,11 @@ begin
             I2 when S="10" else
             I3;
 end architecture;
-```
+~~~
 
 Zuweisung mit `selected`. Gleiches Beispiel.
 
-```
+~~~ {.vhdl .number-lines}
 architecture conditional of MUX41 is
 begin
        with S select
@@ -234,18 +235,18 @@ begin
             I2 when "10",
             I3 when others;
 end architecture;
-```
+~~~
 
 Selected wählt aus einem Signal aus wohingegen die Conditional-Anweisung Boolsche-Ausdrücke evaluiert. Im Selected-
 Beispiel wird auch das Vektor-Literal verwendet. Ein Vektor kann in VHDL bequem über die Doppelhochkomma verglichen 
 werden. 
 
-**Generics**
+### Generics
 
 Um seine Entity vielseitiger einzusetzen, ist es auch möglich gewisse Werte vom Verwender der Entity definieren zu lassen. 
 So kann z.B. ein Multiplexer definiert werden, der eine variable Eingangs- und Ausgangsbreite hat. 
 
-```
+~~~ {.vhdl .number-lines}
 entity MUX41 is
 generic ( width : NATURAL := 2);
 port (
@@ -254,7 +255,7 @@ port (
        O : out STD_LOGIC_VECTOR(width-1 downto 0)
      );
 end entity;
-```
+~~~
 
 Generics werden in der Generic-Map zugewiesen. Genau so wie Signale haben sie einen Datentyp. Die Zuweisen `:= 2` im 
 Beispiel ist ein Default-Wert. Dieser kommt zur Anwendung, wenn der Verwender der Entity das Generic nicht setzt.
@@ -270,11 +271,11 @@ Dazu werden zunächst drei Begriffe:
 * Component Instantiation 
 * Component Configuration
 
-**Component Declaration**
+### Component Declaration
 
 Um eine Entity innerhalb einer anderen Entity zu verwenden, wird als erstes eine Component Declaration benötigt. 
 
-```
+~~~ {.vhdl .number-lines}
 component MUX41Comp is
 generic ( width : NATURAL );
 port (
@@ -283,17 +284,17 @@ port (
        O : out STD_LOGIC_VECTOR(width-1 downto 0)
      );
 end entity;
-```
+~~~
 
 Eine Komponente hat in etwa den gleichen Aufbau, wie eine Entity. Die Komponente definiert die Schnittstelle zu 
 der Entity, die verwendet werden soll. Für unsere Zwecke genügt es meist, die Entity zu kopieren. 
 Component-Declaration können sich entweder in Paketen oder am Beginn einer Architecture befinden.
 
-**Component Instantiation**
+### Component Instantiation
 
 Die Component Instantiation verknüpft die Komponente mit unserem Design. 
 
-```
+~~~ {.vhdl .number-lines}
 architecture ...
        component ...
        signal TB_I0, TB_I1, TB_S, TB_O, ...
@@ -309,7 +310,7 @@ begin
        );
 
 end architecture;    
-```
+~~~
 
 Hier werden in unserer Architecture die Signale der Komponente mit unseren internen Signalen verbunden. 
 Auf der linken Seite der Portmap stehen die Signale der Komponente. 
@@ -317,12 +318,12 @@ Auf der linken Seite der Portmap stehen die Signale der Komponente.
 Achtung! Hier wird nur die Komponente mit unserem Design verknüpft. Es gibt noch keine Verbindung zu einer konkreten Entity.
 Hierfür benötigt es die Component Configuration. 
 
-**Component Configuration**
+### Component Configuration
 
 Die Component Configuration legt fest, welche Entity mit welcher Architecture in unsere Komponente gesetzt wird. Eine 
 Entity kann nämlich auch über mehrere Architekturen verfügen. 
 
-```
+~~~ {.vhdl .number-lines}
 configuration v1 of testbench is
  for beh
        for SEL : MUX41Comp
@@ -333,7 +334,7 @@ configuration v1 of testbench is
        end for;
   end for;
 end configuration v1;
-```
+~~~
 
 Angenommen wir befinden uns in einer Architektur `beh` dort gibt es zwei Component Instantiations `SEL : MUX41Comp`
 und `COND : MUX41Comp`. Nun wollen wir das die Komponente `SEL` mit unserer Selected-Implementierung des Multiplexer 

@@ -6,7 +6,7 @@ hyperrefoptions:
     - linkcolor=black
     - urlcolor=blue
 
-highlight-style: pygments
+highlight: espresso
 listings: true
 
 ...
