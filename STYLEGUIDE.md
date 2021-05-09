@@ -13,7 +13,7 @@ Standarmäßig wird automatisch ein Inhaltsverzeichnis erstellt. Sollte das nich
 Um zu erreichen, dass möglichst viele begeisterte Student*innen an den Zusammenfassungen mitwirken, soll direkt am Anfang des Dokuments ein Disclaimer eingefügt werden, der zum Mitmachen auffordert und auf das Github-Repo verweist.
 Eine Zusammenfassung im Article-Stil könnte also etwa einen Header haben wie den Folgenden haben:
 
-~~~
+~~~ 
 ---
 title: "**<Titel der Zusammenfassung>**"
 ...
@@ -60,3 +60,13 @@ Um einen einheitlichen Stil zu erreichen, wird gebeten die kleinen Header vor Bu
 ### Tabellen
 
 ### Programm-Code
+
+Blöcke mit Programm-Code werden zwischen zwei Zeilen mit je drei Tilden gestellt. Nach den "öffnenden" Tilden kann in geschwungenen Klammern die Sprache angegeben werden und die Zeilennummerierung aktiviert werden. Ein Beispiel wäre der folgende Code-Block:
+
+~~~
+~~~ {.c .number-lines}
+int foo(){
+	return 0;
+}
+~~~
+~~~

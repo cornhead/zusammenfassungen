@@ -2,6 +2,6 @@
 documentclass: beamer
 theme: metropolis
 
-toc: false
+toc: true
 ...
 

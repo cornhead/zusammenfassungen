@@ -332,10 +332,11 @@ Die Component Configuration **kann weggelassen werden**, falls Entity und Archti
 
 Um zu testen, ob das Design auch tut, wird es in einer **Testbench** simuliert.
 Diese ist eine spezielle entity, die quasi die gesamte Welt um das zu testende Design simulieren muss:
-```
+
+~~~ {.vhdl .number-lines}
 entity testbench is
 end;
-```
+~~~~
 
 In der zugehörigen architecture wird dann die Unit Under Test instanziert, und an sie Eingangssignale zum Testen angelegt, entweder direkt oder über einen `process`.
 Für die Simulation nicht benötigte Output Ports können in der Port Map als `open` deklariert werden.
@@ -344,13 +345,17 @@ Für die Simulation nicht benötigte Output Ports können in der Port Map als `o
 Beim direkten Anlegen von Signalen können verschiedene Delay Models verwendet werden.
 
 **Pure Delay**: Das angegebene Signal wird einfach um eine gewisse Zeit (hier 15ns) nach hinten verschoben.
-```
+
+~~~ {.vhdl .number-lines}
 O <= transport S after 15 ns;
-```
+~~~
+
 **Inertial Delay**: Beim Inertial Delay werden zusätzlich kurze Pulse entfernt.
-```
+
+~~~ {.vhdl .number-lines}
 O <= reject 10 ns inertial S after 15 ns;
-```
+~~~
+
 In diesem Beispiel wird an O ebenfalls das Signal S um 15ns verschoben angelegt, allerdings werden Pulse kürzer als 10ns entfernt (`reject`).
 Reject kann ausgelassen werden, dann wird der delay-Wert auch für reject verwendet.
 

@@ -12,7 +12,8 @@ articles = \
 	hm_zusammenfassung
 
 beamers = \
-	digides_formelsammlung
+	digides_formelsammlung\
+	adm_formelsammlung
 	
 all = $(articles) $(beamers)
 
