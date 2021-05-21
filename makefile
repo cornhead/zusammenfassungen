@@ -9,7 +9,8 @@ articles = \
 	digides_zusammenfassung\
 	risc_v_cheatsheet\
 	depsys_zusammenfassung\
-	hm_zusammenfassung
+	hm_zusammenfassung\
+	rta_zusammenfassung
 
 beamers = \
 	digides_formelsammlung\
