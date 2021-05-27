@@ -16,7 +16,6 @@ beamers = \
 	digides_formelsammlung\
 	adm_formelsammlung
 	
-all = $(articles) $(beamers)
 
 .PHONY: all
 .PHONY: articles
@@ -24,7 +23,7 @@ all = $(articles) $(beamers)
 .PHONY: clean
 
 
-all: $(all)	
+all: articles beamers	
 
 clean:
 	rm -f $(all)
