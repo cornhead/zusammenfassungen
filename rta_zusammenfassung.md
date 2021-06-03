@@ -15,14 +15,25 @@ An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Gi
 ## Galilei
 Galileo Galilei; ~16. Jhd ([Wikipedia](https://de.wikipedia.org/wiki/Galileo_Galilei))
 
+Griechen hatten bereits in der Antike fantastisches Wissen über die Statik von Objekten, aber nicht über deren Dynamik, vermutlich weil dafür die Methoden der Zeitmessung noch nicht forgeschritten Genug waren. Galileo weiß, dass Pendel sehr gleichmäßig schwingen und kann daher die Dynamik von Gegenständen besser untersuchen.
+
+
+
 * Ptolemei'sches Weltbild (geozentrisch) $\rightarrow$ Platenbahnen beschreiben "Schlaufen" // Skizze einfügen
 * Kopernikanisches Weltbild (heliozentrisch) $\rightarrow$ Planetenbahnen beschreiben Kreise
 * Kepplersches Weltbild $\rightarrow$ Planetenbahnen beschreiben Ellipsen
 
 wichtiges Kepplersches Gesetz: in gleicher Zeit überstreichen Planeten gleiche Flächen (heute bekannt als Drehimpulserhaltung)
 
+
+
+Galileo beschreibt folgendes Gedankenexperiment: Man befindet sich in einem Schiffsrumpf ohne fenster. Im Raum sind außerdem ein paar Fliegen, ein Goldfischglas und eine aufgehängte Flasche, aus der Wasser in eine Schüssel tropft. Wenn das Schiff im Hafen steht, dann fliegen die Fliegen in alle Richtungen gleich mühelos, genauso wie der Goldfisch in alle Richtungen gleich schnell schwimmen kann und die Tropfen einfach in die Schüssel fallen. Und auch wenn das Schiff nun ausgelaufen ist und sich mit gleichbleibender Geschwindigkeit fortbewegt, werden Fliegen Richtung Bug und Richtung Heck gleich schnell fliegen können, genau wie der Fisch in alle Richtung gleich schnell schwimmen kann, und die Tropfen fallen nicht neben die Schüssel, sondern immer noch in sie hinein. Tatsächlich kann man ohne Fenster gar nicht sagen, ob das Schiff steht oder ob es sich gleichförmig geradlinig fortbewegt $\rightarrow$ Relativitätsprinzip
+
+Galileo stellt fest, dass Kräft nicht direkt die Geschwindigkeit von Objekten beeinflusst, sondern deren Beschleunigung $\rightarrow$ geradlinig gleichförmige Bewegungen sind "Grundbewegungen"
+
 Galileo entwickelt Fallgesetze: Holzkugel und Bleikugel fallen in gleicher Zeit von Schiefem Turm von Pisa.
-Außerdem nimmt Gallileo gleichförmige, geradlinige Bewegungen als "Grundbewegung" an
+
+Tatsächlich ist sich Galileo im Grunde wichtiger Konzepte bewusst, die heute als Newton'sche Axiome bekannt sind, bloß hat er sie nicht mathematisch beschrieben.
 
 ## Newton
 Isaac Newton; ~17. Jhd ([Wikipedia](https://de.wikipedia.org/wiki/Isaac_Newton))
@@ -45,11 +56,11 @@ Setzt man $F^i(x^m)=0^i$, folgt $m \cdot x"î(t) = 0$. Für $m \neq 0$ folgt dan
 
 $F_{grav}^i(x^m) = - G \frac{M \cdot m}{r^3} x^i = - G \frac{M \cdot m}{r^2} e_r^i$
 
-Gravitationsgesetz erklärt sowohl die Umlaufbahn des Mondes, als auch das Fallen von Äpfeln auf berühmte Wissenschaftler.
+Gravitationsgesetz erklärt sowohl die Umlaufbahn des Mondes, als auch das Fallen von Äpfeln auf berühmte Wissenschaftler $\rightarrow$ die gleichen Gesetze gelten für ganz große und ganz kleine Objekte (Griechen dachten noch, dass für Planeten eigene Gesetze gelten würden)
 
 Wurfgesetz:
 
-* Abstand zum Erdboden $y$; Erdradius $R$; $y << R$; Erdmasse $M$
+* Abstand zum Erdboden $y$; Erdradius $R$; $y \ll R$; Erdmasse $M$
 * Dann lässt sich Berechnung der Gravitationskraft vereinfachen zu
 * $|f_g| = G \frac{M \cdot m}{R^2} = m \cdot g$ mit  Erdbeschleunigung $g = \frac{G \cdot M}{R^2} \approx 9.81m/s^2$
 
