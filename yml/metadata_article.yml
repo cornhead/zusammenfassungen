@@ -1,9 +1,6 @@
----
 documentclass: article
 classoptions:
     - oneside
 papersize: a4
 
 toc: true
-toc-title: Inhaltsverzeichnis
-...

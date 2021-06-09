@@ -3,10 +3,8 @@ lang: de-AT
 
 hyperrefoptions:
     - colorlinks=true
-    - linkcolor=black
-    - urlcolor=blue
+    - linkcolor=blue
+    - urlcolor=red
 
 highlight: espresso
 listings: true
-
-...
