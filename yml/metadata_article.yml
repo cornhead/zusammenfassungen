@@ -2,5 +2,8 @@ documentclass: article
 classoptions:
     - oneside
 papersize: a4
+header-includes: |
+	\usepackage{amsfonts,amsmath,amssymb,amsthm} 
+	\usepackage{stmaryrd}
 
 toc: true
