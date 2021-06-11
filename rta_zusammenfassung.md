@@ -56,7 +56,7 @@ Setzt man $F^i(x^m)=0^i$, folgt $m \cdot x"î(t) = 0$. Für $m \neq 0$ folgt dan
 
 $F_{grav}^i(x^m) = - G \frac{M \cdot m}{r^3} x^i = - G \frac{M \cdot m}{r^2} e_r^i$
 
-Gravitationsgesetz erklärt sowohl die Umlaufbahn des Mondes, als auch das Fallen von Äpfeln auf berühmte Wissenschaftler $\rightarrow$ die gleichen Gesetze gelten für ganz große und ganz kleine Objekte (Griechen dachten noch, dass für Planeten eigene Gesetze gelten würden)
+Gravitationsgesetz erklärt sowohl die Umlaufbahn des Mondes, als auch das Fallen von Äpfeln auf berühmte Wissenschaftler $\rightarrow$ die gleichen Gesetze gelten für ganz große und ganz kleine Objekte (Griechen dachten noch, dass für Planeten eigene Gesetze gelten würden). Mit Gravitationsgesetz ließen sich auch Kometenbahnen verstehen lassen, die zuvor unerklärlich waren.
 
 Wurfgesetz:
 
@@ -68,3 +68,58 @@ Beobachtung: Setzt man Das Gravitationsgesetz in das Kraftgesetz ein ergibt sich
 $m \cdot x"^i(t) = - G \frac{M \cdot m}{r^3} x^i$ wobei sich $m$ herauskürzt.
 Die Bewegung zur Folge der Gravitaionskraft ist nicht von der Masse des Objekts abhängig.
 $\Rightarrow$ ist die Gravitationskraft überhaupt eine Kraft?
+
+## Leibniz
+
+(hat zeitglich mit Newton Infinitesimalrechnung entwickelt)
+
+Für Leibniz war es unbefriedigend, dass sich durch Newtons Gravitationsgesetzt die Gezeiten dadurch erklären ließen, dass die Gravitation "durch die Erde durchgreift". Leibnizens Ansicht nach sollten sich physikalische Phänomene durch Wirkungen aus der unmittelbaren Umgebung erklären lassen, die sich dann womöglich fortpflanzen.
+
+
+
+# Elektrizität und Magnetismus
+
+Elektrische Kraft:
+
+* Materie verfügt über die Eigenschaft Ladung $q$.
+* $F^i_{coul.}(x^m) = \frac{1}{4\pi \epsilon_0} \cdot \frac{Q\cdot q}{r^3} x^i$
+
+Setzt man Coulomb'sches Gesetz in Newton'sche Bewegungsgleichung ein, kürzt sich die Masse nicht heraus, da ja die Masse eines Objekts und seine Ladung unabhängig gewählt werden können.
+
+
+Magnetisches Kraftgesetz:
+
+* $F^i_{amp.}(x^m) = \frac{\mu_0}{4\pi} \cdot E_{i,j,k} I$ // todo: vervollständigen
+* $(v \times w)^i = E_{i,j,k} v^j w^k$ (Kreuzprodukt)
+
+$E_{i,j,k}$ ist eine trilineare Funktion (linear in allen Argumenten) und total antisymmetrisch (egal welche Argumente man tauscht, das Vorzeichen ändert sich)
+
+$\underbrace{(E_{i,j,k} v^i w^j)}_{(v\times w)} u^k \in \mathbb{R}$
+
+$E_{x,y,z} = E_{1,2,3} = E_{i,j,k} e^i_x e^j_y e^k_z = 1$
+
+## Maxwell'sche Gleichungen
+
+1866
+
+verbinden elektrische und magnetische Kräfte in einer Theorie $\rightarrow$ Elektromagnetismus
+
+wichtige Erkenntnis: Licht ist eine elektromagnetische Welle (anscheinend)
+
+* $E^i = \lim_{q_1\rightarrow 0} F^i_{coul.} / q_1$ ... elektrisches Feld
+* $B^i$ ... magnetisches Feld
+
+
+* $\partial_i E^i(x^m, t) = \frac{1}{\epsilon_0}\rho(x^m, t)$ ... Gauß-Gesetz
+* $E_{i,j,k} \partial_j E^k(x^m, t) + \dot{B}^i(x^m, t) = 0$ ... Faraday
+* // todo: ergänzen
+
+* $\rho$ ... Ladungsdichte
+* $J$ ... Stromdichte
+* $\partial_i f(x^m) = \frac{\partial f}{\partial x^i} (x^m)$
+
+Transportintegral: Wie viel Material wird entlang einer bestimmten Kurve geschoben
+
+Flächenintegral: Wie viel Material wird durch eine bestimmte Fläche geschoben
+
+Divergenz-Operator $\partial_i$ gibt an, wie viel Material in einen (kleinen) Volumswürfel hineinfließt oder aus ihm hinausfließt. Dass der Divergenzoperator des magnetischen Feldes überall null ergibt, bedeutet, dass es keine Quellen oder Senken gibt.
