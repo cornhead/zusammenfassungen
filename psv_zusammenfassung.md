@@ -53,6 +53,23 @@ Execute every branch at least once.
 
 In literature, the definitions of branches are rather imprecise $\rightarrow$ what about unconditional jumps, `goto`, function calls or fall-throughs?
 
+### Decision Coverage
+
+Exercise every decision outcome at least once (one time `true`, one time `false`)
+
+Again, definition of decisions is imprecise.
+
+### Notes on Branch Coverage vs. Decision Coverage
+
+Branch coverage implies decision coverage
+
+* if "decision" means boolean expression at branching points only
+
+Decision coverage implies branch coverage
+
+* if "branch" doesn't include unconditional jumps
+* if "decision" refers to *all* boolean expressions
+
 ### Condition Coverage
 
 Exercise every boolean sub-expression/atom/condition outcome (but their values do not necessarily have to affect the overall outcome)
@@ -66,11 +83,24 @@ if ( ( x > 0) && ( y > 0) )
 
 All outcomes of the sub-expressions are exercised once but the decision never evaluated to `true`.
 
+
+### Condition/Decision Coverage
+
+Combination of condition and decision coverage:
+
+* cover all condition outcomes
+* cover all decision outcomes
+
+but not all branches of the 'decision tree' might be executed
+
 ### Modified Condition / Decision Coverage (MC/DC)
 
-Every condition in a decision has to have taken affect on the outcome at least once. (see the stuck-at error model in the lecture on digital design)
+Every condition in a decision has to have taken affect on the outcome (independently) at least once. (remember the stuck-at error model in the lecture on digital design)
+
+For example, see the [exam of 2018, task on coverage, subtask D](#2018_mcdc)
 
 MC/DC is defined in DO-178B (high relevance in industry)
+
 
 ### Multiple Condition Coverage
 
@@ -118,7 +148,11 @@ Table: Data Flow Criteria
 
 ## Mutation Testing
 
+Aim: test how well a test suite is capable of finding bugs in software
 
+Idea: create mutation of that software by deliberately injecting a bug $\rightarrow$ check whether test suite "kills" mutant
+
+or the other way around: create mutant $P_2$ of program $P_1$, encode behaviour of $P_1$ and $P_2$ in formula and use SAT solver to see whether $P_1 \oplus P_2$ is satisfiably $\rightarrow$ if yes, then satisfying assignment represents a testcase that kills that mutant; if no, then the bug can't be found
 
 
 
@@ -231,12 +265,17 @@ if (B){
 
 ## Unbounded Model Checking
 
-Uses model in form of a Kripke structure to check statements in temporal logic
+Uses model in form of a Kripke structure to check statements in temporal logic (see chapter on [temporal logic](#chap:tl))
+
+Finding out for which states a given formula in temporal logic (either CTL or LTL) holds:
+
+#. split up formula into subformulas (tree-like)
+#. recursively find states for which subformulas hold $\rightarrow$ begin at leaves (propositional formulas) and work your way to the root
 
 
 
 
-# Temporal Logic
+# Temporal Logic {#chap:tl}
 
 ## CTL*
 
@@ -282,6 +321,75 @@ There are CTL formulas that can't be expresed in LTL and vice versa
 CTL has 10 basic operators -- 5 temporal operators times 2 path quantifiers -- but all of them can be expressed through **EX**, **EG** and **EU**
 
 ![expressing the remaining 7 basic operators of CTL through **EX**, **EG** and **EU**](./img/psv_temporal_logic_1.png){width=90%}
+
+
+
+
+# SAT
+
+## Tseitins Transformation
+
+Goal: come up with CNF formula that is equisatisfiable to a given propositional logic formula
+
+#. express formula only through conjunctions and disjunctions ($a \Rightarrow b \equiv \neg a \vee b$ and so forth)
+#. build syntax tree of formula, introducing new variables for every subformula
+#. build CNF formula by expressing each subtree through three CNF clauses, bottom-up (see illustration)
+
+![Tseitin Transformation: build CNF formula from tree](./img/psv_sat_1.png){width=75%}
+
+## Resolution Rules
+
+$\inference{(C \vee a) \quad (D \vee \overline{a})}{(C \vee D)}$
+
+and in particular
+
+$\inference{(C \vee a) \quad \overline{a}}{C}[\textrm{unit propagation}]$
+
+## Decision making
+
+whenever possible, propagate units, but what if there ware no units to propagate? $\rightarrow$ make a decision for one variable (i.e. assignment)
+
+What if decision a decision leads to a conflict? $rightarrow$ backtracking: determine a "learnd clause" and return to highest decision level that is not contained in conflict clause (or to 0)
+
+How to find good conflict clause? Choose conflict clause such that it contains the first unique implication point (UIP), i.d., a node (other than the conflict node) that lies on all paths from the decision node to the conflict node and is closest to the conflict node. (the decision node is a UIP by definition)
+
+DPLL algorithm:
+
+#. if conflict at decision level 0 $\rightarrow$ UNSAT
+#. repeat:
+	#. if all variables assigned, return SAT
+	#. make decision
+	#. propagate constraints
+	#. if no conflict, goto 1.
+	#. if decision level is 0, return UNSAT
+	#. analyse conflict and add conflict clause
+	#. backtrack and go to 3.
+
+
+Like with BDDs, variable order makes difference. How to choose which variable to assign next if a decision has to be made? Heuristics:
+
+* Dynamic largest individual sum (DLIS): choose assignment such that number of satisfied clauses is maximised (high overhead)
+* Variable state independent decaying sum (VSDIS): favour literals in recently added conflict clauses. With right data structures, decision is possible in $\mathcal{O}(1)$
+
+--------------------
+                  &nbsp;   BDDs                  SAT solvers
+------------------------   ---------------       -------------------
+            #(variables)   hundreds              hundreds of thousands
+
+              complexity   PSPACE-complete       NP-complete
+
+             assignments   $\mathcal{O}(n)$      SAT-run
+
+               canoncial   yes                   no
+
+          equality check   $\mathcal{O}(1)$      SAT-run of $F \oplus G$
+
+  quantifier elimination   yes                   co-factoring
+--------------------
+
+Table: comparison of BDDs and SAT-solvers
+
+
 
 
 \pagebreak
@@ -469,7 +577,7 @@ Indicate (X) which of the following coverage criteria are satisfied by the test-
 
 #### C) not given here
 
-#### D) MC/DC
+#### D) MC/DC {#2018_mcdc}
 
 Consider the expression $((a \wedge b) \vee c)$, where $a$, $b$, and $c$ are Boolean variables. Provide a minimal number of test cases such that modified condition/decision coverage is achieved for the expression. Clarify for each test case whichcondition(s) independently affect(s)the outcome.
 

@@ -4,6 +4,8 @@ classoptions:
 papersize: a4
 header-includes: |
 	\usepackage{amsfonts,amsmath,amssymb,amsthm} 
-	\usepackage{stmaryrd}
+	\usepackage{stmaryrd}  
+	\usepackage{semantic}  
+	\usepackage{semantic}  
 
 toc: true
