@@ -4,7 +4,7 @@ Im Allgemeinen sollten Zusammenfassungen kurz und bündig sein. Sie dienen ja da
 
 ## Überschriften, Header und Metadaten
 
-Pandoc unterstützt Yaml-Metadaten-Header. Diese sollen auch genutzt werden, um den Titel des Dokuments anzugeben, vorzugsweise fett geschrieben. Die Yaml-Header sind jedoch noch wesentlich mächtiger. In ihnen kann eingestellt werden, ob ein Inhaltsverzeichnis erstellt werden soll, in welchem Format das PDF erstellt werden soll, ob weitere LaTeX-Pakete geladen werden soll und noch vieles mehr. Ein Blick in die [Dokumentation von Pandoc](https://pandoc.org/MANUAL.html#pandocs-markdown) zu diesem Thema kann sich auszahlen. Metadaten-Header beginnen mit einer Zeile `---` und enden mit einer Zeile `...`, doch aufgrund der Weise wie die Dokumente momentan verarbeitet werden, entfällt die erste Zeile
+Pandoc unterstützt Yaml-Metadaten-Header. Diese sollen auch genutzt werden, um den Titel des Dokuments anzugeben, vorzugsweise fett geschrieben. Die Yaml-Header sind jedoch noch wesentlich mächtiger. In ihnen kann eingestellt werden, ob ein Inhaltsverzeichnis erstellt werden soll, in welchem Format das PDF erstellt werden soll, ob weitere LaTeX-Pakete geladen werden soll und noch vieles mehr. Ein Blick in die [Dokumentation von Pandoc](https://pandoc.org/MANUAL.html#pandocs-markdown) zu diesem Thema kann sich auszahlen. Metadaten-Header beginnen mit einer Zeile `---` und enden mit einer Zeile `...`, doch aufgrund der Weise wie die Dokumente momentan verarbeitet werden, entfällt die erste Zeile.
 
 Dokumente sollten Überschriften haben im Format `<Dokumententyp>: <LVA-Name ohne LVA-Typ>`. So lautet etwa die Überschrift der Zusammenfassung der Vorlesung Digital Design "Zusammenfassung: Digital Design" und nicht "Zusammenfassung: VO Digital Design" und auch nicht "Digital Design -- Zusammenfassung". Wie eingangs erwähnt wird der Titel eines Dokuments im Yaml-Metadaten-Header angegeben. Um die Überschrift fett zu schreiben, soll sie zwischen doppelte Asteriske gestellt werden. Da die meisten Titel wohl Doppeltpunkte enthalten werden, ist es nötig, den Titel zusätzlich zwischen Anführungsstriche zu stellen.
 
@@ -63,10 +63,10 @@ Um einen einheitlichen Stil zu erreichen, wird gebeten die kleinen Header vor Bu
 
 Blöcke mit Programm-Code werden zwischen zwei Zeilen mit je drei Tilden gestellt. Nach den "öffnenden" Tilden kann in geschwungenen Klammern die Sprache angegeben werden und die Zeilennummerierung aktiviert werden. Ein Beispiel wäre der folgende Code-Block:
 
-~~~
+```
 ~~~ {.c .number-lines}
 int foo(){
 	return 0;
 }
 ~~~
-~~~
+```
