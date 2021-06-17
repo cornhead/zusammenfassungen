@@ -38,6 +38,28 @@ Es bietet sich an, die einzelnen Stichwörter oder Halbsätze in Bullet-Lists zu
 
 Um einen einheitlichen Stil zu erreichen, wird gebeten die kleinen Header vor Bullet-Lists mit einem Doppelpunkt zu versehen.
 
+### Links und Abbildungen
+
+Links werden wie folgt erstellt:
+
+~~~
+Das ist ein [Link](http://meinewebsite/).
+~~~
+
+Links können auf eine URL verweisen, oder auch auf andere Stellen im Dokument, die mit einem entsprechenden Anker versehen sind:
+
+~~~
+Für nähere Informationen, sihe [Kapitel 3](#chap_3).
+~~~
+
+Auch Abbildungen können auf fast die gleiche Weise in Dokumente eingefügt werden:
+
+~~~
+![Bildbeschreibung](./img/meinbild.png){width=75%}
+~~~
+
+Beachte das führende Rufzeichen und *optionale*, nachgestellte Attribute.
+
 ### Tabellen
 
 Für eine ausführlichere Beschreibung, auf welche Arten man Tabellen in Markdown schreiben kann, sei auf die [Dokumentation von Pandoc-Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown) verwiesen. Als Beispiel soll aber das folgende Snippet dienen:
@@ -47,10 +69,15 @@ Für eine ausführlichere Beschreibung, auf welche Arten man Tabellen in Markdow
  $A$   $B$   $A \wedge B$
 ----- ----- --------------
   0     0         0
+  
   0     1         0
+  
   1     0         0
+  
   1     1         1
 --------------------------
+
+Table: Das ist eine Beispieltabelle
 ~~~
 
 ### Programm-Code
