@@ -1,13 +1,8 @@
 
 title: "**Zusammenfassung: Programm- und Systemverifikation**"
 lang: en-GB
+
 ...
-
----
-
-An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
-
----
 
 
 * Fault: cause of an error
@@ -395,6 +390,8 @@ Table: comparison of BDDs and SAT-solvers
 \pagebreak
 
 # Examples
+
+Alle Angaben ohne Gewähr. Etwaige Fehler bitte auf [Github](https://github.com/cornhead/zusammenfassungen.git) anmerken/ändern.
 
 ## Coverage
 

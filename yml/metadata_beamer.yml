@@ -1,4 +1,13 @@
 documentclass: beamer
 theme: metropolis
 
-toc: true
+include-before: |
+	\begin{frame}
+		\frametitle{Disclaimer}
+		\begin{block}{Mach mit!}
+			\vspace{0.75cm}
+			An dieser Formelsammlung und der zugehörigen Zusammenfassung kann gerne auf \href{https://github.com/cornhead/zusammenfassungen.git}{Github} mitgewirkt werden!
+		\end{block}
+	\end{frame}
+
+toc: false

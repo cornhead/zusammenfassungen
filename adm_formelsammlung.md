@@ -2,13 +2,6 @@
 title: "**Formelsammlung: Algebra und diskrete Mathematik**"
 ...
 
-## Disclaimer
-
-### Mach mit!
-An dieser Formelsammlung und der zugehörigen Zusammenfassung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
-
-
-
 
 # Elementare Zahlentheorie
 

@@ -3,12 +3,6 @@ title:  "**Zusammenfassung: Digital Design**"
 ...
 
 
----
-
-An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
-
----
-
 ## Basics
 
 Vorteile von Digitalisierung:

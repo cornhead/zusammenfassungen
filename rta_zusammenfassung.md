@@ -1,12 +1,7 @@
----
+
 title: "**Zusammenfassung: Relativitätstheorie -- allgemeinveständlich**"
 ...
 
----
-
-An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
-
----
 
 * Spezielle Relativitätstheorie: 1905
 * Allgemeine Relativitätstheorie: 1915

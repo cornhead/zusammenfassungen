@@ -1,9 +1,9 @@
 # Tools
 
-Für dieses Projekt werden im Wesentlichen `pandoc` und `make` verwendet. Außerdem wird `pdflatex` benötigt gemeinsam mit einigen Paketen, die in `texlive`, `texlive-latex-extra` und `texlive-lang-german` enthalten sein sollten (wobei ich mir nicht sicher bin, wie viel von `texlive-latex-extra` benötigt wird). Mit dem folgendem Befehl können die nötigen Programme unter Debian-Distributionen bequem installiert werden:
+Für dieses Projekt werden im Wesentlichen `pandoc` und `make` verwendet. Außerdem wird `pdflatex` benötigt gemeinsam mit einigen Paketen, die in `texlive`, `texlive-latex-extra`, `texlive-lang-german` und `texlive-science` enthalten sein sollten (wobei ich mir nicht sicher bin, wie viel von `texlive-latex-extra` benötigt wird). Mit dem folgendem Befehl können die nötigen Programme unter Debian-Distributionen bequem installiert werden:
 
 ~~~
-apt install make pandoc pdflatex texlive texlive-latex-extra texlive-lang-german
+apt install make pandoc pdflatex texlive texlive-latex-extra texlive-lang-german texlive-science
 ~~~
 
 Für andere Linux-Distributionen stehen meistens vergleichbare Paket-Manager zur Verfügung.

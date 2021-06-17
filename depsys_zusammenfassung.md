@@ -2,11 +2,6 @@
 title: "**Summary: Dependable Systems**"
 ...
 
----
-
-An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
-
----
 
 # Basics
 

@@ -2,12 +2,11 @@ metadata_defaults  = ./yml/metadata_defaults.yml
 metadata_article = ./yml/metadata_article.yml
 metadata_beamer  = ./yml/metadata_beamer.yml
 
-md2article = pandoc -s -f markdown+yaml_metadata_block+tex_math_dollars+multiline_tables -t latex  $(metadata_defaults) $(metadata_article)
+md2article = pandoc $(metadata_defaults) $(metadata_article)
 md2beamer  = pandoc -s -f markdown+yaml_metadata_block+tex_math_dollars+multiline_tables -t beamer $(metadata_defaults) $(metadata_beamer)
 
 articles = \
 	digides_zusammenfassung\
-	risc_v_cheatsheet\
 	depsys_zusammenfassung\
 	hm_zusammenfassung\
 	rta_zusammenfassung\

@@ -2,12 +2,6 @@
 title: "**Zusammenfassung: Hardware Modelling**"
 ...
 
----
-
-An dieser Zusammenfassung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
-
----
-
 
 # Hardware Design
 

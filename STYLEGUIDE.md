@@ -10,35 +10,16 @@ Dokumente sollten Überschriften haben im Format `<Dokumententyp>: <LVA-Name ohn
 
 Standarmäßig wird automatisch ein Inhaltsverzeichnis erstellt. Sollte das nicht erwünscht sein, kann im Yaml-Metadaten-Header `toc: false` angegeben werden. Das Inhaltsverzeichnis beinhaltet Links zu den entsprechenden Kapiteln, die aber schwarz dargestellt werden. (Durch die Einstellung, die das bewirkt, ergibt sich auch, dass alle Links in einem Dokument auf andere Stellen in diesem Dokument ebenfalls schwarz dargestellt werden und erst durch entsprechende Formatierung gekennzeichnet werden müssen.)
 
-Um zu erreichen, dass möglichst viele begeisterte Student*innen an den Zusammenfassungen mitwirken, soll direkt am Anfang des Dokuments ein Disclaimer eingefügt werden, der zum Mitmachen auffordert und auf das Github-Repo verweist.
-Eine Zusammenfassung im Article-Stil könnte also etwa einen Header haben wie den Folgenden haben:
+Um zu erreichen, dass möglichst viele begeisterte Student*innen an den Zusammenfassungen mitwirken, wird automatisiert am Anfang des Dokuments ein Disclaimer eingefügt werden, der zum Mitmachen auffordert und auf das Github-Repo verweist.
+
+Eine Zusammenfassung könnte also etwa einen Header haben wie den Folgenden haben:
 
 ~~~ 
 
-title: "**<Titel der Zusammenfassung>**"
+title: "**<Titel der Zusammenfassung/Formelsammlung>**"
 ...
 
----
-
-An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
-
----
 ~~~
-
-Und eine Formelsammlung im Beamer-Stil könnte etwa folgenden Header haben:
-
-~~~
-
-title: "**<Titel der Formelsammlung>**"
-...
-
-## Disclaimer
-
-### Mach mit!
-An dieser Formelsammlung und der zugehörigen Zusammenfassung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!
-~~~
-
-In der Beamer-Präsentation wird die Überschrift auf Level 3 (`###`) also Box dargestellt (abhängig vom verwendeten Template).
 
 
 ## Textgestaltung und Formatierung
@@ -58,6 +39,19 @@ Es bietet sich an, die einzelnen Stichwörter oder Halbsätze in Bullet-Lists zu
 Um einen einheitlichen Stil zu erreichen, wird gebeten die kleinen Header vor Bullet-Lists mit einem Doppelpunkt zu versehen.
 
 ### Tabellen
+
+Für eine ausführlichere Beschreibung, auf welche Arten man Tabellen in Markdown schreiben kann, sei auf die [Dokumentation von Pandoc-Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown) verwiesen. Als Beispiel soll aber das folgende Snippet dienen:
+
+~~~
+--------------------------
+ $A$   $B$   $A \wedge B$
+----- ----- --------------
+  0     0         0
+  0     1         0
+  1     0         0
+  1     1         1
+--------------------------
+~~~
 
 ### Programm-Code
 

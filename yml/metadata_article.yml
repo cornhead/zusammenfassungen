@@ -1,11 +1,28 @@
+pandoc_args: [
+      "-S",
+      "-f markdown+yaml_metadata_block+tex_math_dollars+multiline_tables",
+      "-t latex"
+    ]
+
 documentclass: article
 classoptions:
     - oneside
 papersize: a4
+
 header-includes: |
 	\usepackage{amsfonts,amsmath,amssymb,amsthm} 
 	\usepackage{stmaryrd}  
 	\usepackage{semantic}  
-	\usepackage{semantic}  
+
+include-before: |
+	\vspace{1.5cm}
+	
+	---
+	
+	**An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!**
+	
+	---
+	
+	\vspace{1.5cm}
 
 toc: true
