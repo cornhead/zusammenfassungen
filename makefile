@@ -3,7 +3,7 @@ metadata_article = ./yml/metadata_article.yml
 metadata_beamer  = ./yml/metadata_beamer.yml
 
 md2article = pandoc $(metadata_defaults) $(metadata_article)
-md2beamer  = pandoc -s -f markdown+yaml_metadata_block+tex_math_dollars+multiline_tables -t beamer $(metadata_defaults) $(metadata_beamer)
+md2beamer  = pandoc -s -f markdown+yaml_metadata_block+tex_math_dollars+multiline_tables -t beamer --slide-level=2 $(metadata_defaults) $(metadata_beamer)
 
 articles = \
 	digides_zusammenfassung\

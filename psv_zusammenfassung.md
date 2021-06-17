@@ -5,6 +5,17 @@ lang: en-GB
 ...
 
 
+# Bugs
+
+different kinds of bugs:
+
+* Bohrbug: plain and simple, like Bohrs atomic model
+* Heisenbug: dissappears if you try to debug it
+* Schrödinbug: code that never should have worked but did -- until you looked at it
+* Mandelbug: the cause is way too complex to understand
+
+standardized terminology:
+
 * Fault: cause of an error
 * Error: erroneous state, but not directly observable in behaviour $\rightarrow$ might lead to failure, but not necessarily
 * Failure: deviation from expected behaviour
@@ -344,7 +355,7 @@ $\inference{(C \vee a) \quad \overline{a}}{C}[\textrm{unit propagation}]$
 
 whenever possible, propagate units, but what if there ware no units to propagate? $\rightarrow$ make a decision for one variable (i.e. assignment)
 
-What if decision a decision leads to a conflict? $rightarrow$ backtracking: determine a "learnd clause" and return to highest decision level that is not contained in conflict clause (or to 0)
+What if a decision leads to a conflict? $\rightarrow$ backtracking: determine a "learnd clause" and return to highest decision level that is not contained in conflict clause (or to 0)
 
 How to find good conflict clause? Choose conflict clause such that it contains the first unique implication point (UIP), i.d., a node (other than the conflict node) that lies on all paths from the decision node to the conflict node and is closest to the conflict node. (the decision node is a UIP by definition)
 

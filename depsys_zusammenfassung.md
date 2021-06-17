@@ -1,5 +1,5 @@
 
-title: "**Summary: Dependable Systems**"
+title: "**Zusammenfassung: Dependable Systems**"
 ...
 
 
