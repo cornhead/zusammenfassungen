@@ -84,7 +84,7 @@ Setzt man Coulomb'sches Gesetz in Newton'sche Bewegungsgleichung ein, kürzt sic
 
 Magnetisches Kraftgesetz:
 
-* $F^i_{amp.}(x^m) = \frac{\mu_0}{4\pi} \cdot E_{i,j,k} I$ // todo: vervollständigen
+* $F^i_{amp.}(x^m) = \frac{\mu_0}{4\pi} \cdot E_{i,j,k} I_1 x_1^{'j}(s_1) E_{k,l,m} I_2 x_2^{'l}(s_2) \cdot \frac{x_1^m(s_1)-x_2^m(s_2)}{\left| x_1^m(s_1)-x_2^m(s_2) \right| ^3}$ // todo: vervollständigen
 * $(v \times w)^i = E_{i,j,k} v^j w^k$ (Kreuzprodukt)
 
 $E_{i,j,k}$ ist eine trilineare Funktion (linear in allen Argumenten) und total antisymmetrisch (egal welche Argumente man tauscht, das Vorzeichen ändert sich)
@@ -101,17 +101,30 @@ verbinden elektrische und magnetische Kräfte in einer Theorie $\rightarrow$ Ele
 
 wichtige Erkenntnis: Licht ist eine elektromagnetische Welle (anscheinend)
 
+Definitionen:
+
 * $E^i = \lim_{q_1\rightarrow 0} F^i_{coul.} / q_1$ ... elektrisches Feld
 * $B^i$ ... magnetisches Feld
 
+Maxwell-Gleichungen:
 
-* $\partial_i E^i(x^m, t) = \frac{1}{\epsilon_0}\rho(x^m, t)$ ... Gauß-Gesetz
-* $E_{i,j,k} \partial_j E^k(x^m, t) + \dot{B}^i(x^m, t) = 0$ ... Faraday
-* // todo: ergänzen
+#. $\partial_i E^i(x^m, t) = \frac{1}{\epsilon_0}\rho(x^m, t)$ ... Gauß-Gesetz
+#. $E_{i,j,k} \partial_j E^k(x^m, t) + \dot{B}^i(x^m, t) = 0$ ... Faraday
+#. $\partial_i B^i(x^m, t) = 0$
+#. $E_{i,j,k} \partial_j B^k(x^m, t) - \mu_0 \epsilon_0 \dot{E^i}(x^m, t) = \mu_0 J^2(x^m, t)$
+
+mit
 
 * $\rho$ ... Ladungsdichte
 * $J$ ... Stromdichte
 * $\partial_i f(x^m) = \frac{\partial f}{\partial x^i} (x^m)$
+
+Interpretation der Maxwell-Gleichungen:
+
+#. Die Divergenz des elektrischen Feldes ist proportional zur Ladungsdichte $\rightarrow$ gleiche Ladungen stoßen einander ab
+#. Eine Divergenz im elektrischen Feld bewirkt eine "entgegengesetzte" Rotation des magnetischen Feldes und andersherum $\rightarrow$ Induktion
+#. Die Divergenz des des magnetischen Feldes ist immer null $\rightarrow$ Das Magnetfeld hat keine Quellen und Senken
+#.
 
 Transportintegral: Wie viel Material wird entlang einer bestimmten Kurve geschoben
 
