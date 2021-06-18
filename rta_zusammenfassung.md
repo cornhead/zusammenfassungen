@@ -37,15 +37,15 @@ hebt Galileis Erkenntnisse auf mathematische Ebene
 
 ### 2. Newtonsches Axiom
 
-* $m \cdot x"^i(t) = F^i(x^m(t))$
+* $m \cdot \ddot{x}^i(t) = F^i(x^m(t))$
 * also "Kraft ist Masse mal Beschleunigung"
 * Sinn dahinter: bei gegebener Anfangsposition und Anfangsgeschwindigkeit kann Trajektorie eines Körpers aus seiner Kraft hergeleitet werden $\rightarrow$ lösen einer ODE zweiten Grades
 
-// einfügen: Herleitung von x' und x" aus gegebener Trajektorie
+// einfügen: Herleitung von $\dot{x}$ und $\ddot{x}$ aus gegebener Trajektorie
 
 Geschwindigkeit ist Ortsänderung, Beschleunigung ist Geschwindigkeitsänderung
 
-Setzt man $F^i(x^m)=0^i$, folgt $m \cdot x"î(t) = 0$. Für $m \neq 0$ folgt dann eine gerade, gleichförmige Bewegung $\rightarrow$ 1. Newtonsches Axiom
+Setzt man $F^i(x^m)=0^i$, folgt $m \cdot \ddot{x}^i(t) = 0$. Für $m \neq 0$ folgt dann eine gerade, gleichförmige Bewegung $\rightarrow$ 1. Newtonsches Axiom
 
 ### Newtonsches Gravitations-Gesetz
 
@@ -60,7 +60,7 @@ Wurfgesetz:
 * $|f_g| = G \frac{M \cdot m}{R^2} = m \cdot g$ mit  Erdbeschleunigung $g = \frac{G \cdot M}{R^2} \approx 9.81m/s^2$
 
 Beobachtung: Setzt man Das Gravitationsgesetz in das Kraftgesetz ein ergibt sich
-$m \cdot x"^i(t) = - G \frac{M \cdot m}{r^3} x^i$ wobei sich $m$ herauskürzt.
+$m \cdot \ddot{x}^i(t) = - G \frac{M \cdot m}{r^3} x^i$ wobei sich $m$ herauskürzt.
 Die Bewegung zur Folge der Gravitaionskraft ist nicht von der Masse des Objekts abhängig.
 $\Rightarrow$ ist die Gravitationskraft überhaupt eine Kraft?
 
@@ -72,62 +72,186 @@ Für Leibniz war es unbefriedigend, dass sich durch Newtons Gravitationsgesetzt 
 
 
 
-# Elektrizität und Magnetismus
+# Elektromagnetismus
 
-Elektrische Kraft:
+## Elektrisches und Magnetisches Feld
+
+Elektrische Kraft (zwischen zwei Ladungen):
 
 * Materie verfügt über die Eigenschaft Ladung $q$.
 * $F^i_{coul.}(x^m) = \frac{1}{4\pi \epsilon_0} \cdot \frac{Q\cdot q}{r^3} x^i$
 
 Setzt man Coulomb'sches Gesetz in Newton'sche Bewegungsgleichung ein, kürzt sich die Masse nicht heraus, da ja die Masse eines Objekts und seine Ladung unabhängig gewählt werden können.
 
+Strukturmäßig sieht die Coulomb'sche Kraft sehr so aus wie die Gravitationskraft. Es hat eine Zeit lang die Ansicht geherrscht, dass diese Art "gut" ist, um Kräfte zu beschreiben, und war bemüht alle Kräfte in eine ähnliche Form zu bringen.
 
-Magnetisches Kraftgesetz:
 
-* $F^i_{amp.}(x^m) = \frac{\mu_0}{4\pi} \cdot E_{i,j,k} I_1 x_1^{'j}(s_1) E_{k,l,m} I_2 x_2^{'l}(s_2) \cdot \frac{x_1^m(s_1)-x_2^m(s_2)}{\left| x_1^m(s_1)-x_2^m(s_2) \right| ^3}$ // todo: vervollständigen
-* $(v \times w)^i = E_{i,j,k} v^j w^k$ (Kreuzprodukt)
+Magnetische Kraft (zwischen zwei Strömen):
 
-$E_{i,j,k}$ ist eine trilineare Funktion (linear in allen Argumenten) und total antisymmetrisch (egal welche Argumente man tauscht, das Vorzeichen ändert sich)
+* $F^i_{amp.}(x^m) = \frac{\mu_0}{4\pi} \cdot \E_{i,j,k} I_1 {x'}_1^j(s_1) \E_{k,l,m} I_2 {x'}_2^l(s_2) \cdot \frac{x_1^m(s_1)-x_2^m(s_2)}{\left| x_1^m(s_1)-x_2^m(s_2) \right| ^3} \left(x_1(s_1) - x_2(s_2) \right)$ // todo: vervollständigen
+* $(v \times w)^i = \E_{i,j,k} v^j w^k$ (Kreuzprodukt)
 
-$\underbrace{(E_{i,j,k} v^i w^j)}_{(v\times w)} u^k \in \mathbb{R}$
+wobei $I_n x'_n(s_n)$ den Strom repräsentiert. Dabei ist $I_n$ die Stromstärke und $x'_n(s_n)$ die Bewegungsrichtung (Ableitung der Position) parametriert über die Bogenlänge.
 
-$E_{x,y,z} = E_{1,2,3} = E_{i,j,k} e^i_x e^j_y e^k_z = 1$
+Wenn man die Epsilon-Operatoren durch Kreuzprodukte ausdrückt (siehe unten), sieht man, dass auch die Ampere'sche Kraft die Form der Gravitationskraft hat, bloß mit Kreuzprodukten, um Richtungen der Ströme richtig einzubeziehen.
 
-## Maxwell'sche Gleichungen
+
+Der Operator $\E_{i,j,k}$ heißt Epsilon-Tensor. Im Folgenden seien seine wichtigsten Eigenschaften kurz umrissen:
+
+* seien $v$ und $w$: Vektoren (z.b. aus $\mathbb{R}^3$)
+* Delta-Tensor (für inneres Produkt): $\delta(v, w) = \delta_{ij} v^i w^j = v^i w^i = v \cdot w = v^1 w^1 + v^2 w^2 + v^3 w^3 \cdots$
+	* bilinear
+	* symmetrisch
+* Epsilon-Tensor (für Kreuzprodukt): $\E_{i,j,k}v^j w^k = (v \times w)^i$
+	* trilinear: linear in allen drei Argumenten
+	* total antisymmetrisch: egal welche zwei Argumente man vertauscht, das Vorzeichen ändert sich
+	* $\E_{i,j,k}$ergibt $0$, wenn zwei Indizes gleich sind
+	* $\E_{x,y,z} = \E_{1,2,3} = \E_{i,j,k} e^i_x e^j_y e^k_z = 1$
+
+## Inhomogene Maxwell-Gleichungen
 
 1866
 
-verbinden elektrische und magnetische Kräfte in einer Theorie $\rightarrow$ Elektromagnetismus
-
-wichtige Erkenntnis: Licht ist eine elektromagnetische Welle (anscheinend)
+Erkenntnis: Strom ist Bewegung von Ladung. Zusammenhang zwischen elektrischer und magnetischer Kraft? $\rightarrow$ Elektromagnetismus
 
 Definitionen:
 
-* $E^i = \lim_{q_1\rightarrow 0} F^i_{coul.} / q_1$ ... elektrisches Feld
-* $B^i$ ... magnetisches Feld
+* $E^i = \lim \limits_{q_1\rightarrow 0} \frac{F^i_{coul.}}{q_1}$ ... elektrisches Feld
+* $B^i = \frac{F^i_{amp.}}{I_1 {x'}_1^i(s_i)}$ ... magnetisches Feld
+
+Die Stärke eines Feldes gibt die mögliche Kraft auf eine sehr kleine Testladung/Testsrom an, relativ zur stärke dieser Ladung/Strom. Damit ist eine Beschreibung durch Felder etwas abstrakter als eine Beschreibung durch Kräfte.
 
 Maxwell-Gleichungen:
 
 #. $\partial_i E^i(x^m, t) = \frac{1}{\epsilon_0}\rho(x^m, t)$ ... Gauß-Gesetz
-#. $E_{i,j,k} \partial_j E^k(x^m, t) + \dot{B}^i(x^m, t) = 0$ ... Faraday
+#. $\E_{i,j,k} \partial_j E^k(x^m, t) + \dot{B}^i(x^m, t) = 0$ ... Faraday-Gesetz
 #. $\partial_i B^i(x^m, t) = 0$
-#. $E_{i,j,k} \partial_j B^k(x^m, t) - \mu_0 \epsilon_0 \dot{E^i}(x^m, t) = \mu_0 J^2(x^m, t)$
+#. $\E_{i,j,k} \partial_j B^k(x^m, t) - \mu_0 \epsilon_0 \dot{E^i}(x^m, t) = \mu_0 J^i(x^m, t)$ ... Ampere-Maxwell-Gesetz
 
 mit
 
-* $\rho$ ... Ladungsdichte
-* $J$ ... Stromdichte
+* $\rho$ ... Ladungsdichte, Ladung pro Volumseinheit
+* $J^i$ ... Stromdichte, Strom pro Volumseinheit
 * $\partial_i f(x^m) = \frac{\partial f}{\partial x^i} (x^m)$
+
+Die Operatoren $\partial_i$ und $\E_{i,j,k}\partial_j$ werden in den folgenden Unterpunkten erläutert. (siehe [Fluss durch kleinen Würfel](#fdkw) für ersteren Operator und [Transportintegral entlang Rand eines kleinen Quadrates](#trkq) für zweiteren)
+
+Das Gauß-Gesetz und das Faraday-Gesetz werden "elektrische Gesetze" genannt. Die verbleibenden beiden sind die "magnetischen Gesetze".
+
+Die Maxwell-Gleichungen stellen ein System linearer Differentialgleichungen ersten Grades dar, wobei die Differentialgleichungen inhomogen sind. Sie werden daher auch *inhomogenen* Maxwell-Gleichungen genannt, im Gegesatz zu den *homogenen*, die weiter unten besprochen werden.
 
 Interpretation der Maxwell-Gleichungen:
 
-#. Die Divergenz des elektrischen Feldes ist proportional zur Ladungsdichte $\rightarrow$ gleiche Ladungen stoßen einander ab
-#. Eine Divergenz im elektrischen Feld bewirkt eine "entgegengesetzte" Rotation des magnetischen Feldes und andersherum $\rightarrow$ Induktion
-#. Die Divergenz des des magnetischen Feldes ist immer null $\rightarrow$ Das Magnetfeld hat keine Quellen und Senken
-#.
-
-Transportintegral: Wie viel Material wird entlang einer bestimmten Kurve geschoben
-
-Flächenintegral: Wie viel Material wird durch eine bestimmte Fläche geschoben
+#. Die Divergenz des elektrischen Feldes ist proportional zur Ladungsdichte $\rightarrow$ Ladung erzeugt das elektrische Feld
+#. Eine Divergenz im elektrischen Feld bewirkt eine "entgegengesetzte" verwirbelung des magnetischen Feldes und andersherum $\rightarrow$ Induktion
+#. Die Divergenz des magnetischen Feldes ist immer null $\rightarrow$ Das Magnetfeld hat keine Quellen und Senken
+#. Strom erzeugt einen Wirbel im magnetischen Feld
 
 Divergenz-Operator $\partial_i$ gibt an, wie viel Material in einen (kleinen) Volumswürfel hineinfließt oder aus ihm hinausfließt. Dass der Divergenzoperator des magnetischen Feldes überall null ergibt, bedeutet, dass es keine Quellen oder Senken gibt.
+
+## Transportintegral
+
+Wie viel Material wird entlang einer bestimmten Kurve geschoben?
+
+$v^i(x^m)$ ... Vektorfeld (entspricht Strömung)
+
+$\Gamma(v^i, \gamma) = \int \limits_\gamma v^i(x^m)dx^i = \int\limits_{\lambda_0}^{\lambda_1} d\lambda v^i(x^m(\lambda))x'^i(\lambda)$
+
+$\Gamma(v^i, \gamma)$ ... Transportintegral eines Feldes $v^i(x^m)$ entlang einer Kurve $\gamma$ (, die nach $\lambda$ parametriert werden kann)
+
+## Flächenintegral
+
+Wie viel Material wird durch eine bestimmte Fläche geschoben?
+
+$Fl(v^i, F) = \int\limits_F d^1 f^i v^i$
+
+$d^2 f^i = dAn^2$ ... Normalvektor auf Fläche $f$ mit Länge $1$
+
+## Fluss durch einen kleinen Würfel, relativ zu Volumen {#fdkw}
+
+An stelle $x^m$ befindet sich der Mittelpunkt eines Würfels mit Kantenlänge $\epsilon$, der genau entlang der Koordinatenachsen ausgerichtet ist. $W_{x, \epsilon}$ bezeichnet Würfel, $\partial W_{x, \epsilon}$ bezeichnet nur seine Oberfläche/Rand$
+
+$\lim \limits_{\epsilon \rightarrow 0} \frac{1}{Vol(W_{x, \epsilon})} \int \limits_{W_{x, \epsilon}} d^2 f^i v^i$
+
+$=\lim \limits_{\epsilon \rightarrow 0} \frac{1}{\epsilon^3} \left( \begin{array}{l} \pm e_z^i v^i(x^m\pm \frac{\epsilon}{2} e_z^m) \epsilon^2 \\  \pm e_y^i v^i(x^m\pm \frac{\epsilon}{2} e_y^m) \epsilon^2 \\  \pm e_x^i v^i(x^m\pm \frac{\epsilon}{2} e_x^m) \epsilon^2 \end{array}\right)$
+
+$= \lim \limits_{\epsilon \rightarrow 0} \frac{1}{\epsilon}$ // vervollständigen
+
+$= \partial_i v^i(x^m)$
+
+$= \div v^i(x^m)$ ... Divergenz / Quellendichte von $v^i(x^m)$
+
+## Transportintegral entlang des Randes eines kleinen Quadrates {#trkq}
+
+Quadrat $Q_{x, \epsilon}$ und dessen Rand $\partial Q_{x, \epsilon}$
+
+$\lim \limits_{\epsilon \rightarrow 0} \frac{1}{Ar(W_{x, \epsilon})} \int \limits_{\partial Q_{x, \epsilon}} v^i dx^i$
+
+$= \lim \limits_{\epsilon \rightarrow 0} \frac{1}{\epsilon^2}  \cdot \left( \begin{array}{l} \pm e_y^i v^i (x^m \pm \frac{\epsilon}{2} e_x^m) \\ \mp e_x^i v^i (x^m \pm \frac{\epsilon}{2} e_y^m) \end{array}\right)$
+
+$= \lim \limits_{\epsilon \rightarrow 0} \frac{1}{\epsilon^2} \cdot \left( \begin{array}{l} \pm v^y +{}+ \frac{\epsilon}{2} \partial_x v^y(x^m) + \mathcal{O}(\epsilon^2) \\ \mp v^x -{}- \frac{\epsilon}{2} \partial_y v^x(x^m) + \mathcal{O}(\epsilon^2) \end{array}\right)$
+
+$= \partial_x v^y(x^m) - \partial_y v^x(x^m)$
+
+$= e_z^i \E_{i,j,k} \partial_j v^k(x^m)$
+
+$= \rot v^i(x^m)$ ... Rotor von $v^i(x^m)$
+
+Wenn man das Quadrat auf einen Punkt schrumpft, bleibt nicht nur ebendieser Punkt über, sondern auch die Flachennormale, die gewissermaßen die ursprüngliche Orientierung des Quadrates repräsentiert.
+
+## Ladungserhaltung
+
+Durch intuitives Verständnis der Operatoren lassen sich die Maxwell-Gleichungen nun besser greifbar Machen:
+
+// vervollständigen
+
+Zwei der Maxwell-Gleichungen sind besonders interessant, denn ihre rechte Seite ist ungleich 0. Leiten wir (1) nach der Zeit ab und wenden auf (4) den Divergenzoperator an:
+
+* ad (1): $\partial_i \dot{E}^i(x^m, t) = \frac{1}{\epsilon_0} \dot{\rho}(x^m, t)$
+* ad (4): $\E_{i,j,k} \partial_i \partial_j B^k(x^m, t) - \mu_0 \epsilon_0 \partial_i \dot{E}^i(x^m, t) = \mu_0 \partial_i J^i(x^m, t)$
+
+Weiters multiplizieren wir (1) mit $\epsilon_0$ und dividieren (4) durch $\mu_0$:
+
+* ad (1): $\epsilon_0 \partial_i \dot{E}^i(x^m, t) = \dot{\rho}(x^m, t)$
+* ad (4): $\frac{1}{\mu_0} \E_{i,j,k} \partial_i \partial_j B^k(x^m, t) - \epsilon_0 \partial_i \dot{E}^i(x^m, t) = \partial_i J^i(x^m, t)$
+
+Durch Addition der so erhaltenen Gleichungen folgt
+
+$\frac{1}{\mu_0} \E_{i,j,k} \partial_i \partial_j B^k = \dot{\rho} + \partial_i J^i(x^m, t)$
+
+Über die Eigenschaften des Epsilon- und des Delta-Tensors ergibt sich, dass die linke Seite dieser Gleichung gleich sein muss ihrer Negation. Daraus folgt, dass die linke Seite 0 sein muss. Also:
+
+$\dot{\rho} + \partial_i J^i = 0$ ... Ladungserhaltung
+
+$\Rightarrow$ Ladungserhaltung ist eine direkte Konsequenz der Maxwell-gleichungen. Ladungsdichte kann sich also nur durch Zu- oder Abfluss von Strom ändern.
+
+## Homogene Maxwell-Gleichungen
+
+In Vakuum gilt $\rho = J^i = 0$. Setzt man diese Werte in die inhomogenen Maxwell-Gleichungen ein, ergebn sich die Vakuum-Maxwell-Gleichungen.
+
+#. $\partial_i E^i = 0$
+#. $\E_{i,j,k} \partial_j E^k + \dot{B}^i = 0$
+#. $\partial_i B^i = 0$
+#. $\E_{i,j,k} \partial_j B^k - \mu_0 \epsilon_0 \dot{E}^i = 0$
+
+Es fällt auf, dass alle rechten Seiten dieser gleichungen 0 sind. Somit stellen sie gewöhnliche lineare Differentialgleichungen ersten Grades dar, die zudem homogen sind. Die gleichungen werden daher auch als Homogene Maxwell-Gleichungen bezeichnet.
+
+## Licht
+
+Die homogenen Maxwell-Gleichungen nehmen für die elektrischen und die magnetischen Gleichungen sehr Ähnliche Formen an. Man sieht daher schnell, dass $B^i = E^i = 0$ eine triviale Lösung des Gleichungssystems ist, doch eine große Erkenntnis von Maxwell ist, dass dies nicht die einzige Lösung ist.
+
+Um das zu sehen, entkoppeln wir zuerst die Gleichungen. Hierzu Bilden wir zunächst die zeitliche Ableitung von (2)
+
+$\E_{i,j,k} \partial_j \dot{E}^k + \ddot{B}^i = 0$
+
+Der erste Term dieser Gleichung lässt sich aber auch leicht durch (4) ausdrücken. Man erhält dann
+
+$\frac{1}{\mu_0 \epsilon_0} \E_{i,j,k} \partial_j \left(  \E_{k,l,m} \partial_l B^m \right) + \ddot{B}^i = 0$
+
+was sich umstellen lässt zu 
+
+$\ddot{B}^i + \frac{1}{\mu_0 \epsilon_0} \underbrace{\E_{i,j,k}\E_{k,l,m}}_{\delta_{lm}^{ij}} \partial_j \partial_l B^m = 0$
+
+$\ddot{B}^i - \frac{1}{\mu_0 \epsilon_0} \partial^2 B^i = 0$ ... Wellengleichung
+
+Die gleiche Wellengleichug ließe sich auch für $E^i$ herleiten. In dieser Gleichung beschreibt $\frac{1}{\mu_0 \epsilon_0}$ das Quadrat einer Ausbreitungsgeschwindigkeit. Es zeigt sich, dass $\frac{1}{\mu_0 \epsilon_0} = c^2$ mit $c \approx 3 \cdot 10^8$ m/s. Damit wurde Maxwell klar, dass Licht kein eigenständiges Phänomen ist, sondern lediglich eine elektromagnetische Welle.
