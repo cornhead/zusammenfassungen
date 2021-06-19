@@ -32,7 +32,7 @@ $p$ ist prim (eine Primzahl):
 * $p^k\mid a \wedge p^{k+1}\nmid a \Leftrightarrow \nu_p (a) = k$
 * $a = \prod_{p\in \mathbb{P}} p^{\nu_p (a)}$
 	
-## Kongruzenz
+## Kongruenz
 $a$ ist kongruent $b$ (modulo $m$):
 
 $a \equiv b \mod m \Leftrightarrow m\mid(b-a)$\newline
@@ -70,7 +70,7 @@ Polardarstellung:
 * $z_1\cdot z_2 = \left[ r_1\cdot r_2; \phi_1+\phi_2 \right]$
 * $z_1 = a_1+b_1\cdot i = \left[ r_1; \phi_1\right]$
 
-($z_1, z_2 \in \mathbb{C}$)
+($z_1, z_2 \in \mathbb{C}$, $z_1 = a_1 + b_1 \cdot i$, $z_2 = a_2 + b_2 \cdot i$)
 
 Potenzen und Wurzeln siehe unten
 
@@ -138,53 +138,67 @@ $f$ heißt...
 
 # Algebraische Strukturen
 
-\textbf{Binäre Operationen $\circ$ auf $A$}\newline
-	 sind Abbildungen $\circ: A\times A \rightarrow A$,\newline
-	 die abgeschlossen sind auf $A$, d.h.:\newline
-	 $\forall a, b \in A: (a\circ b)\in A$
-	 \newline\newline
-	 
-	 \textbf{Gruppoide}\newline
-	 sind ein Paar $(A, \circ)$ aus einer Menge $A$\newline
-	 und einer binären Operation auf $A$
-	 \newline\newline
-	 
-	 \textbf{Halbgruppen, Monoide und Gruppen}
-	 \begin{itemize}
-	 	\item Ist ein Gruppoid überdies auch noch\newline
-	 		\underline{assoziativ}: $\forall a,b,c \in A: (a\circ b)\circ c = a \circ (b\circ c)$\newline
-	 		nennt man es eine \underline{Halbgruppe}.
-	 	\item Besitzt eine Halbgruppe überdies ein\newline
-	 		\underline{neutrales Element}: $\exists e \in A \forall a\in A: e\circ a = a\circ e = a$\newline
-	 		nennt man sie ein \underline{Monoid}.
-	 	\item Besitzt ein Monoid überdies\newline
-	 		\underline{inverse Elemente}: $\forall a\in A\exists a^{-1}\in A: a\circ a^{-1} = a^{-1}\circ a = e$\newline
-	 		nennt man es eine \underline{Gruppe}.
-	 \end{itemize}
+## Binäre Operationen
+
+Binäre Operationen $\circ$ auf $A$ sind Abbildungen $\circ: A\times A \rightarrow A$, die abgeschlossen sind auf $A$, d.h.:
+
+$\forall a, b \in A: (a\circ b)\in A$
+
+## Gruppoide
+
+Gruppoide sind Paare $(A, \circ)$ aus einer Menge $A$ und einer binären Operation $\circ$ auf $A$
+
+## Halbgruppen, Monoide und Gruppen
+
+* Ist ein Gruppoid überdies auch noch\
+  **assoziativ**: $\forall a,b,c \in A: (a\circ b)\circ c = a \circ (b\circ c)$\
+  nennt man es eine **Halbgruppe**.
+
+* Besitzt eine Halbgruppe überdies ein\
+  **neutrales Element**: $\exists e \in A \forall a\in A: e\circ a = a\circ e = a$\
+  nennt man sie ein **Monoid**.
+* Besitzt ein Monoid überdies\
+  **inverse Elemente**: $\forall a\in A\exists a^{-1}\in A: a\circ a^{-1} = a^{-1}\circ a = e$\
+  nennt man es eine **Gruppe**.
+  
+## Übersicht -- div. algebraische Strukturen
+
+-------------------------------------------------
+     &nbsp;   assoz.   neutr. Elem.   inv. Elem.
+-----------  -------- -------------- ------------
+   Gruppoid
+   
+ Halbgruppe     X
  
- 	\textbf{Untergruppen}\newline
- 	$(U, \circ)$ heißt Untergruppe von $(G, \circ) \Leftrightarrow U \subset G \wedge (U, \circ)$ $Gruppe$\newline
- 	Man schreibt dann $U \leqslant G$\newline
- 	Untergruppenkriterium: $U\leqslant G \Leftrightarrow \forall a,b \in U: a\circ b^{-1} \in U$
- 	\newline\newline
- 	
- 	\textbf{Ringe}\newline
- 	$(A, +, \cdot)$ heißt Ring $\Leftrightarrow$
- 	\begin{enumerate}
- 		\item $(A, +)$ $komm.$ $Gruppe$
- 		\item $(A, \cdot)$ $Halbgruppe$
- 		\item Es gelten die Distributivgesetze:
- 		\begin{itemize}
- 			\item $\forall a,b,c\in A: a\cdot(b+c) = a\cdot b + a\cdot c$
- 			\item $\forall a,b,c\in A: (a+b)\cdot c = a\cdot c+b\cdot c$
- 		\end{itemize}
- 	\end{enumerate}
- 
- 	\textbf{Körper}\newline
- 	$(A,+, \cdot)$ heißt Körper $\Leftrightarrow$
- 	\begin{enumerate}
- 		\item $(A, +)$ $komm.$ $Gruppe$
- 		\item $(A\backslash \lbrace 0\rbrace, \cdot)$ $komm.$ $Gruppe$
- 		\item Es gelten die Distributivgesetze.
- 	\end{enumerate}
+     Monoid     X           X
+     
+     Gruppe     X           X             X
+-------------------------------------------------
+
+## Untergruppen
+
+$(U, \circ)$ heißt Untergruppe von $(G, \circ) \Leftrightarrow U \subset G \wedge (U, \circ)$ $Gruppe$
+
+
+Man schreibt dann $U \leqslant G$
+
+Untergruppenkriterium: $U\leqslant G \Leftrightarrow \forall a,b \in U: a\circ b^{-1} \in U$
+
+## Ringe
+
+$(A, +, \cdot)$ heißt Ring $\Leftrightarrow$
+
+* $(A, +)$ kommutative Gruppe
+* $(A, \cdot)$ Halbgruppe
+* Es gelten die Distributivgesetze:
+	* $\forall a,b,c\in A: a\cdot(b+c) = a\cdot b + a\cdot c$
+	* $\forall a,b,c\in A: (a+b)\cdot c = a\cdot c+b\cdot c$
+
+## Körper
+
+$(A,+, \cdot)$ heißt Körper $\Leftrightarrow$
+
+* $(A, +)$ kommutative Gruppe
+* $(A\backslash \lbrace 0\rbrace, \cdot)$ kommutative Gruppe
+* Es gelten die Distributivgesetze.
 
