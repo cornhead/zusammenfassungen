@@ -201,9 +201,7 @@ Wenn man das Quadrat auf einen Punkt schrumpft, bleibt nicht nur ebendieser Punk
 
 ## Ladungserhaltung
 
-Durch intuitives Verständnis der Operatoren lassen sich die Maxwell-Gleichungen nun besser greifbar Machen:
-
-// vervollständigen
+Durch intuitives Verständnis der Operatoren lassen sich die Maxwell-Gleichungen nun besser greifbar Machen: // vervollständigen
 
 Zwei der Maxwell-Gleichungen sind besonders interessant, denn ihre rechte Seite ist ungleich 0. Leiten wir (1) nach der Zeit ab und wenden auf (4) den Divergenzoperator an:
 
@@ -255,3 +253,20 @@ $\ddot{B}^i + \frac{1}{\mu_0 \epsilon_0} \underbrace{\E_{i,j,k}\E_{k,l,m}}_{\del
 $\ddot{B}^i - \frac{1}{\mu_0 \epsilon_0} \partial^2 B^i = 0$ ... Wellengleichung
 
 Die gleiche Wellengleichug ließe sich auch für $E^i$ herleiten. In dieser Gleichung beschreibt $\frac{1}{\mu_0 \epsilon_0}$ das Quadrat einer Ausbreitungsgeschwindigkeit. Es zeigt sich, dass $\frac{1}{\mu_0 \epsilon_0} = c^2$ mit $c \approx 3 \cdot 10^8$ m/s. Damit wurde Maxwell klar, dass Licht kein eigenständiges Phänomen ist, sondern lediglich eine elektromagnetische Welle.
+
+Das Ausbreitungsmedium von elektromagnetischen Wellen sind also gewissermaßen das elektrische und magnetische Feld. Zuvor nahm man als Ausbreitungsmedium von Licht den sogenannten Lichtether an. Es stellte sich nun die Frage, mit welcher Geschwindigkeit wir uns gegenüber dem Lichtether bewegen. Um diese Frage zu klären wurde folgendes Experiment durchgeführt: man messe die Ausbreitungsgeschwindigkeit von Licht in unterschiedliche Richtungen. Da man sich vermutlich gegenüber dem Ether bewegt, müsste man einen Unterschied der Ausbreitungsgeschwindkeiten in die unterschiedlichen Richtungen messen. Doch bei der Durchführung war dies nicht der Fall. Nun wäre es natürlich denkbar, dass man sich in diesem Moment genau in Ruhe gegenüber dem Ether befand. Man wartete also ein halbes Jahr und führte das Experiment erneut durch. Da sich die Erde dann ja in die genau entgegengesetzte Richtung bewegt, hätte man zumindest dann einen Unterschied feststellen können müssen; doch wieder nichts.
+
+Wie erklärt man nun dieses Phänomen? Dem Ether wurden zunehmend mehr Eigenschaften zugesprochen, die -- wie Einstein bemerkte -- nur den Zweck hatten, den Ether unbeobachtbar zu machen, was zutiefst unwissenschaftlich ist. Andere Folgerungen aus diesen Messungen könnten sein, dass entweder das Relativitätsprinzip nicht immer gilt, oder dass die Maxwell-Gleichungen falsch sind. Beides würde die Physik in gleich schwere Krisen werfen. Einstein schlägt nun in seiner **speziellen Relativitätstheorie** (1905) einen dritten Weg vor, der nicht verlangt, dass eines dieser etablierten Konzepte aufgegeben werden muss: Er stellt fest, dass die Zeit für unterschiedliche Beobachter nicht unbedingt gleich verlaufen muss.
+
+## Raumzeit
+
+Minkowski, 1908
+
+* Gleichzeit-Ebenen
+* Weltlinien
+* Gleichgeschwindigkeitskegel
+	* Lichtkegel (wenn die ebenen $c\cdot t$ auseinander sind ist der Öffnungswinkel 45°)
+	
+nvarianz des Lichtkegels: konstruktion des kegels muss für alle bezugssysteme gleich sein -> bei geneigten weltlinien eines beobachters kippen auch gleichzeitigkeitsebenen -> zeitliche reihenfolge von ereignissen kann von beobachter abhängen, gleiches objekt wirkt als hätte es unterschiedliche längen je nachdem wer es beobachtet
+
+minkowski metrik -> lichtartige, raumartige und zeitartige vektoren
