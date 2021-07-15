@@ -49,7 +49,7 @@ Das ist ein [Link](http://meinewebsite/).
 Links können auf eine URL verweisen, oder auch auf andere Stellen im Dokument, die mit einem entsprechenden Anker versehen sind:
 
 ~~~
-Für nähere Informationen, sihe [Kapitel 3](#chap_3).
+Für nähere Informationen, siehe [Kapitel 3](#chap_3).
 ~~~
 
 Auch Abbildungen können auf fast die gleiche Weise in Dokumente eingefügt werden:
@@ -58,11 +58,11 @@ Auch Abbildungen können auf fast die gleiche Weise in Dokumente eingefügt werd
 ![Bildbeschreibung](./img/meinbild.png){width=75%}
 ~~~
 
-Beachte das führende Rufzeichen und *optionale*, nachgestellte Attribute.
+Beachte das führende Rufzeichen und *optionale*, nachgestellte Attribute. Für Bilder steht der Order `img` zur Verfügung. Bitte gebt den Bildern sinnvolle Namen!
 
 ### Tabellen
 
-Für eine ausführlichere Beschreibung, auf welche Arten man Tabellen in Markdown schreiben kann, sei auf die [Dokumentation von Pandoc-Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown) verwiesen. Als Beispiel soll aber das folgende Snippet dienen:
+Für eine ausführlichere Beschreibung, auf welche verschiedenen Arten man Tabellen in Markdown schreiben kann, sei auf die [Dokumentation von Pandoc-Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown) verwiesen. Als Beispiel soll aber das folgende Snippet dienen:
 
 ~~~
 --------------------------
