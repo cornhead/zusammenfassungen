@@ -10,7 +10,8 @@ articles = \
 	depsys_zusammenfassung\
 	hm_zusammenfassung\
 	rta_zusammenfassung\
-    psv_zusammenfassung
+	psv_zusammenfassung\
+	test
 
 beamers = \
 	digides_formelsammlung\
