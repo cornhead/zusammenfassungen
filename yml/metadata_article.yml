@@ -10,24 +10,9 @@ classoptions:
 papersize: a4
 
 header-includes: |
-	\usepackage{amsfonts,amsmath,amssymb,amsthm} 
-	\usepackage{stmaryrd}  
-	\usepackage{semantic}  
-	
-	\renewcommand{\epsilon}{\varepsilon}
-	\newcommand{\E}{\mathcal{E}}
-	\renewcommand{\div}{\textbf{Div}~}
-	\newcommand{\rot}{\textbf{Rot}~}
+	\usepackage{./tex/summary} 
 
 include-before: |
-	\vspace{1.5cm}
-	
-	---
-	
-	**An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf [Github](https://github.com/cornhead/zusammenfassungen.git) mitgewirkt werden!**
-	
-	---
-	
-	\vspace{1.5cm}
+	\makedisclaimer
 
 toc: true

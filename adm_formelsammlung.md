@@ -1,4 +1,4 @@
-
+summary-type: formula_sheet
 title: "**Formelsammlung: Algebra und diskrete Mathematik**"
 
 ...

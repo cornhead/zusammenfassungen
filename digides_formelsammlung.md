@@ -1,4 +1,4 @@
-
+summary-type: formula_sheet
 title: "**Formelsammlung: Digital Design**"
 ...
 

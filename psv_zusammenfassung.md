@@ -402,7 +402,7 @@ Table: comparison of BDDs and SAT-solvers
 
 # Examples
 
-Alle Angaben ohne Gewähr. Etwaige Fehler bitte auf [Github](https://github.com/cornhead/zusammenfassungen.git) anmerken/ändern.
+Alle Angaben ohne Gewähr. Etwaige Fehler bitte auf \Github anmerken/ändern.
 
 ## Coverage
 

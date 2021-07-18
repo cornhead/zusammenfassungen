@@ -8,7 +8,9 @@ Pandoc unterstützt Yaml-Metadaten-Header. Diese sollen auch genutzt werden, um 
 
 Dokumente sollten Überschriften haben im Format `<Dokumententyp>: <LVA-Name ohne LVA-Typ>`. So lautet etwa die Überschrift der Zusammenfassung der Vorlesung Digital Design "Zusammenfassung: Digital Design" und nicht "Zusammenfassung: VO Digital Design" und auch nicht "Digital Design -- Zusammenfassung". Wie eingangs erwähnt wird der Titel eines Dokuments im Yaml-Metadaten-Header angegeben. Um die Überschrift fett zu schreiben, soll sie zwischen doppelte Asteriske gestellt werden. Da die meisten Titel wohl Doppeltpunkte enthalten werden, ist es nötig, den Titel zusätzlich zwischen Anführungsstriche zu stellen.
 
-Standarmäßig wird automatisch ein Inhaltsverzeichnis erstellt. Sollte das nicht erwünscht sein, kann im Yaml-Metadaten-Header `toc: false` angegeben werden. Das Inhaltsverzeichnis beinhaltet Links zu den entsprechenden Kapiteln, die aber schwarz dargestellt werden. (Durch die Einstellung, die das bewirkt, ergibt sich auch, dass alle Links in einem Dokument auf andere Stellen in diesem Dokument ebenfalls schwarz dargestellt werden und erst durch entsprechende Formatierung gekennzeichnet werden müssen.)
+Standarmäßig wird automatisch ein Inhaltsverzeichnis erstellt. Sollte das nicht erwünscht sein, kann im Yaml-Metadaten-Header `toc: false` angegeben werden. Das Inhaltsverzeichnis beinhaltet Links zu den entsprechenden Kapiteln.
+
+Es wird zwischen zwei Arten von Zusammenfassungen unterschieden: Die eine nennt sich `article` und ähnelt in ihrer Form einem typischen Skript. Sie wird also hochformatig im A4-Format dargestellt, hat eine Überschrift, ein Inhaltsverzeichnis, etc.. Die andere nennt sich `formula_sheet` und entspricht eher Lernkarten. (Entgegen ihres Namens dürfen aber auch gerne andere Lernkarten in diesem Format dargestellt werden, die nicht als Formelsammlung dienen.) Die gewünschte Art der Zusammenfassung wird im Metadata-Tag `summary-type` angegeben. Wird dieser Tag nicht angegeben oder wird dessen Inhalt falsch verstanden, wird standardmäßig `article` als Typ gewählt.
 
 Um zu erreichen, dass möglichst viele begeisterte Student*innen an den Zusammenfassungen mitwirken, wird automatisiert am Anfang des Dokuments ein Disclaimer eingefügt werden, der zum Mitmachen auffordert und auf das Github-Repo verweist.
 
@@ -16,6 +18,7 @@ Eine Zusammenfassung könnte also etwa einen Header haben wie den Folgenden habe
 
 ~~~ 
 
+summary-type: formula_sheet
 title: "**<Titel der Zusammenfassung/Formelsammlung>**"
 ...
 
@@ -91,3 +94,31 @@ int foo(){
 }
 ~~~
 ```
+
+### Hervorhebung durch farbige Markierung
+
+Durch das LaTeX-Package `summary` werden drei Environments zur Verfügung gestellt, die dazu dienen, Abschnitte eines Textes durch farbige Markierungen hervorzuheben. Diese Environments heißen `note`, `example` und `theorem` und sind dazu gedacht genau das hervozuheben, was ihr Name bereits suggeriert. Der Titel eines solchen Abschnittes wird im einzigen Argument der Environments festgelegt. Soll kein Titel vergeben werden, kann hinter den Namen der Environment ein Asterisk (`*`) gestellt werden. Die Environments könnten also wie folgt verwendet werden:
+
+~~~
+\begin{theorem}{2. Newtonsches Axiom}
+$m \cdot \ddot{x}^i(t) = F^i(x^m(t))$
+\end{theorem}
+
+\begin{note*}
+Das ist eine Notiz ohne Titel
+\end{note}
+~~~
+
+Nach momentanem Stand werden die Environments als farbig umrandete Boxen dargestellt, die sehr hervorstechen. Es ist jedoch geplant, ihr Aussehen so zu ändern, dass sie nur noch als farbiger Balken am linken Rand des Dokuments erscheinen und sich somit wesentlich besser in den Fließtext einfügen.
+
+Ein Nachteil dieser Environments ist noch, dass ihr Inhalt als LaTeX interpretiert wird, nicht als Markdown. Dieses Problem soll in Zukunft jedoch behoben werden. Außerdem soll in Zukunft ihre Einbindung mit Pandoc-Markdown konform werden. Das obige Beispiel würde dann wie folgt abgeändert werden müssen:
+
+~~~
+::: theorem {title="2. Newtonsches Axiom"}
+$m \cdot \ddot{x}^i(t) = F^i(x^m(t))$
+:::
+
+::: note
+Das ist eine Notiz ohne Titel
+:::
+~~~
