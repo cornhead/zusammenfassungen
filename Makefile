@@ -2,6 +2,8 @@ metadata_defaults  = ./yml/metadata_defaults.yml
 metadata_article = ./yml/metadata_article.yml
 metadata_beamer  = ./yml/metadata_beamer.yml
 
+texPackages = ./tex/summary.sty
+
 md2article = pandoc $(metadata_defaults) $(metadata_article)
 md2beamer  = pandoc -s -f markdown+yaml_metadata_block+tex_math_dollars+multiline_tables -t beamer --slide-level=2 $(metadata_defaults) $(metadata_beamer)
 
@@ -21,6 +23,6 @@ all: $(allPdfs)
 clean:
 	rm -f $(allPdfs)
 
-%.pdf: %.md $(metadata_defaults) $(metadata_article) $(metadata_beamer)
+%.pdf: %.md $(metadata_defaults) $(metadata_article) $(metadata_beamer) $(texPackages)
 	$(md2pdf) $< -o $@
 	

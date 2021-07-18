@@ -12,6 +12,8 @@
 
 \newcommand\summaryLang{german}
 
+
+%% TODO: automatically detect language as given by yml-variables
 \DeclareOption{english}{ \renewcommand\summaryLang{english}}
 \DeclareOption{german}{  \renewcommand\summaryLang{german}}
 \DeclareOption*{ \PackageWarning{summary}{Option '\CurrentOption' unknown. Please choose either 'german' or 'english'. (default is german)} }
@@ -34,11 +36,12 @@
 }
 {}
 
-\newcommand{\makedisclaimer}{
-	\vspace{1.5cm}
-	\textbf{\summaryStrDisclaimer}
-	\vspace{1.5cm}
-}
+
+
+
+
+
+
 
 
 \renewcommand{\epsilon}{\varepsilon}
@@ -47,7 +50,7 @@
 \newcommand{\rot}{\textbf{Rot}~}
 
 
-%% TODO: the following code was meant to avoid code duplication but it then, all boxes were red. I would like to force immediated expansion of the macros (thats what the thing with the roman numerals is for) but it did not work
+%% TODO: the following code was meant to avoid code duplication but then, all boxes were red. I would like to force immediated expansion of the macros (thats what the thing with the roman numerals is for) but it did not work
 %
 %% 1: name of box, 2: color, 3: title-prefix
 %\newcommand\DefineNewSummaryBox[3]{
@@ -56,7 +59,7 @@
 %	\def\nsbPrefix{#3}
 %	
 %	\romannumeral-`X\newtcolorbox[auto counter, number within=section]{\nsbName}[1][]{colback=\nsbColor!5!white, colframe=\nsbColor!75!black, title={\nsbPrefix ~ \thetcbcounter: #1}}
-%	\newtcolorbox{\nsbName*}{colback=\nsbColor!5!white, colframe=\nsbColor!75!black}
+%	\romannumeral-`X\newtcolorbox{\nsbName*}{colback=\nsbColor!5!white, colframe=\nsbColor!75!black}
 %}
 %
 %\romannumeral-`X\DefineNewSummaryBox{example}{green}{\summaryStrExample}
@@ -70,5 +73,18 @@
 \newcommand\summaryTheoremColor{red}
 
 \newtcolorbox[auto counter, number within=section]{note}[1]{colback=\summaryNoteColor!5!white, colframe=\summaryNoteColor!75!black, title={\summaryStrNote ~ \thetcbcounter: #1}}
+%\newtcolorbox{note*}{colback=\summaryNoteColor!5!white, colframe=\summaryNoteColor!75!black}
 \newtcolorbox[auto counter, number within=section]{example}[1]{colback=\summaryExampleColor!5!white, colframe=\summaryExampleColor!75!black, title={\summaryStrExample ~ \thetcbcounter: #1}}
+%\newtcolorbox{example*}{colback=\summaryExampleColor!5!white, colframe=\summaryExampleColor!75!black}
 \newtcolorbox[auto counter, number within=section]{theorem}[1]{colback=\summaryTheoremColor!5!white, colframe=\summaryTheoremColor!75!black, title={\summaryStrTheorem ~ \thetcbcounter: #1}}
+%\newtcolorbox{theorem*}{colback=\summaryTheoremColor!5!white, colframe=\summaryTheoremColor!75!black}
+
+
+\newcommand{\makedisclaimer}{
+	\vspace{1.5cm}
+	\begin{note}
+	\textbf{\summaryStrDisclaimer}
+	\end{note}
+	\vspace{1.5cm}
+}
+
