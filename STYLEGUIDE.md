@@ -91,3 +91,31 @@ int foo(){
 }
 ~~~
 ```
+
+### Hervorhebung durch farbige Markierung
+
+Durch das LaTeX-Package `summary` werden drei Environments zur Verfügung gestellt, die dazu dienen, Abschnitte eines Textes durch farbige Markierungen hervorzuheben. Diese Environments heißen `note`, `example` und `theorem` und sind dazu gedacht genau das hervozuheben, was ihr Name bereits suggeriert. Der Titel eines solchen Abschnittes wird im einzigen Argument der Environments festgelegt. Soll kein Titel vergeben werden, kann hinter den Namen der Environment ein Asterisk (`*`) gestellt werden. Die Environments könnten also wie folgt verwendet werden:
+
+~~~
+\begin{theorem}{2. Newtonsches Axiom}
+$m \cdot \ddot{x}^i(t) = F^i(x^m(t))$
+\end{theorem}
+
+\begin{note*}
+Das ist eine Notiz ohne Titel
+\end{note}
+~~~
+
+Nach momentanem Stand werden die Environments als farbig umrandete Boxen dargestellt, die sehr hervorstechen. Es ist jedoch geplant, ihr Aussehen so zu ändern, dass sie nur noch als farbiger Balken am linken Rand des Dokuments erscheinen und sich somit wesentlich besser in den Fließtext einfügen.
+
+Ein Nachteil dieser Environments ist noch, dass ihr Inhalt als LaTeX interpretiert wird, nicht als Markdown. Dieses Problem soll in Zukunft jedoch behoben werden. Außerdem soll in Zukunft ihre Einbindung mit Pandoc-Markdown konform werden. Das obige Beispiel würde dann wie folgt abgeändert werden müssen:
+
+~~~
+::: theorem {title="2. Newtonsches Axiom"}
+$m \cdot \ddot{x}^i(t) = F^i(x^m(t))$
+:::
+
+::: note
+Das ist eine Notiz ohne Titel
+:::
+~~~
