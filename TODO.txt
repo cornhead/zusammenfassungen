@@ -1,0 +1,11 @@
+./sh
+    /getSummaryType.sh
+        -) line 15: exit does not seem to work
+        -) trim quotation marks in tag?
+./tex
+    /summary.sty
+        -) line 53: todo already describes what to do -> prevent code duplication
+        -) also create environments with asterisc (no title)
+        -) make environments better looking (only colored bar on next to the text)
+./Makefile
+    -) line 15: use awk to exclude files from being parsed, then use variable to exlude files more easily
