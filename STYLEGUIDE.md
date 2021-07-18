@@ -10,12 +10,15 @@ Dokumente sollten Überschriften haben im Format `<Dokumententyp>: <LVA-Name ohn
 
 Standarmäßig wird automatisch ein Inhaltsverzeichnis erstellt. Sollte das nicht erwünscht sein, kann im Yaml-Metadaten-Header `toc: false` angegeben werden. Das Inhaltsverzeichnis beinhaltet Links zu den entsprechenden Kapiteln, die aber schwarz dargestellt werden. (Durch die Einstellung, die das bewirkt, ergibt sich auch, dass alle Links in einem Dokument auf andere Stellen in diesem Dokument ebenfalls schwarz dargestellt werden und erst durch entsprechende Formatierung gekennzeichnet werden müssen.)
 
+Es wird zwischen zwei Arten von Zusammenfassungen unterschieden: Die eine nennt sich `article` und ähnelt in ihrer Form einem typischen Skript. Sie wird also hochformatig im A4-Format dargestellt, hat eine Überschrift, ein Inhaltsverzeichnis, etc.. Die andere nennt sich `formula_sheet` und entspricht eher Lernkarten. (Entgegen ihres Namens dürfen aber auch gerne andere Lernkarten in diesem Format dargestellt werden, die nicht als Formelsammlung dienen.) Die gewünschte Art der Zusammenfassung wird im Metadata-Tag `summary-type` angegeben. Wird dieser Tag nicht angegeben oder wird dessen Inhalt falsch verstanden, wird standardmäßig `article` als Typ gewählt.
+
 Um zu erreichen, dass möglichst viele begeisterte Student*innen an den Zusammenfassungen mitwirken, wird automatisiert am Anfang des Dokuments ein Disclaimer eingefügt werden, der zum Mitmachen auffordert und auf das Github-Repo verweist.
 
 Eine Zusammenfassung könnte also etwa einen Header haben wie den Folgenden haben:
 
 ~~~ 
 
+summary-type: formula_sheet
 title: "**<Titel der Zusammenfassung/Formelsammlung>**"
 ...
 
