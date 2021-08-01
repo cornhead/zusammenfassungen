@@ -61,7 +61,7 @@ Auch Abbildungen können auf fast die gleiche Weise in Dokumente eingefügt werd
 ![Bildbeschreibung](./img/meinbild.png){width=75%}
 ~~~
 
-Beachte das führende Rufzeichen und *optionale*, nachgestellte Attribute. Für Bilder steht der Order `img` zur Verfügung. Bitte gebt den Bildern sinnvolle Namen!
+Beachte das führende Rufzeichen und *optionale*, nachgestellte Attribute. Für Bilder steht der Order `img` zur Verfügung. Bitte gebt den Bildern sinnvolle Namen! Sollte es nötig sein, selbst Abbildungen zu erstellen, etwa mit Tikz, sei auf den Punkt `Abbildungen erstellen` verwiesen
 
 ### Tabellen
 
@@ -122,3 +122,9 @@ $m \cdot \ddot{x}^i(t) = F^i(x^m(t))$
 Das ist eine Notiz ohne Titel
 :::
 ~~~
+
+## Abbildungen erstellen
+
+Um Abbildungen zu erstellen steht wie so oft LaTeX zur Verfügung. Im Ordern `./img/tex` können tex-Dateien erstellt werden, die zu PDFs übersetzt werden. Die einzelnen Seiten der PDFs werden als PNGs extrahiert. Die so enstandenen Bilder werden einfach durchnummeriert. Leider habe ich dafür noch keine bessere Lösung gefunden. Der gesamte Prozess ist durch `make` automatisiert. 
+
+Sollte eine Zusammenfassung Bilder benötigen, die auf die eben beschriebene Weise generiert werden, kann dem Dokument im Metadaten-Header der Tag `tikz-requirements` hinzugefügt werden, gefolgt mit dem Basename der benötigten tex-Datei. Daraufhin werden beim Kompilieren der Zusammenfassung auch die benötigten Dateien mitkompiliert. Falls beispielsweise die Abbildungen benötigt werden, die durch `digides_drawings.tex` beschrieben werden, kann in der entsprechenden Zusammenfassung der Tag `tikz-requirements: digides_drawings` hinzugefügt werden.

@@ -8,8 +8,15 @@ md2article = pandoc $(metadata_defaults) $(metadata_article)
 md2beamer  = pandoc -s -f markdown+yaml_metadata_block+tex_math_dollars+multiline_tables -t beamer --slide-level=2 $(metadata_defaults) $(metadata_beamer)
 
 summaryType = $(shell cat $< | ./sh/getSummaryType.sh)
+tikzRequirements = $(shell cat $< | ./sh/getTikzRequirements.sh)
 
 md2pdf = $(if $(filter $(summaryType),formula_sheet), $(md2beamer), $(md2article) )
+
+define makeDrawings
+	@if [ "$(tikzRequirements)" != "" ]; then \
+		make -C ./img/tex $(tikzRequirements) | sed -e 's/\n/\t\n/g'; \
+	fi
+endef
 
 
 allPdfs = $(shell ls *.md | sed -e 's/.md/.pdf/g' -e 's/README.pdf//g' -e 's/TOOLS.pdf//g' -e 's/STYLEGUIDE.pdf//g') # TODO: find better method to exclude files from list
@@ -24,5 +31,6 @@ clean:
 	rm -f $(allPdfs)
 
 %.pdf: %.md $(metadata_defaults) $(metadata_article) $(metadata_beamer) $(texPackages)
+	$(makeDrawings)
 	$(md2pdf) $< -o $@
 	

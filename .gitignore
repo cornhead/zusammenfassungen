@@ -1,3 +1,6 @@
-*.tex
+*.aux
+*.log
 *.pdf
 *.orig
+test.*
+./img/tex/*.png

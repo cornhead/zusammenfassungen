@@ -1,0 +1,116 @@
+\documentclass[]{standalone}
+\usepackage{circuitikz}
+
+\standaloneenv{circuitikz}
+
+%\ctikzset{tripoles/european not symbol=circle}
+
+\newcommand\GateInv{european not port}
+\newcommand\GateNor{european nor port}
+\newcommand\GateAnd{european and port}
+\newcommand\LatchSR{flipflop SR}
+\newcommand\LatchSRE{flipflop SRE}
+\newcommand\LatchD{flipflop Dlatch}
+\newcommand\FFD{flipflop D}
+
+
+\tikzset{flipflop SRE/.style={flipflop,
+	flipflop def={t1=S, t2=E, t3=R, t4={\ctikztextnot{Q}}, t6=Q}}
+}
+
+\tikzset{flipflop Dlatch/.style={flipflop,
+		flipflop def={t1=D, t3=E, t4={\ctikztextnot{Q}}, t6=Q}}
+}
+
+% TODO: make this work:
+%\ctikzset{tripoles/european not symbol=ieee circle}
+
+\begin{document}
+
+	\begin{circuitikz}
+		\newcommand\botHeight{1.75}
+		
+		\draw (1,5) to ++(0,0) node[anchor=east]{VCC} to (2.5,5) to ++(0,0) node(n1){} to (5,5);
+		\draw (1,\botHeight) to ++(0,0) node[anchor=east]{GND} to (2.5,\botHeight) to ++(0,0) node(n2){} to (5,\botHeight);
+		
+		\draw (n1) to[short, *-] ++(0,0) node[pmos, emptycircle, anchor=S](p){};
+		\draw (p.D) to ++(0,0) node[nmos, anchor=D](n){};
+		\draw (n.S) to ++(0,0) to[short, -*] (n2);
+		
+		\draw (p.D) to[short, *-o] ++(1.5,0) node[anchor=west](out){out};
+		\draw (n.G) to (p.G);
+		\draw (n.D) ++(-1,0) node[]{} to[short, *-o] ++(-1,0) node[anchor=east](input){in};
+		
+		\draw (input) ++(-2,0) node[\GateInv, anchor=east]{};
+	\end{circuitikz}
+
+	\begin{circuitikz}
+		\newcommand\offsetLeft{0.4}
+		\newcommand\offsetRight{0.6}
+		
+		\draw (2,3) node[\GateNor](nor1){};
+		\draw (2,1) node[\GateNor](nor2){};
+		
+		\draw (nor1.out) to ++(0,-\offsetRight) node[](n1o){};
+		\draw (nor1.in 2) to ++(0,-\offsetLeft) node[](n1i){};
+		\draw (nor2.out) to ++(0,\offsetRight) node[](n2o){};
+		\draw (nor2.in 1) to ++(0,\offsetLeft) node[](n2i){};
+		\draw (n1i) to[short, -] (n2o);
+		\draw (n2i) to[short, -] (n1o);
+		
+		\draw (nor1.out) to[short, -o] ++(1,0) node[anchor=west](){$\overline{\textrm Q}$};
+		\draw (nor2.out) to[short, -o] ++(1,0) node[anchor=west](){Q};
+		\draw (nor1.in 1) to[short, -o] ++(-1,0) node[anchor=east](){S};
+		\draw (nor2.in 2) to[short, -o] ++(-1,0) node[anchor=east](){R};
+		
+		\draw (-4,2) node[\LatchSR](){};
+	\end{circuitikz}
+
+	\begin{circuitikz}
+		\draw (2,2) node[\LatchSR](sr){};
+		\draw (sr.pin 1) node[\GateAnd, anchor=east](and1){};
+		\draw (sr.pin 3) node[\GateAnd, anchor=east](and2){};
+		\draw (and1.in 2) to (and2.in 1);
+		
+		\draw  (and1.in 1) to[short, -o] ++(-1,0) node[anchor=east](){S};
+		\draw  (and2.in 2) to[short, -o] ++(-1,0) node[anchor=east](){R};
+		\draw  (and2.in 1) ++(0,0.6) to[short, *-o] ++(-1,0) node[anchor=east](){E};
+		\draw (sr.pin 4) to[short, -o] ++(1,0) node[anchor=west](){$\overline{\textrm Q}$};
+		\draw (sr.pin 6) to[short, -o] ++(1,0) node[anchor=west](){Q};
+		
+		\draw (-5,2) node[\LatchSRE](){}; 
+	\end{circuitikz}
+
+
+	\begin{circuitikz}
+		\draw (2,2) node[\LatchSRE](sr){};
+		\draw (sr.pin 3) node[\GateInv, anchor=east](inv){};
+		\draw (inv.in) |- (sr.pin 1);
+		
+		\draw (sr.pin 1) ++(-1.95,0) to[short, *-o] ++(-1,0) node[anchor=east](){D};
+		\draw (sr.pin 2) to ++(-0.965,0) to[crossing, mirror, -o] ++(-2,0) node[anchor=east](){E};
+		\draw (sr.pin 4) to[short, -o] ++(1,0) node[anchor=west](){$\overline{\textrm Q}$};
+		\draw (sr.pin 6) to[short, -o] ++(1,0) node[anchor=west](){Q};
+		
+		\draw (-5,2) node[\LatchD](){}; 
+	\end{circuitikz}
+
+	\begin{circuitikz}
+		\draw (2,2) node[\LatchD](d1){} ++(1,-2) node[\GateInv](inv2){} ++(-2.5,0) node[\GateInv](inv1){};
+		\draw (5,2) node[\LatchD](d2){};
+		
+		\draw (inv1.out) to (inv2.in);
+		\draw (d1.pin 3) to [short, -*] ++(0,-1.165);
+		\draw (inv2.out) to ++(0.5,0) |- (d2.pin 3);
+		\draw (d1.pin 6) to (d2.pin 1);
+		\draw[dashed] (inv2.out) to ++(2,0);
+		
+		\draw (inv1.in) to[short, -o] ++(0,0) node[anchor=east](){Clk};
+		\draw (d1.pin 1) to[short, -o] ++(-2,0) node[anchor=east](){D};
+		\draw (d2.pin 6) to[short, -o] ++(0.5,0) node[anchor=west](){Q};
+		\draw (d2.pin 4) to[short, -o] ++(0.5,0) node[anchor=west](){$\overline{\textrm Q}$};
+		
+		\draw (-4.5,1.5) node[\FFD](){};
+	\end{circuitikz}
+
+\end{document} 
