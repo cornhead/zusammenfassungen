@@ -6,9 +6,15 @@
 \RequirePackage{semantic}
 
 \RequirePackage{tcolorbox}
+\RequirePackage{tikz}
 \RequirePackage{xcolor}
 
 \RequirePackage{ifthen}
+
+\tcbuselibrary{skins,breakable}
+
+
+
 
 \newcommand\summaryLang{german}
 
@@ -31,8 +37,8 @@
 { %% english strings
 	\renewcommand\summaryStrDisclaimer{Contributions to this summary and the corresponding formula sheet are welcomed on \Github. }
 	\renewcommand\summaryStrExample{Example}
-	\renewcommand\summaryStrNote{Bemerkung}
-	\renewcommand\summaryStrTheorem{Satz}
+	\renewcommand\summaryStrNote{Note}
+	\renewcommand\summaryStrTheorem{Theorem}
 }
 {}
 
@@ -50,40 +56,104 @@
 \newcommand{\rot}{\textbf{Rot}~}
 
 
-%% TODO: the following code was meant to avoid code duplication but then, all boxes were red. I would like to force immediated expansion of the macros (thats what the thing with the roman numerals is for) but it did not work
-%
-%% 1: name of box, 2: color, 3: title-prefix
-%\newcommand\DefineNewSummaryBox[3]{
-%	\def\nsbName{#1}
-%	\def\nsbColor{#2}
-%	\def\nsbPrefix{#3}
-%	
-%	\romannumeral-`X\newtcolorbox[auto counter, number within=section]{\nsbName}[1][]{colback=\nsbColor!5!white, colframe=\nsbColor!75!black, title={\nsbPrefix ~ \thetcbcounter: #1}}
-%	\romannumeral-`X\newtcolorbox{\nsbName*}{colback=\nsbColor!5!white, colframe=\nsbColor!75!black}
-%}
-%
-%\romannumeral-`X\DefineNewSummaryBox{example}{green}{\summaryStrExample}
-%\romannumeral-`X\DefineNewSummaryBox{note}{blue}{\summaryStrNote}
-%\romannumeral-`X\DefineNewSummaryBox{theorem}{red}{\summaryStrTheorem}
-
-
-% as alternative to the above code, here is a different code with code duplication
+\newcommand\summaryLeftbarThikness{2pt}
+\newcommand\summaryLeftbarSpacing{10pt} % defines the horizontal gap between the left bar and text
+\newcommand\summaryLeftbarExtraLength{-5pt} % defines the extra length that the left bar laps above and below the text
+\newcommand\summaryLeftbarTopBotSpacing{7pt} % spacing of the bars at the top and the bottom end of the left bar to the text
 \newcommand\summaryNoteColor{blue}
 \newcommand\summaryExampleColor{green}
 \newcommand\summaryTheoremColor{red}
 
-\newtcolorbox[auto counter, number within=section]{note}[1]{colback=\summaryNoteColor!5!white, colframe=\summaryNoteColor!75!black, title={\summaryStrNote ~ \thetcbcounter: #1}}
-%\newtcolorbox{note*}{colback=\summaryNoteColor!5!white, colframe=\summaryNoteColor!75!black}
-\newtcolorbox[auto counter, number within=section]{example}[1]{colback=\summaryExampleColor!5!white, colframe=\summaryExampleColor!75!black, title={\summaryStrExample ~ \thetcbcounter: #1}}
-%\newtcolorbox{example*}{colback=\summaryExampleColor!5!white, colframe=\summaryExampleColor!75!black}
-\newtcolorbox[auto counter, number within=section]{theorem}[1]{colback=\summaryTheoremColor!5!white, colframe=\summaryTheoremColor!75!black, title={\summaryStrTheorem ~ \thetcbcounter: #1}}
-%\newtcolorbox{theorem*}{colback=\summaryTheoremColor!5!white, colframe=\summaryTheoremColor!75!black}
+%% TODO: the following code is pure code duplication. I tried to solve this by introducing a new
+%% macro that defines those new environments , but it failed because then this macro would be
+%% expanded only at call time, not on definition, so all boxes had the same colors and titles.
+%% If someone could change this, that would be cool!
 
+\newtcolorbox[auto counter, number within=section]{note}[1]{
+	empty,
+	title={\summaryStrNote ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryNoteColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryNoteColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
+
+\newtcolorbox[auto counter, number within=section]{example}[1]{
+	empty,
+	title={\summaryStrExample ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryExampleColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryExampleColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
+
+\newtcolorbox[auto counter, number within=section]{theorem}[1]{
+	empty,
+	title={\summaryStrTheorem ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryTheoremColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryTheoremColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
 
 \newcommand{\makedisclaimer}{
 	\vspace{1.5cm}
-	\begin{note}
-	\textbf{\summaryStrDisclaimer}
+	\begin{note}{}
+		\textbf{\summaryStrDisclaimer}
 	\end{note}
 	\vspace{1.5cm}
 }

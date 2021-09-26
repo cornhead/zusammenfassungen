@@ -5,7 +5,7 @@
     -) combine the two existing scripts to one that extracts any given tags
 ./tex
     /summary.sty
-        -) line 53: todo already describes what to do -> prevent code duplication
+        -) line 67: todo already describes what to do -> prevent code duplication
         -) also create environments with asterisc (no title)
         -) automatically detect language
 ./Makefile
