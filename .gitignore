@@ -2,5 +2,6 @@
 *.log
 *.pdf
 *.orig
-test.*
-./img/tex/*.png
+test*
+img/tex/*.png
+py/__pycache__

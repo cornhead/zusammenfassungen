@@ -4,20 +4,20 @@ Im Allgemeinen sollten Zusammenfassungen kurz und bündig sein. Sie dienen ja da
 
 ## Überschriften, Header und Metadaten
 
-Pandoc unterstützt Yaml-Metadaten-Header. Diese sollen auch genutzt werden, um den Titel des Dokuments anzugeben, vorzugsweise fett geschrieben. Die Yaml-Header sind jedoch noch wesentlich mächtiger. In ihnen kann eingestellt werden, ob ein Inhaltsverzeichnis erstellt werden soll, in welchem Format das PDF erstellt werden soll, ob weitere LaTeX-Pakete geladen werden soll und noch vieles mehr. Ein Blick in die [Dokumentation von Pandoc](https://pandoc.org/MANUAL.html#pandocs-markdown) zu diesem Thema kann sich auszahlen. Metadaten-Header beginnen mit einer Zeile `---` und enden mit einer Zeile `...`, doch aufgrund der Weise wie die Dokumente momentan verarbeitet werden, entfällt die erste Zeile.
+Pandoc unterstützt Yaml-Metadaten-Header. Diese sollen auch genutzt werden, um den Titel des Dokuments anzugeben, vorzugsweise fett geschrieben. Die Yaml-Header sind jedoch noch wesentlich mächtiger. In ihnen kann eingestellt werden, ob ein Inhaltsverzeichnis erstellt werden soll, in welchem Format das PDF erstellt werden soll, ob weitere LaTeX-Pakete geladen werden soll und noch vieles mehr. Ein Blick in die [Dokumentation von Pandoc](https://pandoc.org/MANUAL.html#pandocs-markdown) zu diesem Thema kann sich auszahlen. Metadaten-Header beginnen mit einer Zeile `---` und enden mit einer Zeile `...`.
 
-Dokumente sollten Überschriften haben im Format `<Dokumententyp>: <LVA-Name ohne LVA-Typ>`. So lautet etwa die Überschrift der Zusammenfassung der Vorlesung Digital Design "Zusammenfassung: Digital Design" und nicht "Zusammenfassung: VO Digital Design" und auch nicht "Digital Design -- Zusammenfassung". Wie eingangs erwähnt wird der Titel eines Dokuments im Yaml-Metadaten-Header angegeben. Um die Überschrift fett zu schreiben, soll sie zwischen doppelte Asteriske gestellt werden. Da die meisten Titel wohl Doppeltpunkte enthalten werden, ist es nötig, den Titel zusätzlich zwischen Anführungsstriche zu stellen.
+Dokumente sollten Überschriften haben im Format `<Dokumententyp>: <LVA-Name ohne LVA-Typ>`. So lautet etwa die Überschrift der Zusammenfassung der Vorlesung Digital Design "Zusammenfassung: Digital Design" und nicht "Zusammenfassung: VO Digital Design" und auch nicht "Digital Design -- Zusammenfassung". Wie eingangs erwähnt wird der Titel eines Dokuments im Yaml-Metadaten-Header angegeben. Um die Überschrift fett zu schreiben, soll sie zwischen doppelte Asteriske gestellt werden. Da die meisten Titel wohl Doppelpunkte enthalten werden, ist es nötig, den Titel zusätzlich zwischen Anführungsstriche zu stellen; ansonsten wäre das nicht nötig.
 
 Standarmäßig wird automatisch ein Inhaltsverzeichnis erstellt. Sollte das nicht erwünscht sein, kann im Yaml-Metadaten-Header `toc: false` angegeben werden. Das Inhaltsverzeichnis beinhaltet Links zu den entsprechenden Kapiteln.
 
-Es wird zwischen zwei Arten von Zusammenfassungen unterschieden: Die eine nennt sich `article` und ähnelt in ihrer Form einem typischen Skript. Sie wird also hochformatig im A4-Format dargestellt, hat eine Überschrift, ein Inhaltsverzeichnis, etc.. Die andere nennt sich `formula_sheet` und entspricht eher Lernkarten. (Entgegen ihres Namens dürfen aber auch gerne andere Lernkarten in diesem Format dargestellt werden, die nicht als Formelsammlung dienen.) Die gewünschte Art der Zusammenfassung wird im Metadata-Tag `summary-type` angegeben. Wird dieser Tag nicht angegeben oder wird dessen Inhalt falsch verstanden, wird standardmäßig `article` als Typ gewählt.
+Es wird zwischen zwei Arten von Zusammenfassungen unterschieden: Die eine nennt sich `zusammenfassung` und ähnelt in ihrer Form einem typischen Skript. Sie wird also hochformatig im A4-Format dargestellt, hat eine Überschrift, ein Inhaltsverzeichnis, etc.. Die andere nennt sich `formula_sheet` und entspricht eher Lernkarten. (Entgegen ihres Namens dürfen aber auch gerne andere Lernkarten in diesem Format dargestellt werden, die nicht als Formelsammlung dienen.) Die gewünschte Art der Zusammenfassung wird im Metadata-Tag `summary-type` angegeben. Wird dieser Tag nicht angegeben oder wird dessen Inhalt falsch verstanden, wird das Dokument *nicht* übersetzt
 
 Um zu erreichen, dass möglichst viele begeisterte Student*innen an den Zusammenfassungen mitwirken, wird automatisiert am Anfang des Dokuments ein Disclaimer eingefügt werden, der zum Mitmachen auffordert und auf das Github-Repo verweist.
 
 Eine Zusammenfassung könnte also etwa einen Header haben wie den Folgenden haben:
 
 ~~~ 
-
+---
 summary-type: formula_sheet
 title: "**<Titel der Zusammenfassung/Formelsammlung>**"
 ...
@@ -97,34 +97,26 @@ int foo(){
 
 ### Hervorhebung durch farbige Markierung
 
-Durch das LaTeX-Package `summary` werden drei Environments zur Verfügung gestellt, die dazu dienen, Abschnitte eines Textes durch farbige Markierungen hervorzuheben. Diese Environments heißen `note`, `example` und `theorem` und sind dazu gedacht genau das hervozuheben, was ihr Name bereits suggeriert. Der Titel eines solchen Abschnittes wird im einzigen Argument der Environments festgelegt. Soll kein Titel vergeben werden, kann hinter den Namen der Environment ein Asterisk (`*`) gestellt werden. Die Environments könnten also wie folgt verwendet werden:
+Durch das LaTeX-Package `summary` werden drei Environments zur Verfügung gestellt, die dazu dienen, Abschnitte eines Textes durch farbige Markierungen hervorzuheben. Diese Environments heißen `note`, `example` und `theorem` und sind dazu gedacht genau das hervozuheben, was ihr Name bereits suggeriert. Der Titel eines solchen Abschnittes wird im einzigen Argument der Environments festgelegt. Dank des make.py-Skriptes ist es möglich, diese Umgebungen markdown-ähnlicher und benutzerfreundlicher einzubinden. Die Environments könnten also wie folgt verwendet werden:
 
 ~~~
-\begin{theorem}{2. Newtonsches Axiom}
-$m \cdot \ddot{x}^i(t) = F^i(x^m(t))$
-\end{theorem}
-
-\begin{note*}
-Das ist eine Notiz ohne Titel
-\end{note}
-~~~
-
-Nach momentanem Stand werden die Environments als farbig umrandete Boxen dargestellt, die sehr hervorstechen. Es ist jedoch geplant, ihr Aussehen so zu ändern, dass sie nur noch als farbiger Balken am linken Rand des Dokuments erscheinen und sich somit wesentlich besser in den Fließtext einfügen.
-
-Ein Nachteil dieser Environments ist noch, dass ihr Inhalt als LaTeX interpretiert wird, nicht als Markdown. Dieses Problem soll in Zukunft jedoch behoben werden. Außerdem soll in Zukunft ihre Einbindung mit Pandoc-Markdown konform werden. Das obige Beispiel würde dann wie folgt abgeändert werden müssen:
-
-~~~
-::: theorem {title="2. Newtonsches Axiom"}
-$m \cdot \ddot{x}^i(t) = F^i(x^m(t))$
+:::theorem 2. Newtonsches Axiom
+	$m \cdot \ddot{x}^i(t) = F^i(x^m(t))$
 :::
 
-::: note
+:::note
 Das ist eine Notiz ohne Titel
 :::
 ~~~
+
+Diese Umgebungen erhalten einen farbigen Balken am linken Rand der Seite. Dadurch ist es leicht möglich, besonders wichtige Aussagen hervorzuheben.
 
 ## Abbildungen erstellen
 
-Um Abbildungen zu erstellen steht wie so oft LaTeX zur Verfügung. Im Ordern `./img/tex` können tex-Dateien erstellt werden, die zu PDFs übersetzt werden. Die einzelnen Seiten der PDFs werden als PNGs extrahiert. Die so enstandenen Bilder werden einfach durchnummeriert. Leider habe ich dafür noch keine bessere Lösung gefunden. Der gesamte Prozess ist durch `make` automatisiert. 
+Um Abbildungen zu erstellen steht wie so oft LaTeX zur Verfügung. Im Ordner `./img/tex` können tex-Dateien erstellt werden, die zu PDFs übersetzt werden. Die einzelnen Seiten der PDFs werden als PNGs extrahiert. Standardmäßig werden die so erstellten Bilder einfach durchnummeriert. Alternativ kann aber auch ein Namenssuffix mit einem LaTeX-Power-Comment angegeben werden:
 
-Sollte eine Zusammenfassung Bilder benötigen, die auf die eben beschriebene Weise generiert werden, kann dem Dokument im Metadaten-Header der Tag `tikz-requirements` hinzugefügt werden, gefolgt mit dem Basename der benötigten tex-Datei. Daraufhin werden beim Kompilieren der Zusammenfassung auch die benötigten Dateien mitkompiliert. Falls beispielsweise die Abbildungen benötigt werden, die durch `digides_drawings.tex` beschrieben werden, kann in der entsprechenden Zusammenfassung der Tag `tikz-requirements: digides_drawings` hinzugefügt werden.
+~~~
+% output-name: my_awesome_name
+~~~
+
+(Dies ist eine weitere tolle Funktionalität des make.py-Skripts)

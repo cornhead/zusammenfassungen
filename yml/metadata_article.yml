@@ -1,9 +1,3 @@
-pandoc_args: [
-      "-S",
-      "-f markdown+yaml_metadata_block+tex_math_dollars+multiline_tables",
-      "-t latex"
-    ]
-
 documentclass: article
 classoptions:
     - oneside

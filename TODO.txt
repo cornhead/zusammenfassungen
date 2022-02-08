@@ -1,20 +1,7 @@
-./sh
-    /getSummaryType.sh
-        -) line 15: exit does not seem to work
-        -) trim quotation marks in tag?
-    -) combine the two existing scripts to one that extracts any given tags
 ./tex
     /summary.sty
         -) line 67: todo already describes what to do -> prevent code duplication
         -) also create environments with asterisc (no title)
         -) automatically detect language
-./Makefile
-    -) line 15: use awk to exclude files from being parsed, then use variable to exlude files more easily
-    -) produce better output: less verbose
-    
-./img
-	./tex
-		./Makefile
-			-) create the possibility to set the names of the created images from within latex
 
--) add version history to summaries and credits for the authors
+-) add version history to summaries and credits for the authors?

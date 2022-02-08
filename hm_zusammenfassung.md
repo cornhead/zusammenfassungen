@@ -1,4 +1,5 @@
-
+---
+summary-type: zusammenfassung
 title: "**Zusammenfassung: Hardware Modelling**"
 ...
 
