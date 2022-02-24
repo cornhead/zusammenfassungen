@@ -30,7 +30,7 @@ formelsammlung = SummaryType(
 		os.path.join('yml', 'metadata_beamer.yml')
 	],
 	identifier='summary-type: (formelsammlung|formula_sheet)',
-	pandoc_options=['-s', '-f', 'markdown', '-t', 'beamer']
+	pandoc_options=['-s', '-f', 'markdown', '--slide-level', '2', '-t', 'beamer']
 )
 
 

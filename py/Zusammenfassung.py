@@ -6,6 +6,7 @@ import os
 class SummaryType:
 	
 	_command_for_special_block = ['pandoc', '-f', 'markdown', '-t', 'latex']
+	_command_for_bullet_list   = ['pandoc', '-f', 'markdown', '-t', 'latex']
 	_command_for_tikz_images_latex = ['pdflatex', '-synctex=1', '-interaction=nonstopmode']
 	_command_for_tikz_images_imagemagick = ['convert', '-density', '300', '-colorspace', 'rgb']
 	
@@ -67,6 +68,9 @@ class SummaryType:
 			'in_yml_header': False,
 			'found_yml_header': False,
 			'entering_yml_header': False,
+			'entering_bullet_list': False,
+			'exiting_bullet_list': False,
+			'in_bullet_list': False,
 			'in_special_block': False,
 			'entering_special_block': False,
 			'exiting_special_block': False,
@@ -78,7 +82,8 @@ class SummaryType:
 		regex={
 			'blank_line': re.compile('^\s*$'),
 			'yml_start_end': re.compile('\s*---\s*'),
-			'special_block_start' : re.compile('\s*:::(theorem|note|example)(\s+([a-zA-Z].*)|\s*)'),
+			'bullet_list_item': re.compile('^\s*(\*|#\.)\s'),
+			'special_block_start' : re.compile('\s*:::(theorem|note|example|comment)(\s+([a-zA-Z].*)|\s*)'),
 			'special_block_end' : re.compile('\s*:::(\n|$)')
 		}
 		
@@ -104,6 +109,19 @@ class SummaryType:
 						if (not state['in_yml_header']):
 							next_state['entering_yml_header'] = True
 			
+				# bullet lists
+				
+				next_state['entering_bullet_list'] = False
+				next_state['exiting_bullet_list'] = False
+				next_state['in_bullet_list'] = False
+				
+				if (regex['bullet_list_item'].match(line)):
+					next_state['in_bullet_list'] = True
+					next_state['entering_bullet_list'] = not state['in_bullet_list']
+				else:
+					next_state['exiting_bullet_list'] = state['in_bullet_list']
+
+
 			
 				# special blocks
 				
@@ -116,7 +134,7 @@ class SummaryType:
 					
 					res = regex['special_block_start'].search(line)
 					next_state['special_block_type'] = res.group(1)
-					next_state['special_block_title'] = res.group(2)
+					next_state['special_block_title'] = res.group(2).strip()
 					
 				if (regex['special_block_end'].match(line)):
 					next_state['in_special_block'] = False
@@ -148,19 +166,16 @@ class SummaryType:
 						
 					s += line
 				
-				elif (next_state['entering_special_block']):
-					pass
-					# this leaves out the entering line
+				
+				
+				elif (next_state['entering_bullet_list']):
+					i = line
+				elif (next_state['in_bullet_list']):
+					i += line
 					
-				elif (state['in_special_block']):					
-					if (state['entering_special_block']):
-						i = ''
-						s += '\\begin{'+state['special_block_type']+'}{'+state['special_block_title']+'}\n'
+				elif (next_state['exiting_bullet_list']):
 					
-					if (not next_state['exiting_special_block']): i += line
-					
-				elif (state['exiting_special_block']):
-					p = subprocess.Popen(self._command_for_special_block,
+					p = subprocess.Popen(self._command_for_bullet_list,
 						stdout = subprocess.PIPE,
 						stdin  = subprocess.PIPE
 					)
@@ -170,9 +185,36 @@ class SummaryType:
 					p.stdin.write(i.encode(self.encoding))
 					p.stdin.close()
 					
-					out = p.stdout.read()
+					out = p.stdout.read().decode(self.encoding)
 					
-					s += out.decode(self.encoding) + '\\end{'+state['special_block_type']+'}\n' + line
+					s += out + line
+									
+				
+				
+				elif (next_state['entering_special_block']):
+					pass # this leaves out the entering line
+					
+				elif (state['in_special_block']):					
+					if (state['entering_special_block']):
+						i = ''
+					
+					if (not next_state['exiting_special_block']): i += line
+					
+				elif (state['exiting_special_block']):
+					if (state['special_block_type'] != 'comment'):
+						p = subprocess.Popen(self._command_for_special_block,
+							stdout = subprocess.PIPE,
+							stdin  = subprocess.PIPE
+						)
+						
+						i = textwrap.dedent(i)
+						
+						p.stdin.write(i.encode(self.encoding))
+						p.stdin.close()
+						
+						out = p.stdout.read().decode(self.encoding)
+						
+						s += '\\begin{'+state['special_block_type']+'}{'+state['special_block_title']+'}\n' + out + '\\end{'+state['special_block_type']+'}\n' + line
 					
 					
 				else:
@@ -239,7 +281,7 @@ class SummaryType:
 			p.stdin.write(parsed.encode(self.encoding))
 			p.stdin.close()
 			
-			err = p.stderr.read()
+			err = p.stderr.read().decode(self.encoding)
 			
 			if (len(err) > 0):
 				print(err)
