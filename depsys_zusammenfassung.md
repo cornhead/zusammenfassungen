@@ -8,7 +8,7 @@ title: "**Zusammenfassung: Dependable Systems**"
 
 ## Allgemeine Begriffe und Definitionen
 
-* Definition of dependability[^def_dependability]:
+* Definition of dependability:
 	* original: Dependability is the ability to deliver service that can justifiably be trusted.
 	* alternative: Dependability of a system is the ability to avoid service failures that are more frequent and more severe than is acceptable.
 	* note: both definitions do not require that a system never fails, but it must not fail too often or with unacceptable consequences
@@ -30,8 +30,6 @@ A system is the *provider* of a *service* to one or many *users* (which again ar
 * External State: the part of the providers state that is perceivable at the service interface
 * Internal State: the part of the providers state that is not external
 * Use Interface: the interface interface at which the user receives the service of the provider
-
-[^def_dependability]: IEEE: "Basic concepts and taxonomy of dependable and secure computing", ([Link](https://ieeexplore.ieee.org/document/1335465))
 
 ## Fault, Error, Failure
 
