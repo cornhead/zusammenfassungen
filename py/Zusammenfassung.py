@@ -115,7 +115,7 @@ class SummaryType:
 				next_state['exiting_bullet_list'] = False
 				next_state['in_bullet_list'] = False
 				
-				if (regex['bullet_list_item'].match(line)):
+				if (regex['bullet_list_item'].match(line) and not state['in_special_block']):
 					next_state['in_bullet_list'] = True
 					next_state['entering_bullet_list'] = not state['in_bullet_list']
 				else:
