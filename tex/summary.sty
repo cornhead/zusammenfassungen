@@ -13,6 +13,12 @@
 
 \RequirePackage{todonotes}
 
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+\RequirePackage{algorithmicx}
+
+\RequirePackage{soul} % required for \st (strike through)
+
 \tcbuselibrary{skins,breakable}
 
 
@@ -39,7 +45,7 @@
 
 \ifthenelse{ \equal{\summaryLang}{english} }
 { %% english strings
-	\renewcommand\summaryStrDisclaimer{Contributions to this summary and the corresponding formula sheet are welcomed on \Github. }
+	\renewcommand\summaryStrDisclaimer{Contributions to this summary and the corresponding formula sheet are welcome on \Github. }
 	\renewcommand\summaryStrExample{Example}
 	\renewcommand\summaryStrNote{Note}
 	\renewcommand\summaryStrRemark{Remark}

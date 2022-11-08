@@ -226,7 +226,7 @@ class SummaryType:
 				# ---------------------------------------
 				
 				state = next_state.copy()
-				
+
 		return s
 		
 	

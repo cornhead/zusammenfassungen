@@ -1,7 +1,7 @@
 ./tex
     /summary.sty
         -) line 67: todo already describes what to do -> prevent code duplication
-        -) also create environments with asterisc (no title)
         -) automatically detect language
 
 -) add version history to summaries and credits for the authors?
+-) Parser: nested special blocks don't work
