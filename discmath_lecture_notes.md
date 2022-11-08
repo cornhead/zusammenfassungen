@@ -1,7 +1,261 @@
 ---
 summary-type: zusammenfassung
-title: "**Lecture Notes: \linebreak Discrete Mathematics**"
+title: "**Lecture Notes: Discrete Mathematics**"
 ...
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 1 ----------------------------
+	---------------------------------------------------------
+:::
+
+# Graph Theory
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 2 ----------------------------
+	---------------------------------------------------------
+:::
+
+
+:::definition Walk, Trail, Path
+TODO
+:::
+
+:::theorem
+TODO
+:::
+
+:::lemma Handshaking Lemma
+$\sum\limits_{v\in V} deg(v) = 2\cdot |E|$
+:::
+
+:::definition Eularian Trail
+A Eulerian Trail is a trail that uses every edge exactly once.
+:::
+
+:::theorem
+A connected graph has a Eulerian circuit if and only if all its vertices have even degree.
+:::
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, circle}]
+\centering
+\node[main] (1)              {}; 
+\node[main] (2) [below of=1] {};
+\node[main] (3) [below of=2] {}; 
+\node[main] (4) [right of=2] {};
+\draw [bend left=20]  (1) edge (2)  ; 
+\draw [bend left=20] (2) edge (1) ; 
+\draw [bend left=30] (1) edge (4); 
+\draw [bend left=30] (4) edge (3); 
+\draw [bend left=20] (2) edge (3); 
+\draw [bend left=20] (3) edge (2); 
+\draw [bend left=0] (2) edge (4);
+\end{tikzpicture}
+\caption{no eulerian circuit as every vertex has odd degree}
+\end{figure}
+
+:::proof
+$\Rightarrow:$ In any circuit every vertex is entered as often as it serves as a point of departure.
+
+$\Leftarrow$: Induction on the number of edges
+
+\begin{itemize}
+\item if the graph $G$ has no edges $G$ = $(V = {1}, E = \emptyset)$
+\item otherwise let $W$ be any circuit in G ( this exists: start anywhere, choose any edge unused so far, continue until you hit starting vertex)
+\item let $G^\prime = (V(G), E(G)\backslash E(W))$, all vertices in $G^\prime$ have even degree and $G^\prime$ need not be connected.
+\item let $G^\prime_1, ... G^\prime_c$ be the connected components of $G^\prime$. In each component of $G^\prime_i$ find a Eulerian circuit $W_i$. $W_i$ and $W$ have atleast one vertex in common, because $G$ is connected and removing $W$ produces the components.
+\item therefore $W_1, ... W_c$ and $W$ can be combined to a Eulerian circuit. 
+\end{itemize}
+:::
+
+## Trees and Forests
+:::definition
+\begin{itemize}
+\item A \emph{forest} is a graph without cylces (=acyclic).
+\item A \emph{tree} is a connected forest.
+\item A \emph{leaf} is a vertex of degree 1.
+\end{itemize}
+:::
+
+:::lemma
+If $T$ is a tree and has two vertices it has at least 2 leafs.
+:::
+
+:::proof
+$V(T)$ and $E(T)$ are finite $\Rightarrow$ $T$ contains a maximal path and this path has two leafs (because it is maximal).
+:::
+
+:::definition Spanning subgraphs
+A subgraph $H$ of a graph $G$ is spanning if $V(H) = V(G)$.
+:::
+
+:::theorem
+Let $T$ be a graph, then the following are equivalent:
+\begin{enumerate}
+\item $T$ is a tree.
+\item Any 2 vertices are connected with a unique path.
+\item $T$ is connected and every edge is a bridge (min. connected).
+\item $T$ has no cycles and adding any edge yields a cycle (maximal acyclic)
+\end{enumerate}
+:::
+
+:::proof
+\begin{itemize}
+\item $1 \Rightarrow 2$: otherwise $T$ would not be connected or $T$ would have a cylce.
+\item $2 \Rightarrow 3$: A unique path from $u$ to $v$ exists, which means every edge has to be a bridge.
+\item $3 \Rightarrow 4$: An edge in a cycle would not be a bridge $\Rightarrow$ $T$ has no cycles, adding an edge would yield a cyle because T is connected.
+\item $4 \rightarrow 1$: adding any edge $(u,v)$ yields a cycle $= T$ is connected.
+\end{itemize}
+:::
+
+:::theorem
+A connected graph $G$ has a spanning tree.
+:::
+
+:::proof
+As long as there is a non-bridge, remove it, and use 3. of the previous theorem.
+:::
+
+:::theorem
+A graph is a tree if and only if it is connected and $|V| = |E| + 1$.
+:::
+
+:::proof
+$\Rightarrow$: induction on $|V|: |V| = 1$
+
+If $|V| \geq  2$: remove a leaf to obtain $T^\prime$, by induction $|V(T^\prime )|= |V(T)| - 1$ and $|E(T^\prime)| = |E(T)| - 1$
+
+$|V(T)| = |V(T^\prime)| + 1 = |E(T^\prime)| + 1 + 1 = |E(T) + 1|$
+
+\vspace{0.5cm}
+
+$\Leftarrow$: Let $T^\prime$ be a spanning tree of $T$
+
+$|V(T^\prime)|=|E(T^\prime)| + 1$
+
+$|V(T)|=|E(T)| + 1$, $|V(T)|=|V(T^\prime)| \Rightarrow |E(T)|=|E(T^\prime)|\Rightarrow T=T^\prime$
+:::
+
+How many spanning trees are there?
+
+\begin{figure}
+\centering
+\includegraphics[width=3cm]{./img/tex/discmath_drawings_spanning_trees_01.png}\\
+Spanning trees of the above graph:\\
+\includegraphics[width=2.5cm]{./img/tex/discmath_drawings_spanning_trees_02.png} \hspace{0.5cm}
+\includegraphics[width=2.5cm]{./img/tex/discmath_drawings_spanning_trees_03.png} \hspace{0.5cm}
+\includegraphics[width=2.5cm]{./img/tex/discmath_drawings_spanning_trees_04.png} \hspace{0.5cm}
+\includegraphics[width=2.5cm]{./img/tex/discmath_drawings_spanning_trees_05.png} \\\vspace{0.5cm}
+\includegraphics[width=2.5cm]{./img/tex/discmath_drawings_spanning_trees_06.png} \hspace{0.5cm}
+\includegraphics[width=2.5cm]{./img/tex/discmath_drawings_spanning_trees_07.png} \hspace{0.5cm}
+\includegraphics[width=2.5cm]{./img/tex/discmath_drawings_spanning_trees_08.png} \hspace{0.5cm}
+\includegraphics[width=2.5cm]{./img/tex/discmath_drawings_spanning_trees_09.png}
+\end{figure}
+
+
+:::definition
+\begin{itemize}
+\item $\tau(G)$ is the number of spanning trees of $G$.
+\item $G\backslash e$ is the graph obtained by removing edge $e$.
+\item $G / e$ is the graph obtained by contracting edge $e$.
+\end{itemize}
+:::
+
+:::theorem Deletion Contraction Theorem
+$\tau(G) = \tau(G\backslash e) + \tau(G/e)$
+:::
+
+:::example
+\begin{equation}
+\tau(\includegraphics[width=2cm]{./img/discmath_g.png}) = \tau(\includegraphics[width=2cm]{./img/discmath_g1.png}) + \tau(\includegraphics[width=2cm]{./img/discmath_g2.png}) = 4 + 4 = 8
+\end{equation}
+:::
+
+:::proof
+The set of spanning trees is the disjoint union of spanning trees containing $e$ and spanning trees not containing $e$.
+:::
+
+More generally: If $G$ is a weighted graph with $w: E(G) \rightarrow  \mathbb{R}$ and $H$ is a subgraph of G, then $w(H) = \prod_{e \in E(H)} w(e)$
+
+For weighted graphs, $\tau(G)$ is the sum of the weights of the spanning trees of $G$
+
+$$\tau(G) =  \sum\limits_T \prod_{e \in E(T)} w(e)$$
+
+:::example
+$$\tau(\includegraphics[width=2cm]{./img/discmath_1.png}) = \tau(\includegraphics[width=2cm]{./img/discmath_2.png}) + e \cdot \tau(\includegraphics[width=2cm]{./img/discmath_3.png}) = abc + abd +acd+bcd+e(a+d)(b+c)$$
+:::
+
+:::definition Degree Matrix
+The degree matrix of a graph is 
+$$D = \left( \begin{array}{ccccc} d(v_1) \\ & \cdot & & \text{\huge0} \\ & & \cdot \\ & \text{\huge0} & & \cdot \\ & & & & d(v_n) \end{array} \right)$$
+
+(The degree of a vertex in a weighted graph is $d(u) = \sum\limits_{(u,v) \in E(G)} w(v,u)$)
+:::
+
+:::theorem
+Let $n=|V(G)|$, let $\lambda_1,\dots,\lambda_n$ be the eigenvalues of $D-A$. One of these is $0$, w.l.o.g.\ $\lambda_1 = 0$
+
+Then, $\tau(G)=\frac{1}{n} \cdot \lambda_2 \cdots \lambda_n$.
+
+Equivalently: $\tau(G) = det((D-A)_{i,i})$, where $M_{i,i}$ is obtained by removing row and column i. $M=D-A$
+:::
+
+:::example
+\includegraphics[width=3cm]{./img/discmath_graph.png}
+\\
+$\begin{aligned} det(D-A)_{4,4} &= \begin{pmatrix}
+a+d & -a & 0 & \text{\st{-d}}\\
+-a & a+b+e & -b & \text{\st{-e}}\\
+0 & -b & b+c & \text{\st{-c}}\\
+\text{\st{-d}} & \text{\st{-e}} & \text{\st{-c}} & \text{\st{c+d+e}}
+\end{pmatrix} = \\
+&= (a+d) 
+\begin{vmatrix}
+a+b+e & -b\\
+-b & b+c
+\end{vmatrix} + a 
+\begin{vmatrix}
+-a & 0\\
+-b & b+c
+\end{vmatrix} = \\
+&= (a+d)((a+b+e)(b+c)-b^2)-a^2(b+c)
+\end{aligned}$
+:::
+
+
+## Spanning Trees of Minimal Weight
+
+
+Assume graph $G$ is connected.
+
+Kruskal's Algorithm:
+
+\begin{algorithm}
+\begin{algorithmic}
+\Require Sorted edges by weight: $w(e_1) \leq \dots \leq w(e_m)$.
+\State $T_1 \gets \emptyset$
+\For{$i$ in $1...m$}
+\If{$E(T_i) \cup e_i$ is acyclic}
+\State $E(T_{i+1}) \gets E(T_i) \sqcup e_i $
+\Else
+\State $E(T_{i+1}) \gets E(T_i) $
+\EndIf
+\If{$|E(T_{i+1}|+1=n-1$}
+\State \textbf{return} $E(T) \gets E(T_{i+1}$)
+\EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 8 ----------------------------
+	---------------------------------------------------------
+:::
 
 # Combinatorics
 
