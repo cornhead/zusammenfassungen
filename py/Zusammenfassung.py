@@ -2,6 +2,7 @@ import re
 import subprocess
 import textwrap
 import os
+import sys
 
 class SummaryType:
 	
@@ -83,7 +84,7 @@ class SummaryType:
 			'blank_line': re.compile('^\s*$'),
 			'yml_start_end': re.compile('\s*---\s*'),
 			'bullet_list_item': re.compile('^\s*(\*|#\.)\s'),
-			'special_block_start' : re.compile('\s*:::(theorem|note|example|comment)(\s+([a-zA-Z].*)|\s*)'),
+			'special_block_start' : re.compile('\s*:::(theorem|lemma|remark|proof|definition|note|example|comment)(\s+([a-zA-Z].*)|\s*)'),
 			'special_block_end' : re.compile('\s*:::(\n|$)')
 		}
 		
@@ -134,6 +135,7 @@ class SummaryType:
 					
 					res = regex['special_block_start'].search(line)
 					next_state['special_block_type'] = res.group(1)
+					if next_state['special_block_type'] == 'proof': next_state['special_block_type'] = 'myFancyProof' # renaming because of conflict with existing proof-macro
 					next_state['special_block_title'] = res.group(2).strip()
 					
 				if (regex['special_block_end'].match(line)):
@@ -215,7 +217,7 @@ class SummaryType:
 						out = p.stdout.read().decode(self.encoding)
 						
 						s += '\\begin{'+state['special_block_type']+'}{'+state['special_block_title']+'}\n' + out + '\\end{'+state['special_block_type']+'}\n' + line
-					
+											
 					
 				else:
 					s += line
@@ -263,7 +265,9 @@ class SummaryType:
 		for file in files:
 			target = self.input_name_to_output_name(file)
 			
-			if (verbose): print('making', target, '\t...\t', end='')
+			if (verbose):
+				print('making', target, '\t...\t', end='')
+				sys.stdout.flush()
 			
 			if (not self.shall_make(file)):
 				if (verbose): print('already up to date')
@@ -334,7 +338,9 @@ class SummaryType:
 		for file in files:
 			target = self.input_name_to_output_name(file)
 			
-			if (verbose): print('cleaning up', target, '\t...\t', end='')
+			if (verbose):
+				print('cleaning up', target, '\t...\t', end='')
+				sys.stdout.flush()
 			
 			if (not os.path.isfile(target)):
 				if (verbose): print('nothing to clean up')
@@ -432,7 +438,9 @@ class SummaryType:
 	def make_image(file, verbose=True):
 		if (not os.path.isfile(file)): return -1
 		
-		if (verbose): print('making', file, '\t...\t', end='')
+		if (verbose):
+			print('making', file, '\t...\t', end='')
+			sys.stdout.flush()
 		
 		shall_make = SummaryType.shall_make_image(file)
 		
@@ -519,7 +527,9 @@ class SummaryType:
 			if (not os.path.isfile(file)): continue
 			if (os.path.splitext(file)[1] != '.tex'): continue
 			
-			if (verbose): print('cleaning up', file, '\t...\t', end='')
+			if (verbose):
+				print('cleaning up', file, '\t...\t', end='')
+				sys.stdout.flush()
 			
 			targets = SummaryType.get_targets_of_image(file)
 			
