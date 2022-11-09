@@ -402,3 +402,131 @@ $x^{\underline{0}} = 1 = s_{0,0}\cdot x^0$
 $x^{\underline{n}} = x^{\underline{n-1}} \cdot (x-n+1) = (x-n+1) \sum (-1)^{n-1+k} \cdot s_{n-1,k} \cdot x^k = \sum (-1)^{n-1+k} \cdot s_{n-1,k} \cdot x^{k+1} + (n-1)\sum (-1)^{n-1+k} \cdot s_{n-1,k} \cdot x^k =TODO$
 :::
 
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 9 ----------------------------
+	---------------------------------------------------------
+:::
+
+
+## Generating Functions
+
+Power series: a sequence $(a_n)_{n\in\mathbb{N}}, a_n\in\mathbb{C}$
+
+Consider $\sum\limits_{n\geq 0} a_n z^n$ is the series with cofficients $a_n$.
+
+Idea: Power series is useful for approximating functions.
+
+$\sum a_n z^n$ may or may not converge for a given $z\in\mathbb{C}$.
+
+:::definition Formal Power Series (FPS)
+A formal power series (FPS), written $\sum a_n z^n$ is the same information as the sequence $(a_n)_{n\in\mathbb{N}}$
+:::
+
+Operations on FPS, like addition, multiplication, differentiation, etc.
+
+$\sum\limits_{n=0}^{\infty} a_n z^n \overset{\tiny{powerset}}{:=} \lim\limits_{N\rightarrow \infty} \sum\limits_{n=0}^{N} a_n z^n$ is a limit of a sequence of complex numbers: $a_0, (a_0+a_1z), \dots$
+
+:::theorem
+$\lim\limits_{N\rightarrow\infty} \sum\limits_{n=0}^{N} a_n z^n$ exists, if $|z| < \frac{1}{\limsup\limits_{n\rightarrow\infty} \sqrt{|a_n|}} =: R$
+TODO{it should be the nth root}
+
+If $|z| > R$, the series diverges.
+
+(If $|z| = R$, an ad hoc analysis is necessary.)
+:::
+
+:::remark
+$\{z| \text{series converges}\}$ is the domain of convergence, essentially a circle centered at the origin
+:::
+
+:::example
+\begin{itemize}
+\item $\sum\limits_{n\geq0} z^n = \frac{1}{1-z}$ \dots geometric series, $R=1$
+\item $\sum\limits_{n\geq0} \frac{z^n}{n!} = e^z$ \dots exponential series, $R=\infty$
+\item $\sum\limits_{n\geq0} \binom{\alpha}{n} z^n = (1+z)^\alpha$, $\alpha\in\mathbb{C}$
+\end{itemize}
+:::
+
+:::theorem Identity Theorem for Power Series
+$f(z)=\sum a_n z^n$ converges for $|z| < R$ and $R>0$
+
+$\Rightarrow a_n = \frac{f^{(n)(0)}}{n!}$
+:::
+
+Corollary:
+
+$f(z) = \sum a_n z^n = \sum b_n z^n \Rightarrow a_n = b_n \forall n$ (if $|z| < R$)
+
+
+### Operations on Formal Power Series
+
+Let $A(z) = \sum a_n z^n, B(z) = \sum b_n z^n$, however, $z$ is not a complex number now.
+
+Write $(a_n) \leftrightarrow A(z), (b_n) \leftrightarrow B(z)$
+
+($(0,1,0,\dots) \leftrightarrow z$, $(1,0,0,\dots) \leftrightarrow 1$, $(0,0,0,\dots) \leftrightarrow 0$)
+
+:::definition Operations on FPS
+\begin{itemize}
+\item $(\alpha a_n + \beta b_n)_{n\in\mathbb{N}} \leftrightarrow: \alpha A(z) + \beta B(z)$
+\item $(\sum\limits_{k=0}^{n} a_k b_{n-k})_{n\in\mathbb{N}} \leftrightarrow: A(z) \cdot B(z)$
+\item $(a_n \gamma^n)_{n\in\mathbb{N}} \leftrightarrow: A(\gamma z)$
+\item $(a_{n-1})_{n\in\mathbb{N}_{\geq 1}} \leftrightarrow: zA(z)$
+\item $(n a_n) \leftrightarrow: z A'(z)$
+\end{itemize}
+:::
+
+:::note
+We will use the term generating function for formal power series. Therefore, a generating function is \emph{not} a function
+:::
+
+:::example
+\begin{itemize}
+\item $\frac{1}{1+z} = \sum\limits_{n\geq 0} (-1)^n z^n$ is an equality of FPS
+\item $\frac{z}{(1-z)^2} = z(\frac{1}{1-z})' = \sum n z^n$
+\item $\frac{1}{(1-z)^k} = \sum\limits_{n\geq 0} \binom{n+k-1}{k-1} z^n$
+\end{itemize}
+:::
+
+:::remark
+if $A(z) = B(z)$ as FPS and $A(z)$ and $B(z)$ converge as power series for $|z| < R$, then $A(z)=B(z)$ as power series
+
+For instance, $\sum\limits_{n\geq 0} n! z^n$ is a FPS. It converges only at 0 as a power series
+:::
+
+Why are FPS useful?
+
+:::example Towers of Hanoi
+Discs of different sizes on three pegs. Goal: move discs to another peg, but no disc is allowed to be under a larger disc, and we may only move one disc at a time.
+
+Recurrence for number of required moves $a_n$ to move $n$ discs to a different peg.
+
+First move smaller $n-1$ discs to other peg, then move largest disc to third peg, and then move the $n-1$ discs on top of that.
+
+$a_n = 2 a_{n-1} + 1$ and $a_0$ = 0, but we want an explicit formula for $a_n$:
+
+\begin{itemize}
+\item $a_n = 2 a_{n-1} + 1 | z^n$
+\item $a_n z^n = 2 a_{n-1} z^n + z^n | \sum$
+\item $\underbrace{\sum a_n z^n}_{A(z)} = 2 \underbrace{\sum a_{n-1} z^n}_{zA(z)} + \underbrace{\sum z^n}_{\frac{1}{1-z}}$
+\item $A(z)-a_0 = 2zA(z) + \frac{1}{1-z} - 1$
+\item $A(z)(1-2z) = a_0 + \frac{1}{1-z}-1 = \frac{z}{1-z}$
+\item $A(z) = \frac{z}{(1-z)(1-2z)} = \frac{-1}{1-z} + \frac{1}{1-2z}$
+\item $A(z) = - \sum z^n + \sum 2^n z^n = \sum (2^n-1)z^n$
+\item $\Rightarrow a_n = 2^n -1$
+\end{itemize}
+
+:::
+
+:::example Solving Recurrences with Generating Functions
+$F_0 = 0, F_1 = 1, F_{n+2} = F_{n+1} + F_n$
+
+\begin{itemize}
+\item $F(z) := \sum F_n z^n$
+\item $\sum F_{n+2}z^{n+2} = \sum F_{n+1}z^{n+2} + F_n z^{n+2}$
+\item $F(z) - F_0 -F_1z = z(F(z)-F_0) + z^2F(z)$
+\item $F(z)(1-z-z^2) = F_0 + z(F_1-F_0)$
+\end{itemize}
+:::
+
