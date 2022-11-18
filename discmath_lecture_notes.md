@@ -507,14 +507,14 @@ First move smaller $n-1$ discs to other peg, then move largest disc to third peg
 $a_n = 2 a_{n-1} + 1$ and $a_0$ = 0, but we want an explicit formula for $a_n$:
 
 \begin{itemize}
-\item $a_n = 2 a_{n-1} + 1 | z^n$
-\item $a_n z^n = 2 a_{n-1} z^n + z^n | \sum$
-\item $\underbrace{\sum a_n z^n}_{A(z)} = 2 \underbrace{\sum a_{n-1} z^n}_{zA(z)} + \underbrace{\sum z^n}_{\frac{1}{1-z}}$
-\item $A(z)-a_0 = 2zA(z) + \frac{1}{1-z} - 1$
-\item $A(z)(1-2z) = a_0 + \frac{1}{1-z}-1 = \frac{z}{1-z}$
-\item $A(z) = \frac{z}{(1-z)(1-2z)} = \frac{-1}{1-z} + \frac{1}{1-2z}$
-\item $A(z) = - \sum z^n + \sum 2^n z^n = \sum (2^n-1)z^n$
-\item $\Rightarrow a_n = 2^n -1$
+	\item $a_n = 2 a_{n-1} + 1 | z^n$
+	\item $a_n z^n = 2 a_{n-1} z^n + z^n | \sum$
+	\item $\underbrace{\sum a_n z^n}_{A(z)} = 2 \underbrace{\sum a_{n-1} z^n}_{zA(z)} + \underbrace{\sum z^n}_{\frac{1}{1-z}}$
+	\item $A(z)-a_0 = 2zA(z) + \frac{1}{1-z} - 1$
+	\item $A(z)(1-2z) = a_0 + \frac{1}{1-z}-1 = \frac{z}{1-z}$
+	\item $A(z) = \frac{z}{(1-z)(1-2z)} = \frac{-1}{1-z} + \frac{1}{1-2z}$
+	\item $A(z) = - \sum z^n + \sum 2^n z^n = \sum (2^n-1)z^n$
+	\item $\Rightarrow a_n = 2^n -1$
 \end{itemize}
 
 :::
@@ -523,10 +523,122 @@ $a_n = 2 a_{n-1} + 1$ and $a_0$ = 0, but we want an explicit formula for $a_n$:
 $F_0 = 0, F_1 = 1, F_{n+2} = F_{n+1} + F_n$
 
 \begin{itemize}
-\item $F(z) := \sum F_n z^n$
-\item $\sum F_{n+2}z^{n+2} = \sum F_{n+1}z^{n+2} + F_n z^{n+2}$
-\item $F(z) - F_0 -F_1z = z(F(z)-F_0) + z^2F(z)$
-\item $F(z)(1-z-z^2) = F_0 + z(F_1-F_0)$
+	\item $F(z) := \sum F_n z^n$
+	\item $\sum F_{n+2}z^{n+2} = \sum F_{n+1}z^{n+2} + F_n z^{n+2}$
+	\item $F(z) - F_0 -F_1z = z(F(z)-F_0) + z^2F(z)$
+	\item $F(z)(1-z-z^2) = F_0 + z(F_1-F_0)$
 \end{itemize}
 :::
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 10 ---------------------------
+	---------------------------------------------------------
+:::
+
+In general $a_{n+k} + q_1 a_{n+k-1} + \cdots q_k a_n = 0$ for $n\geq 0$, $a_0,\dots,a_{k-1}$ are given as initial conditions
+
+
+\begin{align*}
+	A(z) &= \sum\limits_{n\geq0} a_nz^z \\
+	\sum\limits_{n\geq0} a_{n+k} z^{n+k} + q_1 \sum a_{n+k-1} z^{n+k} + \cdots + q_k \sum a_n z^{n+k} &= 0 \\
+	A(z)-a_0-a_1z-\cdots-a_{k-1}z^{k-1} + q_1 z ( A(z) - \sum\limits_{i=0}^{k-2} a_i z^i) + \cdots q_k z^k  A(z) &= 0\\
+	A(z)\underbrace{(1+q_1 z + \cdots q_k z^k)}\limits_{q(z)} &= p(z)
+\end{align*}
+
+with $p(z)$ a polynomial of degree at most $k-1$. Essentially, $p(z)$ contains the initial conditions while $q(z)$ describes the recurrence.
+
+Then, $A(z) = \frac{p(z)}{q(z)}$, which is a reational function! (very nice)
+
+Partial fraction decomposition:
+\begin{enumerate}
+	\item find roots of $q(z) = \prod\limits_{i=1}^{r} (z-z_i)^{\lambda_i}$, $\sum\lambda_i = l$
+	\item Ansatz: $\frac{p(z)}{q(z)} = \sum\limits_{i=1}^{r} \sum\limits_{j=1}^{\lambda_i} \frac{\tilde{A}_{ij}}{(z-z_i)^j}$
+	\item expand to generating function: $\sum\limits_{i=1}^{r} \sum\limits_{j=1}^{\lambda_i} \frac{A_{ij}}{(1-z/z_i)^j}$
+	\item $\sum\limits_{n\geq 0} \underbrace{(A_{11} + \binom{n+1}{1} A_{12} + \cdots + \binom{n+\lambda_1 -1}{\lambda_1} A_{1\lambda_1})}\limits_{p_1(n)}(\frac{z}{z_1})^n + \cdots + \sum\dots$
+	\item $ = \sum\underbrace{(p_1(n)(\frac{1}{z_1})^n + \cdots + p_r(n) (\frac{1}{z_r})^n)}\limits_{=a_n}z^n$
+\end{enumerate}
+
+
+:::definition Characteristic Polynomial
+	$\chi(z) := z^k + q_1 z^{k-1} + \cdots + q_k$ is the characterisitc polynomial of the recurrence relation.
+
+	($\chi(z) = q(z)|_{z^k n \rightarrow z^n-k}$)
+
+	$\chi(z) = \prod\limits_{i = 1} ^r (z-\frac{1}{z_i})^{\lambda_i}$
+:::
+
+:::example Characteristic Polynomial of Fibonacci Sequence
+	$a_n = \frac{1}{\sqrt{5}}$
+	TODO{finish formula}
+:::
+
+## Unlabelled Enumeration
+
+:::definition Binary Trees
+	A binary tree is a rooted tree where each node has no successors or 2 successors.
+:::
+
+:::definition Set of all Binary Trees
+	$\mathcal{B}$ is the set of all binary trees
+
+	$\mathcal{B} = \{\cdot\} \cup \{\}$
+	TODO{finish depiction}
+
+	$\mathcal{B}(z) = \sum\limits_{n\geq0} b_n z^n$ where $b_n$ is the number of binary trees with $n$ internal nodes, $b_0 = 1$, $b_1 = 1$, $b_2 = 2$
+:::
+
+
+\begin{itemize}
+	\item $\mathcal{B}(z) = 1 + z\mathcal{B}^2(z)$
+	\item $\mathcal{B} = \frac{1-\sqrt{1-4z}}{2z} = 1+z+2z^2+5z^3 + 14z^4 + 42z^5 + \dots$
+\end{itemize}
+
+### Dictionary for unlabelled structures
+
+:::definition
+	$A(z) = \sum\limits_{n\geq0} \text{\#elements of size }n \cdot z^n$
+:::
+
+\begin{itemize}
+	\item $(\mathcal{A} \cup \mathcal{B})(z) = A(z) + B(z)$
+	\item $(A \times B)(z) = A(z)\cdots B(z)$, (size of $(a,b)$ is the size of $a$ plus size of $b$)
+	\item $(sequences of objects in A)(z) = 1 + A(z) + A^2(z) + \cdots = \frac{1}{1-A(z)}$
+\end{itemize}
+
+:::example Sequences of Ones and Twos
+	Ones have size 1, twos have size 2.
+
+	\begin{itemize}
+		\item $\varnothing$
+		\item $1$
+		\item ${\color{red}1+1}, 2$
+		\item ${\color{blue}1+1+1}, {\color{red}1+2}, {\color{red}2+1}$
+		\item ${\color{green}1+1+1+1}, {\color{blue}1+1+2}, {\color{blue}1+2+1}, {\color{blue}2+1+1}, {\color{red}2+2}$
+		\item $\dots$
+	\end{itemize}
+	
+	$1 + {\color{red}(z+z^2)^2} + {\color{blue}(z+z^2)^3} + {\color{green}(z+z^2)^4} + \cdots = \frac{1}{1-(z+z^2)}$
+:::
+
+:::example
+	We have read, blue and yellow balls. $\underbrace{\text{2 or 3 red ones}}\limits_{r^2+r^3}$, $\underbrace{\text{at least one blue}}\limits_{b+b^2+b^3+\cdots = \frac{b}{1-b}}$ and $\underbrace{\text{at most one yellow}}\limits_{1+y}$. We have $n$ ball. How many possibilities are there?
+	
+	$\Rightarrow A(z) = ((rz)^2 + (rz)^3) \frac{bz}{1-bz}(1+yz)$
+	
+	We want to find $[z^n] A(z) = $ generating function in $r,b,y$
+:::
+
+:::example Combinations without Repetitions
+	Balls $a_1, a_2, \dots, a_N$
+	Select balls, but no ball twice, generating function:
+	
+	$(1+a_1)(1+a_2)\cdots(1+a_N)$, $a_i:= z$: $(1+z)^N = \sum\limits_n\geq0 \binom{N}{n} z^n$
+	
+	If we allow repetition: $(\sum a_1^n) (\sum a_2^n) \cdots (\sum a_N^n) \rightarrow (\frac{1}{1-z})^N = \sum\binom{n+N-1}{n} z^n$
+:::
+
+
+
+
 
