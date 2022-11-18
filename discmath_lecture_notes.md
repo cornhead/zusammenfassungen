@@ -263,7 +263,7 @@ unfinished
 
 ## Balls in Boxes
 
-We have $k$ balls and $n$ boxes. Balls and boxes could be labelled. Count any assignment $$f:[k] \rightarrow [n] ~ .$$ Notation: $[n] = \{1,\dots,n\}$. $f$ means ''put balls into boxes''. $f$ can be injective (no two balls in same box) or surjective (no empty box). How many \emph{arbitrary} functions from $[k]$ to $[n]$ are there? Answer: $n^k$. For injective case: $n\cdot (n-1) \cdots (n-k+1)$. For surjective case: not a nice formula.
+We have $k$ balls and $n$ boxes. Balls and boxes could be labelled. Count any assignment $$f:[k] \rightarrow [n] ~ .$$ Notation: $[n] = \{1,\dots,n\}$. $f$ means ''put balls into boxes''. $f$ can be injective (no two balls in same box) or surjective (no empty box). How many *arbitrary* functions from $[k]$ to $[n]$ are there? Answer: $n^k$. For injective case: $n\cdot (n-1) \cdots (n-k+1)$. For surjective case: not a nice formula.
 
 Let the balls are unlabelled and the boxes are labelled. Injective case: $$\binom{n}{k} = \frac{n!}{k! (n-k)!}$$ because $k! \cdots \binom{n}{k} = n\cdot (n-1) \cdots (n-k+1)$. For the arbitrary case: $\binom{n+k-1}{k}$.
 
@@ -478,7 +478,7 @@ Write $(a_n) \leftrightarrow A(z), (b_n) \leftrightarrow B(z)$
 :::
 
 :::note
-We will use the term generating function for formal power series. Therefore, a generating function is \emph{not} a function
+We will use the term generating function for formal power series. Therefore, a generating function is *not* a function
 :::
 
 :::example
@@ -639,6 +639,162 @@ Partial fraction decomposition:
 :::
 
 
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 11 ---------------------------
+	---------------------------------------------------------
+:::
 
+## Labelled Enumeration
+
+For the unlabelled case, we had $A(z) = \sum a_n z^n$, where $a_n$ was the number of objects of size $n$.
+
+For the labelled case, it is a bit more complicated: $\hat{A}(z) = \sum a_n \frac{z^n}{n!}$. This is called the exponential generating function.
+
+:::example Permutations
+	$A(z) = \sum n! z^n$
+	
+	$\hat{A}(z) = \sum n! \cdot z^n/n! = \frac{1}{1-z}$
+:::
+
+:::example Cyclic Permutations
+	$\hat{A}(z) = \sum\limits_{n\geq1} (n-1)! \cdot z^n/n! = ln(\frac{1}{1-z})$
+:::
+
+### Dictionary for labelled enumeration
+
+\begin{itemize}
+	\item $(\widehat{A\cup B})(z) = \hat{A}(z) + \hat{B}(z)$
+	\item $(\widehat{A\times B})(z) = \hat{A}(z) \cdot \hat{B}(z)$
+	\item $set of objects in \hat{A}(z) = e^{\hat{A}(z)}$
+	\item $cycles of objects in \hat{A}(z) = log(\frac{1}{1-\hat{A}(z)})$
+	\item $\widehat{A B}$
+\end{itemize}
+
+:::definition Product of Labelled Set (Pairs of Labelled Objects)
+	Let $\mathcal{A},\mathcal{B}$ be sets of labelled objects that are closed under relabelling. Let $\mathcal{A}[1,\dots,n]$ be the set of objects with labels $1,\dots,n$.
+	
+	Then, $\mathcal{A} \times \mathcal{B}[1,\dots,n]$ is the set of pairs $(a,b)$ with $a\in\mathcal{A}, b\in\mathcal{B}$ such that the total set of labels is $1,\dots,n$.
+	
+	Formally, $\mathcal{A} \times \mathcal{B}[1,\dots,n] = \bigcup\limits_{TODO} \mathcal{A}[U] \times \mathcal[V]$.
+:::
+
+:::example
+	$A[1,2,3] = \{1,2,3\}$ is *not* closed under relabelling. $A[1,2,3]$ produces *all* objects with labels $\{1,2,3\}$
+:::
+
+:::example
+	$A[1,2] = \{12, 21\}$
+	
+	$B[1,2] = \{12, 21\}$
+	
+	$A \times B[1,2,3,4] = \{(13, 42), (12, 34), (13, 24), (31, 42), (21, 34), (12, 43), \dots\}$
+	
+	(There will be 24 pairs.)
+:::
+
+\begin{align*}
+	[z^n]\widehat{(A\times B)}(z) &= \sum\limits_{k=0}^{n} \binom{n}{k} a_k b_{n-k} \\
+	\widehat{(A\times B)}(z) &= \sum\limits_n \sum\limits_{k=0}^{n} \binom{n}{k} a_k b_{n-k} \cdot z^n/n! \\
+	&= \sum\limits_n \sum\limits_{k=0}^{n} \frac{n!}{k!(n-k!)} \frac{1}{n!} a_k b_{n-k} z^k z^{n-k} \\
+	&= \sum\limits_n \sum\limits_{k=0}^{n} \frac{a_kz^k}{k!} \frac{b_{n-k} z^{n-k}}{(\underbrace{n-k}\limits_l)!} \\
+	&= \sum\limits_{k\geq0} \sum\limits_{l\geq0} \frac{a_kz^k}{k!} \frac{b_{n-k} z^{n-k}}{l!} \\
+	&= \hat{A}(z) \cdot \hat{B}(z)
+\end{align*}
+
+:::definition
+	Let A be a set closed under relablling. Then, $set(A)[1,\dots,n]$ is the set of objects $\{a_1,\dots, a_l\}$ such that the total set of labels is $\{1,\dots,n\}$
+:::
+
+:::example
+	Sets of cycles with lables $\{1,2,3,4\}$
+	
+	Cycles of $\{1\}$
+	
+	TODO
+	
+	Sets of cycles are permutations!
+	
+	$\widehat{sets}(z) = e^z$, $\widehat{cycles}(z) = ln(\frac{1}{1-z})$
+	
+	$\widehat{set(cycles)(z)} = e^{ln(\frac{1}{1-z})} = \frac{1}{1-z} = \widehat{permutations}(z)$
+:::
+
+$B:= sets of non-empty sets$
+
+\begin{align*}
+	\hat{B}(z) &= e^{e^z - 1}
+\end{align*}
+
+$\hat{B}(z) is the exponential generating function for set partitions$.
+
+
+## Partially Ordered Sets
+
+:::definition Partial Order
+	A partial order $(P, <)$ is a set $P$ together with a relation $<$, such that
+	
+	\begin{itemize}
+		\item $a<b \Rightarrow \neg b < a$ (anti-symmetry)
+		\item $a < b, b < c \Rightarrow a < c$ (transitivity)
+	\end{itemize}
+	
+	Notation:
+	
+	\begin{itemize}
+		\item $a \leq b$ means $a<b \vee a = b$.
+		\item $a\lessdot b$ means $a< b$ and $\not\exists c: a<c\wedge c<b$, ''$a$ is covered by $b$''
+	\end{itemize}
+:::
+
+:::remark
+	Equivalently, define $(P, \leq)$ with $\leq$ reflexive, transitivity
+
+The Hasse diagram is the digraph with vertices $P$ and $(a,b)$ is an arc if $a\lessdot b$.
+
+:::remark
+	Notation: In Hasse diagrams, the arcs are drawn from bottom to top.
+:::
+
+:::example
+	$(\mathbb{N}, |)$
+	
+	TODO
+:::
+
+:::remark
+	$1|6$ but *not* $a \lessdot 6$
+:::
+
+:::definition Total Order
+	A linear (or total) order is a poset with $a\leq b$ or $b\leq a$ for all $a,b$
+:::
+
+:::example
+	$(2^A, \subseteq)$
+	
+	TODO
+:::
+
+:::definition Minimal/Maximal Elements
+	A minimal element of a poset $(P, \leq)$ is an element $a\in P$ such that $\forall b\in P: a\leq b$.
+	Analogously for maximal elements.
+	
+	(Minimal/maximal elements are not necessarily unique.)
+:::
+
+:::definition Interval
+	An interval is a subset $[x,y] := \{z | x\leq z \leq y\}$ of $P$
+	
+	$(P, \leq)$ is locally finite if $| [x,y]| \leq \infty \forall x,y \in P$
+:::
+
+:::definition Boundedness
+	$P$ is bounded if
+	\begin{itemize}
+		\item $\exists M \subseteq P : \forall x \in P \exists y \in M : x\leq y$ and
+		\item $\exists M\subseteq P: \forall x \in P \exists y\in M: y\leq x$
+	\end{itemize}
+:::
 
 
