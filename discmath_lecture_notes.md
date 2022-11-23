@@ -798,3 +798,145 @@ The Hasse diagram is the digraph with vertices $P$ and $(a,b)$ is an arc if $a\l
 :::
 
 
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 12 ---------------------------
+	---------------------------------------------------------
+:::
+
+
+$(P, \leq)$ a poset, $f:P\rightarrow\mathbb{R}$, $S_f(x) := \sum\limits_{z \leq x} f(z)$.
+
+Given $S_f$, can we recover $f$?: Yes!
+
+:::definition Möbius Function
+	$(P, \leq)$ a poset, locally finite, with a minimal element $0$
+	
+	$\mu: P\times P \rightarrow \mathbb{R}$ is the Möbius function of $P$ if it satisfies $$\forall x, y: \sum\limits_{z\in[x,y]} \mu(z,y) = \delta_{x,y} = \left\{\begin{array}{ll} 0 ~ & x\neq y \\ 1 & x=y\end{array}\right.$$
+:::
+
+:::remark
+	This Relation determines $\mu$ uniquely.
+:::
+
+:::remark
+	For $x \not\leq y: \mu(x,y) := 0$
+:::
+
+:::example
+	\begin{itemize}
+		\item $[x,x] = \{x\} \Rightarrow \mu(x,x) = 1$
+		\item $[x,y] = \{x,y\} \Rightarrow \mu(x,y) + \mu(y,y) = 0 \Rightarrow \mu(x,y) = -1$
+	\end{itemize}
+:::
+
+:::example
+	$(\mathbb{N}, \leq)$: 
+	\begin{itemize}
+		\item $\mu(n,n) = 1$
+		\item $\mu(n,n+1) = -1$
+		\item $\mu(n,m) = 0 \forall m\geq n+2 \vee m < n$
+	\end{itemize}
+:::
+
+:::example
+	TODO{finish example}
+:::
+
+:::definition Product of Posets
+	$(P_1, \leq), (P_2, \leq)$ Posets. Then $(P_1, \leq) \times (P_2, \leq) := (P_1 \times P_2, \leq)$:
+	
+	Has $(x_1, x_y) \leq (y_1,y_2) \Leftrightarrow (x_1 \leq y_1) \wedge (x_2 \leq y_2)$
+:::
+
+:::theorem
+	If $P_1$ and $P_2$ ahve both a unique minimal element, then $P_1\times P_2$ has a unique minimal element and $\mu_{P_1\times P_2}(\vec{x}, \vec{y}) = \mu_{P_1}(x_1,y_1)\cdot\mu_{P_2}(x_2, y_2)$ with $\vec{x} = (x_1,x_2)$ and $\vec{y} = (y_1, y_2)$
+:::
+
+:::proof
+	Left as an exercise to the reader
+:::
+
+:::example
+	$A = \{a_1, \dots, a_n\}$, $(2^{A}, \subseteq) \cong (\{0,1\}, \leq)^n$
+	
+	e.g. $n=5$, $X = \{a_2, a_5\} \cong 01001$, $Y = \{a_1, a_3, a_3, a_5\} \cong 11101$ $\Rightarrow$ $X \leq Y$
+	
+	$\mu(X,Y) = \mu(0,1)\mu(1,1)\mu(0,1)\mu(0,0)\mu(1,1) = (-1) \cdot 1 \cdot (-1)\cdot  1\cdot  1 = 1$
+	
+	Note: The relation is a component wise comparison. It is *not* the lexicographical order.
+	
+	In general, $X\subseteq Y: \mu(X, Y) = (-1)^{\text{different places}} = (-1)^{|Y\backslash X|} = (-1)^{|Y| - |X|}$
+:::
+
+:::theorem Möbius Inversion
+	$(P, \leq)$ locally ifnite with a unique minimal element 0
+	
+	$f:P\rightarrow \mathbb{R}$, $S_f(x) = \sum\limits_{z\in [0,x]} f(z)$ $\Rightarrow$ $f(x) = \sum\limits_{z\in[0,x]} S_f(z) \mu(z,x)$
+:::
+
+:::proof
+	\begin{align*}
+		\sum\limits_{z\in[0,x]} S_f(z) \mu(z,x) &= \sum\limits_{0\leq z \leq x} \sum\limits_{0\leq y \leq z} f(y) \mu(z,x) \\
+		 & = \sum\limits_{0\leq y \leq z} \sum\limits_{y \leq z \leq x} f(y) \mu(z,x) \\
+		 & = TODO  \\
+		 & = \sum\limits_{y\in[0,x]} f(y) \delta_{y,x} \\
+		 & = f(x)
+	\end{align*}
+:::
+
+:::example
+	$(\mathbb{N}, \leq)$
+	
+	$\mu(m,n) = \left\{ \begin{array}{ll} 1 ~ & m=n \\ -1 & m+1 = n \\ 0 & \text{otherwise}\end{array}  \right.$
+	
+	$f:\mathbb{N}_0 \rightarrow \mathbb{R}$
+	
+	TODO
+:::
+
+:::example Inclusion Exclusion
+	$A_1, \dots, A_m \subseteq M$ 
+	
+	consider $(2^{\{1,\dots,m\}}, \supseteq)$ (the poset of indices)
+	
+	$I \subseteq \{1,\dots, m\}$
+	
+	$f(I) := | \bigcap_{i\in I} A_i \cap \bigcap_{j\in \{1, \dots, m\}\backslash I} \overline{A_j} |$
+	
+	$f(I)$ is the number of elements *precisely* in all $A_i, i\in I$
+	
+	$S_f(I) = \sum\limits_{J \supseteq I} f(J) = | \bigcap_{i\in I} A_i |$
+	
+	$S_f(I)$ is the number of elements in $A_i, i\in I$ (but not *precisely* in $A_i$)
+	
+	Möbius inversion: $f(I) = \sum\limits_{J\supseteq I} S_f(J) \mu(J,I) = \sum\limits_{J\supseteq I} (-1)^{|I| + |J|} |\bigcap_{j\in J} A_j|$
+	
+	In particular, $f(\varnothing) = |\bigcap_{j\in\{i,\dots,m\}} \overline{A_j}| = \sum\limits_{J\subseteq \{1, \dots, m\}} (-1)^{|J| |\bigcap_{j\in J} A_j|}$
+	
+	This is the principle of inclusion/exclusion
+:::
+
+:::example
+	"classical" number theoretic Möbius functions
+	
+	$(\mathbb{N}_\+, |)$
+	
+	$m = p_1^{e_1} \cdots p_r^{e_r}$\\
+	$n = p_1^{f_1} \cdots p_r^{f_r}$ with $e_i, f_i \in \mathbb{N}_0$
+	
+	$m|n \Leftrightarrow e_i \leq f_i \forall i$
+	
+	$(\mathbb{N}_\+, |) \cong (\mathbb{N}_0, \leq) \times  (\mathbb{N}_0, \leq) \times \dots$
+	
+	$\mu(n) := \mu_{ (\mathbb{N}_\+, |)}(1,n) = \mu(0,e_1)\cdot\mu(0,e_2)\cdots\mu(0,e_r)\cdot\underbrace{\mu(0,0)}\limits_{1}\cdots$
+	
+	$\mu(0,k) = \left\{ \begin{array}{ll} 1 ~ & k= 0\\ -1 & k=1 \\ 0 & k>1 \end{array}\right\} = \left\{ \begin{array}{ll} 1 ~ & ...\\ (-1)^r & ... \\ 0 & \text{otherwise} \end{array}\right.$
+	TODO{finish formula}
+	
+	Conclusion: $f:\mathbb{N}_\+ \rightarrow \mathbb{R}$
+	TODO{finish}
+:::
+
+
+
