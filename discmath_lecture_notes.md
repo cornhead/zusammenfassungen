@@ -939,4 +939,140 @@ Given $S_f$, can we recover $f$?: Yes!
 :::
 
 
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 13 ---------------------------
+	---------------------------------------------------------
+:::
+
+
+## Lattices
+
+:::definition
+	$(P, \leq)$ poset, $x,a,b\in P$, then if $a\leq x \leq b$, then $a$ is called a lower bound and $b$ an upper bound for $x$.
+	
+	Let $x \vee y$ (say "x join y") be **the** smallest common upper bound of $x$ and $y$ (if it exists).
+	
+	Let $x \wedge y$ (say "x meet y") be **the** largest common lower bound of $x$ and $y$ (if it exists).
+	
+	(If $x,y$ have no common upper/lower bound or more than one, they cannot be joined/met.)
+	
+	Notation: TODO{insert big vee}
+	
+	Basic properties:
+	\begin{itemize}
+		\item $x\vee y = y \vee x$
+		\item $x \vee x = x$
+		\item $(x\vee y) \vee z = x \vee (y\vee z)$
+		\item $a\vee(a\wedge b) = a = a \wedge (a \vee b)$
+	\end{itemize}
+:::
+
+:::definition Lattices
+	$L$ is a lattice if $\forall x,y\in L: \exists x\vee y ~ \text{and} ~ x\wedge y$ . 
+	
+	$J$ is a join-semi-lattice if $\forall x,y\in J: \exists x\vee y$ .\\
+	$J$ is a meet-semi-lattice if $\forall x,y\in J: \exists x\wedge y$ .
+	
+	$L$ is a complete lattice if $\forall X \in L: \exists V_{x\in X}x ~ \text{and} ~ \And_{x\in X} x$
+	TODO{fix notation}
+:::
+
+:::example
+	$(2^M, \subseteq)$ is a lattice: $A,B \subseteq M$ $\Rightarrow$ $A\vee B := A \cup B$ and $A\wedge B := A \cap B$.
+:::
+
+:::lemma
+	$L$ lattice, $x,y,s,t\in L$
+	
+	\begin{itemize}
+		\item $x\leq s$ and $y\leq s$ $\Rightarrow$ $x\vee y \leq s$
+		\item $x\geq t$ and $y\geq t$ $\Rightarrow$ $x\wedge y \geq t$
+		\item $x\leq y$ $\Leftrightarrow$ $x\vee y = y$ $\Leftrightarrow$ $x \wedge y = x$
+	\end{itemize}
+:::
+
+:::lemma
+	$L$ a finite meet-semi-lattice with a ''1'' element (a top element which is larger than all others)
+	
+	$\Rightarrow$ $L$ is a lattice
+:::
+
+:::proof
+	$x,y \in L$, $B=\{u\in L | x \leq u ~ \text{and} ~ y \leq u\}$
+	
+	$B \neq \varnothing$ because $1\in B$
+	
+	$|B| < \infty$ (because $L$ is finite) $\Rightarrow$ $B=\{u_1, \dots, u_m\}$
+	
+	$u := u_1 \wedge \dots \wedge u_m \in B$
+	
+	$\Rightarrow u =: x\vee y$
+:::
+
+:::example
+	$\Pi_n = \{\pi ~ \text{a set partition of [n]}\}$
+	
+	$\Pi_n, ~ \text{refinement}$ is a lattice. (Refinement means take a block and split it into two.)
+	
+	"1" is the set partition with one block.
+	
+	"0" is the set with all singletons.
+	
+	$\alpha, \beta \in \Pi_n: \alpha\wedge \beta =$ set partition where $i,j$ are in the same block
+	$\Leftrightarrow$ $i,j$ are in the same block in $\alpha$ and in $\beta$
+:::
+
+:::theorem
+	$L$ lattice with "0" and "1" elements, $b\in L, b\neq1$
+	
+	$\Rightarrow \mu(0,1) = -\sum\limits_{x:x\wedge b = 0, x\neq 0} \mu(x,1)$
+:::
+
+:::proof
+	$\Leftrightarrow \sum\limits_{x:x\wedge b = 0} \mu(x,1) = 0$ (because $0\wedge b = 0$)
+	
+	$N(y) := \sum\limits_{x:x\wedge b = y} \mu(x,1) \forall y\leq b$
+	
+	$S_N(b) := \sum\limits_{y:y\leq b} N(y) = \sum\limits_{y\leq b} \sum\limits_{x\wedge b = y} \mu(x,1) = \sum\limits_{x\in L} \mu(x,1) = \sum\limits_{x\in[0,1]} \mu(x,1) = 0$
+	
+	Möbius inversion $\Rightarrow$ $N(b) = \sum\limits_{y\leq b} \underbrace{S(y)}\limits_{0}\mu(y,b) = 0$
+	
+	And therefore, in particular, $N(0) = 0$.
+:::
+
+:::corollary
+	$\mu_{\Pi_n}(0,1) = (-1)^{n-1} (n-1)!$
+:::
+
+TODO{make corollary environment}
+
+:::proof
+	choose $b= \{\{1\dots n-1\}\{n\}\}$
+	
+	then use induction
+:::
+
+# Number Theory
+
+:::definition Divisibility
+	$a,b \in \mathbb{Z}$ then $a|b \Leftrightarrow \exists c \in \mathbb{Z}: a\cdot c = b$
+	
+	More generally, this applys to any ring, e.g. $\mathbb{Z}[X]$ or $\mathbb{Z}_m$)
+:::
+
+:::definition GCD
+	$a,b\in \mathbb{Z}$, $d=gcd(a,b) \Leftrightarrow d|a ~\text{and} ~ d|b ~\text{and it is the greates}$
+	TODO{notation}
+	
+	$b>0 \Rightarrow \exists q,r \in \mathbb{Z}: a = bq+r ~\text{and}~ 0\leq r < b$
+:::
+
+Euclidean Algorithm:
+
+TODO{insert algorithm}
+
+:::theorem
+	d = gcd()
+:::
 
