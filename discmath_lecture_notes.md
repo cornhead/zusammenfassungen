@@ -1073,6 +1073,201 @@ Euclidean Algorithm:
 TODO{insert algorithm}
 
 :::theorem
-	d = gcd()
+	$d = gcd(a, b) \Rightarrow \exists e,f \in \mathbb{N}: d=ae+bf$
+:::
+
+:::proof
+	Euclidean Algorithm backwards
+:::
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 14 ---------------------------
+	---------------------------------------------------------
+:::
+
+:::remark
+	$d=ae+bf \Rightarrow gcd(a,b)|d$
+:::
+
+:::definition Integral Domain
+	$R$ is an integral domain if it has no zero-divisors:
+	
+	$a\cdot b = \Rightarrow a=0 ~ \text{or} ~ b=0$
+:::
+
+:::example
+	$\mathbb{Z}_6 = \{0,1,2,3,4,5\}$
+	
+	$2\cdot 3 = 0$, therefore, 2 and 3 are zero-divisors
+:::
+
+:::example
+	\begin{itemize}
+		\item $\mathbb{Z}_p$ for $p$ prime
+		\item $\mathbb{Z}[X]$
+	\end{itemize}
+:::
+
+:::definition Euclidean Ring
+	$R$ is a Euclidean ring if $R$ is an integral domain and there exists a "Euclidean function" $n:R\rightarrow \mathbb{N}_0{}$ such that $\forall a,b,\in R, b\neq 0 \exists q,r\in R : a=bq+r$ TODO{finish definition}
+:::
+
+:::example
+	\begin{itemize}
+		\item $\mathbb{Z}$: $n(a):= |a|$
+		\item $k$ a field, $k[X]$: $n(a):=deg(a)$ (Warning: $\mathbb{Z}[X]$ is not euclidean)
+	\end{itemize}
+:::
+
+:::remark
+	If $x$ is invertible ($x$ is a unit, i.e.\ $\exists \bar{x}: x\cdot \bar{x} = 1$) then $gcd(a,b) = gcd{a, x\cdot b}$
+:::
+
+:::remark
+	$R^{*} := \{x| x ~ \text{a unit}\}$
+:::
+
+:::example
+	gcd(x^4 + 3x^3 - 3x^2 - 7x + 6, x^3 + x^2 - x + 15) = x+3
+	
+	because
+	
+	$x^4 + 3x^3 - 3x^2 -7x + 6 = (x^3 +x^2 -x +15)\cdot x + \underbrace{2x^3 - 2x^2 - 22x + 6}\limits_{deg(\cdot) = 3 < 4}$
+	
+	$x^3 +x^2 -x +15 = (2x^3 -2x^2 -2xx + 6)\cdot \frac{1}{2} + 2x^2 \dots$
+	
+	$\vdots$
+:::
+
+:::definition Prime Numbers
+	$p\in \mathbb{N}_{>1}$ is a prime number if $m|p \Rightarrow m\in\{\pm1, \pm p\}$
+	
+	$\mathbb{P}$ is the set of primes.
+:::
+
+:::remark
+	In arbitrary integral domains, such a $p$ is called irreducible. In Euclidean domains, prime and irreducible is the same.
+:::
+
+:::remark
+	properly:
+	
+	$p\in R$ is irreducible if $\forall m: m|p \Rightarrow m\in\{\pm1, \pm p\}$.
+	
+	$p\in R$ is prime if $\forall a,b: p|ab \Rightarrow p|a or p|b$.
+	
+	If $R$ is a euclidean domain (e.g.\ $\mathbb{Z}$), then prime and irreducible are equivalend
+	
+	
+:::
+
+:::theorem
+	$p\in \mathbb{P}, p|a\cdot b \Rightarrow p|a \vee p|b$
+	
+	(In Euclidean domains, this is the denition of primes.)
+:::
+
+:::proof
+	two cases:
+	\begin{itemize}
+		\item $p|a$
+		\item $p \not| a$ $\Rightarrow gcd(p,a) = 1$ and therefore $\exists e,f: pe+af = 1$. $b = b\cdot 1 = b\cdot(pe+af) = bpe+abf$. We see that $p|bpe$ and $p|abf$. Therefore, $p|b$
+	\end{itemize}
+:::
+
+:::remark
+	Consider $\mathbb{Z}[\sqrt{-5}]$, then $3$ is irreducible, i.e.\ $m|3 \Rightarrow m \in \{\pm1, \pm 3\}$, but $3|9 = (2+\sqrt{-5})(2-\sqrt{-5})$ but neither is divisble by 3.
+:::
+
+:::theorem Prime Factorization
+	$n\in \mathbb{N}_{\geq1} \Rightarrow n = p_1 \cdots p_r$ for $p_i \in \mathbb{P}$
+:::
+
+:::proof
+	Induction: Base case: $n\in\mathbb{P} \Rightarrow n=p$
+	
+	Otherwise: $\exists n_1, n_2 < n: n= n_1n_2 \Rightarrow n_1 = p_1\cdots p_k, n_2 = p_{k+1} \dots p_r$
+:::
+
+:::theorem
+	The factorization into primes is unique (except for the ordering), i.e.: $$n = \prod\limits_{p\in \mathbb{R}} p^{\nu_p(n)}$$ where $\nu_p(n)$ is the multiplicity of $p$ in $n$
+:::
+
+
+$gcd(a,b) = \prod\limits_{p\in \mathbb{P}} p^{min(\nu_p(a), \nu_p(b))}$
+
+:::theorem
+	There are infinitely many primes.
+:::
+
+:::proof
+	Let $a,b,c,\dots, k$ be (finitely many) prime numbers. Take the product $P = abc\cdots k$ and add 1.  Either $P+1$ is prime or not. If it is prime, then it is larger than $a,b,c,\dots,k$. Otherwise, there exists a prime $p$ which divides $P+1$. $p$ is different from $a,b,c,\dots, k$ because it would divide $P$ and $P+1$ so it would divide $P-P+1 = 1$, which is impossible.
+:::
+
+
+## Congruence Relations and Residue Classes
+
+:::definition
+	$m\in \mathbb{Z}_{\geq1}$, we call it "modulus"; $\bar{a} := a+m\cdot \mathbb{Z} := \{a +m\cdot z | z\in\mathbb{Z}\}$
+:::
+
+:::remark
+	$a\in \bar{a}, \bar{a} = \bar{b} \Leftrightarrow m | a-b$
+	
+	Notation:
+	
+	$a \equiv b \mod m$
+	$a = b ~ (m)$
+:::
+
+:::definition
+	$\mathbb{Z}_m = \{\bar{a} = a+m\mathbb{Z} | a\in \mathbb{Z}\} = \{\bar{0}, \bar{1}, \dots, \overline{m-1}\}$
+:::
+
+:::example
+	$\mathbb{Z}_2 = \{\bar{0}, \bar{1}\}$
+	
+	$\bar{0}$ are the even numbers, $\bar{1}$ are the odd ones.
+:::
+
+:::definition
+	$(\mathbb{Z}_m, +, \cdot)$ with $\bar{a}+\bar{b} := \overline{a+b}$ and $\bar{a} \cdot \bar{b} := \overline{a\cdot b}$, then $(\mathbb{Z}_m, +, \cdot)$ is a commutative ring.
+:::
+
+
+:::remark
+	Notation: $\bar{x} \cdot \bar{a} = 1$, then $\bar{x}^{-1} := \bar{a}$
+:::
+
+:::example
+	$m=5$, $\bar{2}^{-1} = \bar{6}$
+:::
+
+:::theorem
+	$\exists \bar{a}^{-1} \in \mathbb{Z}_m \Leftrightarrow gcd(a,m) = 1$ (i.e.\ $a$ and $m$ are coprime)
+:::
+
+:::proof
+	TODO
+:::
+
+:::definition
+	$\mathbb{Z}_m^{\*} = \{\bar{a}\in\mathbb{Z}_m|gcd(a,m) = 1\}$
+:::
+
+:::example
+	\begin{itemize}
+		\item $\mathbb{Z}_5^{\*} = \{1,2,3,4\}$
+		\item $\mathbb{Z}_6^{\*} = \{1,5\}$
+	\begin{itemize}
+:::
+
+:::example
+	$n\in\mathbb{N}$
+	
+	$9|n \Leftrightarrow 9|\text{sum of digits of }n$
+	
+	Proof: TODO
 :::
 
