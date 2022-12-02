@@ -1260,7 +1260,7 @@ $gcd(a,b) = \prod\limits_{p\in \mathbb{P}} p^{min(\nu_p(a), \nu_p(b))}$
 	\begin{itemize}
 		\item $\mathbb{Z}_5^{\*} = \{1,2,3,4\}$
 		\item $\mathbb{Z}_6^{\*} = \{1,5\}$
-	\begin{itemize}
+	\end{itemize}
 :::
 
 :::example
@@ -1269,5 +1269,161 @@ $gcd(a,b) = \prod\limits_{p\in \mathbb{P}} p^{min(\nu_p(a), \nu_p(b))}$
 	$9|n \Leftrightarrow 9|\text{sum of digits of }n$
 	
 	Proof: TODO
+:::
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 15 ---------------------------
+	---------------------------------------------------------
+:::
+
+
+## Chinese Remainder Theorem
+
+:::theorem
+	$m=m_1\cdot m_2$, $gcd(m_1, m_2) = 1$ (coprime)
+	
+	Then, $x\equiv y \mod m \Leftrightarrow x \equiv y \mod m_1 \wedge x \equiv y \mod m_2$
+:::
+
+:::proof
+	TODO
+:::
+
+:::corollary
+	$m = \prod\limits_{i=1}^r m_i$ with $m_i$ pairwise coprime
+	
+	then, $x \equiv y \mod m \Leftrightarrow \forall i: x \equiv y \mod m_i$
+:::
+
+
+:::theorem Chinese Remainder Theorem
+	\begin{align*}
+		x &\equiv a_1 \mod m_1 \\
+		  & \vdots \\
+		x &\equiv a_r \mod m_r
+	\end{align*}
+	
+	where all $m_i$ are pairwise coprime.
+	
+	This system of congruences has a unique solution mod $m=\prod\limits_{i=1}^r m_i$
+	
+	The solution is given by $$x := \sum\limits_{j=1}^r \frac{m}{m_j} b_j a_j$$ with $b_j:= (\frac{m}{m_j})^{-1} \mod m_j$
+:::
+
+:::example
+	\begin{align*}
+		3x &\equiv 2 \mod 5 \\
+		2x &\equiv 7 \mod 11 \\
+	\end{align*}
+	$$\Downarrow$$
+	\begin{align*}
+		x &\equiv 4 \mod 5 \\
+		x &\equiv 9 \mod 11 \\
+	\end{align*}
+	$$\Downarrow$$
+	\begin{align*}
+		b_1 &= 11^{-1} = 1 \mod 5 \\
+		b_2 &= 5^{-1} = 9 \mod 11
+	\end{align*}
+	$$\Downarrow$$
+	$$x = 11\cdot 1 \cdot 4 + 5 \cdot 9 \cdot 9 = 9 \mod 55$$ (which is the unique solution mod 55)
+:::
+
+:::proof
+
+	\begin{enumerate}
+		\item $x$ is a solution:\\
+			since $gcd(m_i, m_j) = 1$ for $i\neq j$ it follows that $gcd(\frac{m}{m_j}, m_j) = 1 \Rightarrow \exists b_j$
+			
+			$\frac{m}{m_j} \equiv 0 \mod m_i \forall i\neq j \Rightarrow \sum\limits_{j=1}^r \frac{m}{m_j} b_j a_j \equiv \frac{m}{m_i} b_i a_i \equiv a_i \mod m_i$
+			
+		\item $x$ is unique mod $m$:\\
+			suppose $x \equiv a_i \mod m_i$ and $y\equiv a_i \mod m_i$ for all $i$
+			
+			$\Rightarrow x\equiv y \mod m_i \Rightarrow x\equiv y \mod m$
+	\end{enumerate}
+:::
+
+:::example finding inverses
+	$m=17$, find $13^{-1}$, ie, solve $13x\equiv 1 \mod 17$
+	
+	$gcd(13,17) = 1$, which is the condition for the existence of an inverse
+	
+	$\Rightarrow \exists e,f: 13e+17f = 1$
+	
+	$\Rightarrow 13e = 1 \mod 17$
+	
+	$e$ and $f$ can be found with the extended Euclidean algorithm. In this case, it gives us $e=4, f=-3$
+:::
+
+:::remark Reduction of congruence relations
+	$3b \equiv 3c \mod 5 \Rightarrow b \equiv c \mod 5$ because 3 has an inverse mod 5.
+	
+	But: In $3b \equiv 3c \mod 6$, 3 has no inverse
+	
+	$\Rightarrow 3b = 3c + 6k$\\
+	$\Rightarrow b = c + 2k$\\
+	$\Rightarrow b \equiv c \mod 2$
+	
+	In general: $ab \equiv ac \mod am \Rightarrow b\equiv c \mod m$
+:::
+
+## Euler-Fermat and Rivest-Shamir-Adleman
+
+:::definition
+	$<\mathbb{Z}_m^{\*}, \cdot>$ is a group
+	
+	$|\mathbb{Z}_m| = m$\\
+	$|\mathbb{Z}_m^{\*}| =: \phi(m)$ is the (Euler) totient, i.e.\ the number elements coprime m
+:::
+
+:::example
+	$\phi(5) = 4$\\
+	$\phi(6) = 2$
+:::
+
+:::theorem
+	For $p\in \mathbb{P}$: $\phi(p) = p-1$
+	
+	\begin{itemize}
+	\item
+		\begin{align*}
+			\phi(p^e) &= |\{0,\dots, p^e-1\}| - |\{0, p, 2, p, \dots, (p^{e-1}-1)p\}| \\ &= p^e - p^{e-1} \\ &= p^{e(1-1/p)}
+		\end{align*}
+	
+	\item 
+		$\phi(\underbrace{p_1^{e_1}\cdot p_2^{e_2}}\limits_{m}) = m\cdot (1-1/p_1)\cdot(1-1/p_2)$ TODO{proof}
+
+	\item
+		$m = p_1^{e_1}\cdots p_r^{e_r} \Rightarrow \phi(m) = m \cdot (1-1/p_1)\cdots (1-1/p_r)$
+		
+	\end{itemize}
+:::
+
+:::example
+	$\phi(6) = \phi(2)\cdot \phi(3) = 6(1-1/2)(1-1/3) = 2$
+:::
+
+:::theorem Euler-Fermat
+	$gcd(a,m) = 1 \Rightarrow a^{\phi(m)} = 1 \mod m$
+	
+	Special Case: $p\in\mathbb{P}, p \not|a \Rightarrow a^{p-1} = 1 \mod p$
+:::
+
+:::proof
+	$\mathbb{Z}_m^{\*} ) \{\bar{a}_1, \dots, \bar{a}_k\}$, $k=\phi(m)$
+	
+	$gcd(a,m) \Rightarrow$ $a$ is invertible in $\mathbb{Z}_m$ $\Rightarrow$ $\bar{a}\in \mathbb{Z}_m^{\*}$
+	
+	$\Rightarrow \mathbb{Z}_m^{\*} = \{\bar{a} \bar{a}_1, \dots, \bar{a} \bar{a}_k\}$ is a permutation of the original residue classes
+	
+	$\Rightarrow$ TODO{finish}
+:::
+
+:::theorem
+	$p,q\in\mathbb{P}$ different odd primes, $m=pq$, $v = lcm(p-1, q-1)$
+	
+	$\Rightarrow \forall a,k\in\mathbb{Z}: a^{kv+1} \equiv a \mod m$
 :::
 
