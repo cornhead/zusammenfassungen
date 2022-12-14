@@ -1539,3 +1539,146 @@ Proposition: $\bar{a}$ is a primitive root mod $m$, then $\mathbb{Z}_m^{\*} = \{
 	* TODO
 :::
 
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 17 ---------------------------
+	---------------------------------------------------------
+:::
+
+TODO{include lecture 17}
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 18 ---------------------------
+	---------------------------------------------------------
+:::
+
+
+# Polynomials over Finite Fields
+
+:::definition Rings
+	$(R, +, \cdot)$ is a ring if $(R, +)$ is an abelian group with neutral element 0 and multiplication satisfies
+	
+	* $(a+b)c = ac+ bc$
+	* $c(a+b) = ca + cb$
+	* $a(b\cdot c) = (a\cdot b) c$
+	* $\exists 1 \in R: \forall a\in R: a\cdot 1 = 1\cdot a = a$
+:::
+
+:::remark
+	#. A ring is not a field because in a ring, multiplication does not necessarily have inverse elements.
+	#. Recall that $(R^{\*}, \cdot)$ is the group of units where $R^{\*}$ is the set of elements with multiplicative inverse.
+	#. $R$ is an integral domain if $ab = 0 \Rightarrow a= 0 \vee b = 0$ and multiplication is commutative.
+:::
+
+:::definition Euclidean Ring
+	$R$ is a euclidean ring if there is a map $n:R\backslash\{0\} \rightarrow \mathbb{N}_0$
+	such that $\forall a,b\in R\exists q,r\in R, q\neq 0: a  = bq+r$ with $n(r)<n(b)$ or $r=0$, and
+	$\forall a,b\in R\backslash\{0\}: n(a)\leq n(ab)$
+:::
+
+The reason we are interested in integral domains is that there, we have a theory of divisibility.
+
+* $t|a :\Leftrightarrow \exists c:a = t\cdot c$
+* $d=gcd(a,b,) :\Leftrightarrow d|a \wedge d|b \wedge (t|a \wedge t|b \Rightarrow t|d)$
+
+:::definition Associated Elements
+	$a,b\in R$ are called associated (write $a\sim b$) iff $\exists r\in R^{\*} : a=rb$
+:::
+
+:::lemma
+	#. $R$ euclidean ring, $a,b\in R, b\neq 0$, $a|b \Rightarrow n(a) \leq n(b)$.
+	#. If $a,b \not\in R^{\*}\cup\{0\} \Rightarrow n(a) < n(ab)$
+:::
+
+:::proof
+	#. $a|b \Rightarrow \exists c: b = ac$, $n(a) \leq n(ac) = n(b)$
+	#. $x=ab$, ... Professor didn't manage to prove this
+:::
+
+:::corollary
+	If $d$ and $d'$ are gcd's of $a$ and $b$, then $n(d) = n(d')$
+:::
+
+:::definition
+	$R$ integral domain, $a\in R\backslash(R^{\*}\cup\{0\})$, then
+	
+	* $a$ is called irreducible iff $a=bc \Rightarrow b\in R^{\*}$ or $c\in R^{\*}$ 
+	* $a$ is called prime TODO
+:::
+
+:::example
+	$R = \mathbb{Z}$, then $x\in R$ irreducible $\Leftrightarrow x\in \mathbb{P}$ or 
+	
+	TODO
+:::
+
+:::theorem
+	* prime $\Rightarrow irreducibe$
+	* $R$ euclidean, then irreducible $\Leftrightarrow$ prime
+:::
+
+:::proof
+	* $a$ prime, $a=bc$, if $a|b$ then $c$ TODO
+	* TODO
+:::
+
+:::example
+	$R = \mathbb{Z}[i\sqrt(5)] = \{a+bi\sqrt{5} | a,b\in\mathbb{Z}\}$
+	
+	$6 = 2\cdot 3 = (1+i\sqrt{5})(1-i\sqrt{5})$
+	
+	$2|6$ but $2|1+i\sqrt{5}$ because
+	
+	\begin{align*}
+		1+i\sqrt{5} & = 2c \\
+			&= 2(a+bi\sqrt{5}) \\
+			&= 2a + 2bi\sqrt{5} \\
+			1 &= 2a \Rightarrow a\not\in \mathbb{Z}
+	\end{align*}
+	
+	Similarilly, $2 \not| 1-i\sqrt{5}$. Therefore, 2 is not prime.
+	
+	But 2 is irreducible:
+	
+	$2 = (a+bi\sqrt{5})(c+di\sqrt{5}	)$
+	
+	TODO
+:::
+
+:::example
+	$K$ a field $\Rightarrow K[x]$ is a euclidean ring (with euclidean function $n(\cdot) = deg(\cdot)$)
+	
+	$\Rightarrow$ primes are irreducible polynomials
+	
+	That is, $a(x) = b(x)\cdot c(x) \Rightarrow deg(b(x)) = 0$ or $deg(c(x)) = 0$
+	
+	In $\mathbb{C}[x]$, these are the linear polynomials $ax + b$ with $a\neq 0$.
+:::
+
+:::definition Unique-Factorization Domain
+	$R$ integral domain. $R$ is a unique fractorization domain (UFD) or factorial ring if $\forall a \in R\backslash\{R^{\*}\cup \{0\}\}$
+	there exists a unique factorization $a = \varepsilon\cdot p_1 \cdots p_k$ with $\varepsilon\in R^{\*}$, $p_i$ prime
+	
+	(unique: TODO)
+:::
+
+:::theorem
+	$R$ euclidean $\Rightarrow$ $R$ UFD
+:::
+
+:::proof
+	Existence of a factorization:
+		
+	* Case 1: $a$ irreducible $\Rightarrow$ $a$ prime  $\Rightarrow$ $a=1\cdot a$
+
+	* Case 2:$a=bc$, $bc\in R^{\*} \Rightarrow n(b), n(c) < n(a)$.
+			Suppose $a$ has no factorisation, $n(a)$ minimal. Then $b = \varepsilon\cdot p_1\cdots p_k$ and $c=\eta\cdot q_1\cdots q_l$
+			$\Rightarrow a=bc = \varepsilon\cdot\eta\cdot p_1\cdots p_k \cdot q_1\cdots q_1$
+			
+	Uniqueness:
+	
+		TODO
+:::
+
