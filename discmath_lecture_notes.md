@@ -1253,13 +1253,13 @@ $gcd(a,b) = \prod\limits_{p\in \mathbb{P}} p^{min(\nu_p(a), \nu_p(b))}$
 :::
 
 :::definition
-	$\mathbb{Z}_m^{\*} = \{\bar{a}\in\mathbb{Z}_m|gcd(a,m) = 1\}$
+	$\mathbb{Z}_m^{*} = \{\bar{a}\in\mathbb{Z}_m|gcd(a,m) = 1\}$
 :::
 
 :::example
 	\begin{itemize}
-		\item $\mathbb{Z}_5^{\*} = \{1,2,3,4\}$
-		\item $\mathbb{Z}_6^{\*} = \{1,5\}$
+		\item $\mathbb{Z}_5^{*} = \{1,2,3,4\}$
+		\item $\mathbb{Z}_6^{*} = \{1,5\}$
 	\end{itemize}
 :::
 
@@ -1362,9 +1362,9 @@ $gcd(a,b) = \prod\limits_{p\in \mathbb{P}} p^{min(\nu_p(a), \nu_p(b))}$
 	
 	But: In $3b \equiv 3c \mod 6$, 3 has no inverse
 	
-	$\Rightarrow 3b = 3c + 6k$\\
-	$\Rightarrow b = c + 2k$\\
-	$\Rightarrow b \equiv c \mod 2$
+	* $\Rightarrow 3b = 3c + 6k$
+	* $\Rightarrow b = c + 2k$
+	* $\Rightarrow b \equiv c \mod 2$
 	
 	In general: $ab \equiv ac \mod am \Rightarrow b\equiv c \mod m$
 :::
@@ -1372,10 +1372,10 @@ $gcd(a,b) = \prod\limits_{p\in \mathbb{P}} p^{min(\nu_p(a), \nu_p(b))}$
 ## Euler-Fermat and Rivest-Shamir-Adleman
 
 :::definition
-	$<\mathbb{Z}_m^{\*}, \cdot>$ is a group
+	$<\mathbb{Z}_m^{*}, \cdot>$ is a group
 	
 	$|\mathbb{Z}_m| = m$\\
-	$|\mathbb{Z}_m^{\*}| =: \phi(m)$ is the (Euler) totient, i.e.\ the number elements coprime m
+	$|\mathbb{Z}_m^{*}| =: \phi(m)$ is the (Euler) totient, i.e.\ the number elements coprime m
 :::
 
 :::example
@@ -1412,11 +1412,11 @@ $gcd(a,b) = \prod\limits_{p\in \mathbb{P}} p^{min(\nu_p(a), \nu_p(b))}$
 :::
 
 :::proof
-	$\mathbb{Z}_m^{\*} ) \{\bar{a}_1, \dots, \bar{a}_k\}$, $k=\phi(m)$
+	$\mathbb{Z}_m^{*} ) \{\bar{a}_1, \dots, \bar{a}_k\}$, $k=\phi(m)$
 	
-	$gcd(a,m) \Rightarrow$ $a$ is invertible in $\mathbb{Z}_m$ $\Rightarrow$ $\bar{a}\in \mathbb{Z}_m^{\*}$
+	$gcd(a,m) \Rightarrow$ $a$ is invertible in $\mathbb{Z}_m$ $\Rightarrow$ $\bar{a}\in \mathbb{Z}_m^{*}$
 	
-	$\Rightarrow \mathbb{Z}_m^{\*} = \{\bar{a} \bar{a}_1, \dots, \bar{a} \bar{a}_k\}$ is a permutation of the original residue classes
+	$\Rightarrow \mathbb{Z}_m^{*} = \{\bar{a} \bar{a}_1, \dots, \bar{a} \bar{a}_k\}$ is a permutation of the original residue classes
 	
 	$\Rightarrow$ TODO{finish}
 :::
@@ -1443,7 +1443,7 @@ $gcd(a,b) = \prod\limits_{p\in \mathbb{P}} p^{min(\nu_p(a), \nu_p(b))}$
 :::
 
 :::definition RSA Algorithm
-	$m=p\cdot q$, $gcd(e,v) = 1 $ with $v=lcm(p-1,q-1) \Rightarrow \exists d: d\cdot e \equiv 1 \mod v$
+	$m=p\cdot q$, $gcd(e,v) = 1$ with $v=lcm(p-1,q-1) \Rightarrow \exists d: d\cdot e \equiv 1 \mod v$
 	
 	message: $a_1, a_2, \dots$ with $0\leq a_i < m$
 	
@@ -1485,20 +1485,20 @@ Proposition: $ord_G(x) | ~|G|$
 
 
 :::definition Primitive Roots
-	$\bar{a} \in \mathbb{Z}_m^{\*}$ such that $\mathbb{Z}_m^{\*} = <\bar{a}>$, the $\bar{a}$ is called a primitive root mod $m$.
+	$\bar{a} \in \mathbb{Z}_m^{*}$ such that $\mathbb{Z}_m^{*} = <\bar{a}>$, the $\bar{a}$ is called a primitive root mod $m$.
 :::
 
 :::example
-	* $\mathbb{Z}_2^{\*} = <\bar{1}>$
-	* $\mathbb{Z}_3^{\*} = <\bar{2}>$
-	* $\mathbb{Z}_5^{\*} = <\bar{2}>$
-	* $\mathbb{Z}_8^{\*} = \{\bar{1}, \bar{3}, \bar{5}, \bar{7}\}$ has no generator
+	* $\mathbb{Z}_2^{*} = <\bar{1}>$
+	* $\mathbb{Z}_3^{*} = <\bar{2}>$
+	* $\mathbb{Z}_5^{*} = <\bar{2}>$
+	* $\mathbb{Z}_8^{*} = \{\bar{1}, \bar{3}, \bar{5}, \bar{7}\}$ has no generator
 :::
 
-Proposition: $\bar{a}$ is a primitive root mod $m$, then $\mathbb{Z}_m^{\*} = \{a, a^2, \dots, a^{\phi(m)}\}$ and $a^{\phi(m)} \equiv 1$.
+Proposition: $\bar{a}$ is a primitive root mod $m$, then $\mathbb{Z}_m^{*} = \{a, a^2, \dots, a^{\phi(m)}\}$ and $a^{\phi(m)} \equiv 1$.
 
 :::theorem
-	$\mathbb{Z}_m^{\*}$ is cyclic iff $m\in\{2,4, p^e, 2p^e\}$ with $p\in\mathbb{P}\backslash\{2\}$ and $e\in \mathbb{N}_{\geq 1}$
+	$\mathbb{Z}_m^{*}$ is cyclic iff $m\in\{2,4, p^e, 2p^e\}$ with $p\in\mathbb{P}\backslash\{2\}$ and $e\in \mathbb{N}_{\geq 1}$
 :::
 
 :::lemma
@@ -1509,7 +1509,7 @@ Proposition: $\bar{a}$ is a primitive root mod $m$, then $\mathbb{Z}_m^{\*} = \{
 :::proof
 	(using the following lemma)
 	
-	$\phi(p^2) = p(p-1)$, assum that $p-1 = kl$ with $k,l < p-1$ and $ord_{\mathbb{Z}_{p^2}^{\*}}(g) = pl$
+	$\phi(p^2) = p(p-1)$, assum that $p-1 = kl$ with $k,l < p-1$ and $ord_{\mathbb{Z}_{p^2}^{*}}(g) = pl$
 :::
 
 :::lemma
@@ -1530,7 +1530,7 @@ Proposition: $\bar{a}$ is a primitive root mod $m$, then $\mathbb{Z}_m^{\*} = \{
 
 
 :::definition Carmichael Function
-	$\lambda(m) = \text{max}_{a\in\mathbb{Z}_m^{\*}} ~ ord_{\mathbb{Z}_m^{\*}}(a)$ is the Carmichael function
+	$\lambda(m) = \text{max}_{a\in\mathbb{Z}_m^{*}} ~ ord_{\mathbb{Z}_m^{*}}(a)$ is the Carmichael function
 :::
 
 :::remark
@@ -1568,7 +1568,7 @@ TODO{include lecture 17}
 
 :::remark
 	#. A ring is not a field because in a ring, multiplication does not necessarily have inverse elements.
-	#. Recall that $(R^{\*}, \cdot)$ is the group of units where $R^{\*}$ is the set of elements with multiplicative inverse.
+	#. Recall that $(R^{*}, \cdot)$ is the group of units where $R^{*}$ is the set of elements with multiplicative inverse.
 	#. $R$ is an integral domain if $ab = 0 \Rightarrow a= 0 \vee b = 0$ and multiplication is commutative.
 :::
 
@@ -1584,12 +1584,12 @@ The reason we are interested in integral domains is that there, we have a theory
 * $d=gcd(a,b,) :\Leftrightarrow d|a \wedge d|b \wedge (t|a \wedge t|b \Rightarrow t|d)$
 
 :::definition Associated Elements
-	$a,b\in R$ are called associated (write $a\sim b$) iff $\exists r\in R^{\*} : a=rb$
+	$a,b\in R$ are called associated (write $a\sim b$) iff $\exists r\in R^{*} : a=rb$
 :::
 
 :::lemma
 	#. $R$ euclidean ring, $a,b\in R, b\neq 0$, $a|b \Rightarrow n(a) \leq n(b)$.
-	#. If $a,b \not\in R^{\*}\cup\{0\} \Rightarrow n(a) < n(ab)$
+	#. If $a,b \not\in R^{*}\cup\{0\} \Rightarrow n(a) < n(ab)$
 :::
 
 :::proof
@@ -1602,9 +1602,9 @@ The reason we are interested in integral domains is that there, we have a theory
 :::
 
 :::definition
-	$R$ integral domain, $a\in R\backslash(R^{\*}\cup\{0\})$, then
+	$R$ integral domain, $a\in R\backslash(R^{*}\cup\{0\})$, then
 	
-	* $a$ is called irreducible iff $a=bc \Rightarrow b\in R^{\*}$ or $c\in R^{\*}$ 
+	* $a$ is called irreducible iff $a=bc \Rightarrow b\in R^{*}$ or $c\in R^{*}$ 
 	* $a$ is called prime TODO
 :::
 
@@ -1658,8 +1658,8 @@ The reason we are interested in integral domains is that there, we have a theory
 :::
 
 :::definition Unique-Factorization Domain
-	$R$ integral domain. $R$ is a unique fractorization domain (UFD) or factorial ring if $\forall a \in R\backslash\{R^{\*}\cup \{0\}\}$
-	there exists a unique factorization $a = \varepsilon\cdot p_1 \cdots p_k$ with $\varepsilon\in R^{\*}$, $p_i$ prime
+	$R$ integral domain. $R$ is a unique fractorization domain (UFD) or factorial ring if $\forall a \in R\backslash\{R^{*}\cup \{0\}\}$
+	there exists a unique factorization $a = \varepsilon\cdot p_1 \cdots p_k$ with $\varepsilon\in R^{*}$, $p_i$ prime
 	
 	(unique: TODO)
 :::
@@ -1673,7 +1673,7 @@ The reason we are interested in integral domains is that there, we have a theory
 		
 	* Case 1: $a$ irreducible $\Rightarrow$ $a$ prime  $\Rightarrow$ $a=1\cdot a$
 
-	* Case 2:$a=bc$, $bc\in R^{\*} \Rightarrow n(b), n(c) < n(a)$.
+	* Case 2:$a=bc$, $bc\in R^{*} \Rightarrow n(b), n(c) < n(a)$.
 			Suppose $a$ has no factorisation, $n(a)$ minimal. Then $b = \varepsilon\cdot p_1\cdots p_k$ and $c=\eta\cdot q_1\cdots q_l$
 			$\Rightarrow a=bc = \varepsilon\cdot\eta\cdot p_1\cdots p_k \cdot q_1\cdots q_1$
 			
@@ -1682,3 +1682,16 @@ The reason we are interested in integral domains is that there, we have a theory
 		TODO
 :::
 
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 19 ---------------------------
+	---------------------------------------------------------
+:::
+
+TODO{include lecture 19}
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 20 ---------------------------
+	---------------------------------------------------------
+:::
