@@ -1695,3 +1695,125 @@ TODO{include lecture 19}
 	------------------ lecture 20 ---------------------------
 	---------------------------------------------------------
 :::
+
+:::remark
+	* $\mathbb{R}[x]/(x^2-1)$ is not an integral domain because $(x-1)(x+1) = x^2-1 = 0$ (zero dividers).
+	* $p(x) \equiv 0 \Rightarrow x^n \equiv -a_{n-1} x^{n-1} \cdots - a_0$ $\Rightarrow$ any polynomial in $K[x]/(p(x))$ has a representative of degree strictly less than $n$.
+:::
+
+:::theorem
+	$K$ a field, $p(x) \in K[x]$, then $K[x]/p(x)$ is a field iff $p(x)$ irreducible.
+:::
+
+:::remark
+	* $p(x)$ irreducible $\Rightarrow$ p(x) has no zeros, because otherwise $x-a|p(x)$
+	* $K$ is a subfield of $K[x]/p(x)$
+:::
+
+## Algebraic Extensions
+
+
+Let $p(x)$ be monic (leading coefficient 1) and irreducible of field $K$.
+
+Define a new element $a\in L$ by $p(a) = 0$.
+
+:::theorem
+	Let $L\supseteq K$ such that $a$ is a zero of $p(x)\in K[x]$, then exists a unique monic, irreducible polynomial $m\in K[x]$ with $m(a)=0$, which is the *minimal* polynomial.
+:::
+
+:::example
+	$\mathbb{C}$ is defined as the field containing $\mathbb{R}$ and the roots of $x^2+1$. 
+:::
+
+:::proof
+	$p_1(x), p_2(x)$ monic irreducible p_1(a)=p_2(a)=0
+	
+	$d(x) := gcd(p_1, p_2) = A(x)p_1(x) + B(x)p_2(x)$
+	
+	$\Rightarrow d(a) = A(a)p_1(a) + B(a)p_2(a) = 0 \Rightarrow p_1(x) = p_2(x)$
+:::
+
+:::remark
+	$m(x)$ has minimal degree aong all polynomials with $p(a) = 0$.
+:::
+
+:::proposition
+	$p\in K[x], p(a) = 0 \Rightarrow m(x)|p(x)$
+:::
+
+:::proof
+	$p(x) = q(x)m(x) + r(x)$ with $deg(r) < deg(m)$ or $r = 0$
+	
+	$\Rightarrow 0=p(a) = q(a)m(a) + r(a) = r(a)$
+	
+	Since $m$ is minimal, we have $r(x) = 0$ and therefore $m(x)|p(x)$.
+:::
+
+Let $L := \{ \sum\limits_{i=0}^{n-1} b_i a^i | b_i \in K \}$ is the smallest field containing $K$ and $a$, because $a^n = -\sum_{k=0}^{n-1} c_k a^k$, with $deg(m) = n$ and $m(x) = \sum\limits_{k=0}^{n} c_k x^k$.
+
+
+$L \cong K[x]/m(x)$
+
+
+:::example
+	$K = \mathbb{R}$, $m(x)=x^2+1$, $a=i$ with $i^2 = -1$.
+	
+	$K[x]/m(x) = \mathbb{R} \cup \{ax+b| a\neq 0\}$, eg. $x^3=x\cdot x^2 = -x$.
+	
+	$L = \{a\cdot i +b | a,b\in \mathbb{R}\}$
+:::
+
+:::definition Algebraic Elements
+	$a\in L$ is called *algebraic* over $K$ 
+:::
+
+:::example
+	* $\mathbb{Q}[x]/(x^2-2) \cong \mathbb{Q}[\sqrt{2}] = \{a+b\cdot\sqrt{2}| a,b\in \mathbb{Q}\}$
+	* $a,b\in K$, $K[x]/(ax+b) \cong K$
+:::
+
+:::definition Algebraic Closure
+	A field with no algebraic extensions (i.e. any polynomial is a product of linear factors) is *algebraically closed*.
+:::
+
+:::remark
+	* For any field $K$, there is an algebraically closed field $L \supseteq K$.
+	* If $|K| = p \in \mathbb{P}$ (i.e., $K \cong \mathbb{Z}_p$), then, $\forall n \in \mathbb{N} \exists m(x)$ such that $|K[x]/m(x)| = p^n$.
+:::
+
+### Finite Fields
+
+:::theorem 
+	Field $K$ finite. $(K^{*}, \cdot)$ is a cyclic group of order $p^n-1 = |K^{*}|$.
+	
+	$\forall a \in K: a ^{p^n} = a$
+:::
+
+:::proof
+	$|K^{*}| = p^n-1$, let $a\in K^{*}$ with $ord_{(K^{*}, \cdot)}(a) =: r$ is maximal.
+	
+	$\Rightarrow$ $r|p^n-1$ and $\forall y\in K^{*}: ord_{(K^{*}, \cdot)}(y)|r$
+	
+	$\Rightarrow$ $\forall y\in K^{*}: y^r-1 = 0$ but the number of zeros of $x^r-1 \leq r$
+	
+	$\Rightarrow$ $p^n-1 \leq r \rightarrow p^n-1 = r$
+	
+	Since the maximal order of an element equals the order of the group, the group is cyclic.
+:::
+
+:::definition Primitive Element
+	$a$ is called primitive element. Its minimal polynomial is called primitive polynomial.
+:::
+
+:::theorem
+	$q(x)$ is a primitive polynomial of $k=GF(p^n)$ (Galois-field of size $p^n$)
+	
+	$\Leftrightarrow q(x)| x^{p^n-1}-1$ and $q(x) \not| x^k-1$ for $1\leq k<p^n-1$
+:::
+
+:::proof
+	TODO
+:::
+
+
+Next goal: $q(x)=(x-a)(x-a^p)\cdot(x-a^{p^n-1})$
