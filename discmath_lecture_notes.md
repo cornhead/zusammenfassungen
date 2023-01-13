@@ -1801,14 +1801,18 @@ $L \cong K[x]/m(x)$
 	Since the maximal order of an element equals the order of the group, the group is cyclic.
 :::
 
-:::definition Primitive Element
+:::definition Primitive Element and Primitive Polynomial
 	$a$ is called primitive element. Its minimal polynomial is called primitive polynomial.
+:::
+
+:::definition Generator
+	A generator of $(K^{*}, \cdot)$ is a primitive element. Its minimal polynomial (in $\mathbb{Z}_p[x]$ is the primitive polynomial).
 :::
 
 :::theorem
 	$q(x)$ is a primitive polynomial of $k=GF(p^n)$ (Galois-field of size $p^n$)
 	
-	$\Leftrightarrow q(x)| x^{p^n-1}-1$ and $q(x) \not| x^k-1$ for $1\leq k<p^n-1$
+	$\Leftrightarrow q(x)| x^{p^n-1}-1$ and $q(x) \not| x^k-1$ for $1\leq k<p^n-1$ and $q$ is irreducible (in $\mathbb{Z}_p[x]$).
 :::
 
 :::proof
@@ -1817,3 +1821,109 @@ $L \cong K[x]/m(x)$
 
 
 Next goal: $q(x)=(x-a)(x-a^p)\cdot(x-a^{p^n-1})$
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 21 ---------------------------
+	---------------------------------------------------------
+:::
+
+
+:::theorem
+	$q(x)$ has the following form:
+	
+	$q(x) = (x-a)(x-a^p)(x-a^{p^2})\cdots(x-a^{p^{n-1}})$, that is it has $n$ zeros
+:::
+
+:::lemma
+	$\phi:GF(p^n)\rightarrow GF(p^n)$ (field-automorphism)\newline
+	$x \mapsto x^p$  (i.e. a homomorphism and bijective)
+:::
+
+:::proof
+	homomorphism:
+	
+	* $(a+b)^p = a^p + b^p$ (no joke, see exercise)
+	* $(ab)^p = a^p\cdot b^p$
+	
+	bijektive:
+	
+	* $ker(\phi)$ is an ideal of $GF(p^n)$ but fields only have two (trivial) ideals: the field itself and zero.
+	* but $ker(\phi)\neq GF(p^n)$ because $\phi(1) = 1$
+:::
+
+Fact: All automophisms are powers of $\phi$: $\{\phi, \phi^2, \dots, \phi^n=id_K\}$\newline
+$\Rightarrow$ TODO
+
+Let $q(x)$ be a primitive polynomial:\newline
+$GF(p^n) = \mathbb{Z}_p[x]/q(x)$\newline
+$b=\phi(a)$ for an automorphism $\phi$\newline
+$\Rightarrow q(b) = q(\phi(a)) = \phi(q(a)) = \phi(0) = 0$
+
+Since $\phi(x)=x, \phi(x)=x^p, \dots, \phi(x)=x^{p^2}$ are all automorphisms, we have that $\phi_0(a), \phi_1(a),\dots$ are zeros of $q(x)$ and these are actually *all* zeros of $q(x)$
+
+Corollary: The number of primitive polynomials is $\frac{1}{n}\phi(p^n-1)$, because any two primitive polynomials have no common root.
+
+## Linear Codes
+
+:::definition Linear Codes, Generator Matrix, Codewords
+	$K=GF(q)$, $f:K^k\rightarrow K^n$ linear (i.e. homomorphic) and injective
+	
+	$C=f(K^k)$ is an $(n,k)$-linear code
+	
+	Let $\{c_1,\dots,c_k\}$ be a basis of $C$, then $G=TODO\in M_{k\times n}$ is the generator matrix.
+	
+	Codewords are elements of $C$, i.e. linear combinations of $\{c_1,\dots,c_k\}$.
+:::
+
+:::definition Check Matrix
+	A generator matrix of $C^\bot:=\{v\in K^n | v\cdot u=0 \forall u\in C\}$ (orthogonal space to $C$) is called *check matrix*.
+:::
+
+Proposition: Let $H$ be a check matrix, then $G\cdot H^{\top}=\mathbf{0}_{k\times(n-k)}$
+
+:::remark
+	A code $C$ is called systematic if $G=(I_k || F)$, i.e. if $v=(v_1,\dots, v_k)$ is the message then the encoding is $vG=(v_1,\dots, v_k,w_k+1, \dots, w_n)$. That is, the code just appends stuff.
+	
+	If $C$ is systematic, then $H=(-F^{\top} || I_{n-k})$
+:::
+
+:::definition Syndromes
+	$s_H(c) = c\cdot H^{\top}$ is called the syndrome of $c$ (with $c\in K^n$).
+	
+	The syndrom is $0$ iff $c$ is a correct codeword (no error detected).
+:::
+
+Proposition: $C$ an $(n,k)$-linear code, then $u,v$ are in the same coset of $a+C \Leftrightarrow s_H(u) = s_H(v)$
+
+### Polynomial Codes
+
+Polynomial Codes are linear codes, but we take a different vector space
+
+$K_{n-1}[x] = \{p(x) \in K[x] | deg(p(x) \leq n-1)\}$\newline
+($dim(K_{n-1}[x]) = n$)
+
+$g(x)\in K[x]$, $deg(g) = n-k$ (generator polynomial)
+
+Encoding: $f(p(x)) = p(x) \cdot g(x)$ for $p(x)\in K_{k-1}[x]$\newline
+($f$ injective and linear)
+
+$C = f(K_{k-1}[x])$ is a $k$-dimensional subspace of $K_{n-1}[x]$
+
+To check a an encoded message, choose $f(x) \in K[x]$ with $deg(f)=n$ and $h(x)$ such that $c(x) \in C \Leftrightarrow c(x)\cdot h(x) = 0 \mod f(x)$.
+
+Proposition: $f(x) = \lambda g(x)h(x)$, $\lambda\in K^{*}$
+
+:::definition
+	$s(v(x)) := v(x) \mod g(x)$ is the syndrome of $v(x)$
+:::
+
+Proposition: $v(x)$ is a code iff $s(v(x)) = 0$
+
+:::definition
+	A code is cyclic if for any $c_0 + c_1\cdot x + \cdots + c_{n-1}\cdot x^{n-1} \in C$ also the cyclic shift is in $C$. TODO
+:::
+
+:::theorem
+	$C$ is cyclic iff $g(x)|x^n-1$.
+:::
