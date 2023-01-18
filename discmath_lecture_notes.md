@@ -1927,3 +1927,148 @@ Proposition: $v(x)$ is a code iff $s(v(x)) = 0$
 :::theorem
 	$C$ is cyclic iff $g(x)|x^n-1$.
 :::
+
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 22 ---------------------------
+	---------------------------------------------------------
+:::
+
+## Linear (Feedback) Shift Registers (LFSRs)
+
+start with sequence $R_0, \dots, R_{k_1}$
+
+TODO{Create Graphic of LFSR (tikz)}
+
+e.g.\ $R_n \in GF(2)$
+
+$R_k = a_0R_0 + a_1R_1 + \cdots + a_{k-1}R_{k-1}$
+	
+new sequence is $R_1, \dots, R_k$
+
+:::example
+	TODO
+	
+	$101 \rightarrow 010 \rightarrow 100 \rightarrow 001 \rightarrow 011 \rightarrow 111 \rightarrow 110 \rightarrow 101$
+	
+	Observations:
+	
+	* If $K=GF(2)$, there are $2^n$ states. Therefore, the sequence of states is periodic $\rightarrow$ this forms a cycle.
+	* The zero-state will always be a fixed point
+:::
+
+The maximally possible period is $2^k-1$ (for $GF(2)$). But when is the period actually maximal?
+
+The register sequence is the sequence $(R_n)_{n \geq 0}$ and it satisfies the linear recurrence $$R_n+k = \sum\limits_{i=0}^{k-1}a_i R_{n+1}$$
+
+The generating function $R(x) := \sum\limits_{n\geq 0} R_nx^n = \frac{g(x)}{f(x)}$ for two polynomials $g,f\in GF(2)[x]$.
+We know that $f(x) = 1-a_{k-1}x-a_{k-2}x^2-\dots - a_0x^k$ and $deg(g)< k$ 
+
+
+:::example
+	$(a_0,a_1, a_2, a_3) = (1,1,0,1)$
+	
+	$\Rightarrow f(x) = 1+x+x^3+x4$ (addition and subtraction is the same in $GF(2)$)
+	
+	TODO{finish example (tabular)}
+:::
+
+:::theorem
+	Let $(R_n)_{n\geq 0}$ be a register sequence with denominator polynomial $f(x)$ *irreducible*.
+	Then, the period equals $t$ $\Leftrightarrow$ $f(x)|1-x^t$ 
+:::
+
+:::proof
+	* $R_{n+t} = R_n \forall n\geq 0$ \newline
+		$R(x) = \underbrace{(R_0 + \dots + R_{t-1}x^{t-1})}\limits_{\sigma(x)}\cdot \underbrace{(1+x^t+x^{2t}+\cdots)}\limits_{\frac{1}{1-x^t}}$\newline
+		$R(x) = \frac{\sigma(x)}{1-x^t}$\newline
+		TODO
+		
+	* TODO
+:::
+
+:::remark
+	In the example above, the polynomial is not irreducible. Therefore, the theorem does not apply.
+	This is also why the period depends on the initial state (which does not reflect) in the theorem.
+:::
+
+
+Recall the following theorem we had before:
+
+:::theorem
+	$q(x)$ is primitive polynomial iff $q(x)|x^{p^n-1}$ and $q(x) \not| x^k-1$ for $k < p^n-1$
+:::
+
+Therefore:
+
+:::theorem
+	$R_n$ has period $2^n-1$ iff $R(x) = \frac{g(x)}{f(x)}$ with $f(x)$ a primitive polynomial.
+:::
+
+
+
+--------------------
+
+
+# Repetition on Counting Structures with Generating Functions (Combinatorial Species)
+
+:::definition
+	A combinatorial species $F$ is an assignment
+	
+	* of finite sets (of labels) $U$ to finite sets (of strutures) $F[U]$
+	* of bijections $\sigma: U\rightarrow V$ between sets of labels to bijections $F[\sigma]: F[U] \rightarrow F[V]$
+	
+	such that
+	
+	* $F[\sigma \circ \tau] = F[\sigma] \circ F[\tau]$ 
+	* and $F[id_U] = id_{F[U]}$
+:::
+
+:::example
+	
+
+	Linear Orders $\mathcal{L}[\{1, a, \heartsuit\}] = \{1a\heartsuit, 1\heartsuit a, a1\heartsuit, a\heartsuit 1, \heartsuit 1a, \heartsuit a 1\}$
+	
+	Relabelling: $\mathcal{L}\left[ \begin{array}{c}1,a,\heartsuit\\1,2,3\end{array}  \right](\heartsuit a1) = 321 \in \mathcal{L}[\{1,2,3\}]$
+	
+	Permutations $S[\{1,a,\heartsuit\}] = TODO$
+	
+	* $S\left[ \begin{array}{c} 1,2,3\\2,3,1 \end{array} \right](TODO) = TODO$\newline
+	* $S\left[ \begin{array}{c} 1,2,3\\2,3,1 \end{array} \right](TODO) = TODO$
+	
+	TODO
+:::
+
+
+:::definition Atom or Singleton or $X$
+	$X[U]: \left\{ \begin{array}{ll} \{U\} & \dots |U| = 1 \\ \varnothing & \dots\text{otherwise} \end{array}\right.$
+	
+	$X[id_U] = id_{x[U]}$
+:::
+
+:::definition Empty Set or One or $1$
+	1[U] = TODO
+:::
+
+:::definition Set Species ()
+	TODO
+:::
+
+:::definition
+	two structures $f_1\in F[U]$ and $f_2 \in F[V]$ are isomorphic iff there is a relabelling $\sigma:U\rightarrow V$
+	such that $F[\sigma](f_1) = f_2$
+:::
+
+Notation: $F[n] := F[\{1,\dots, n\}]$, $\tilde{F}[n]$ is the set of isomorphism classes in $F[n]$
+
+:::example
+	$S[\{1,a,\heartsuit\}] = TODO$
+	
+	$\tilde{S}[3] = $
+	
+	Remark: $|\tilde{S}[n]| = $ number of integer partitions
+	
+	$\tilde{\mathcal{L}} = \{TODO\}$
+:::
+
