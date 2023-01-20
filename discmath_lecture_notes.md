@@ -1944,6 +1944,8 @@ TODO{Create Graphic of LFSR (tikz)}
 e.g.\ $R_n \in GF(2)$
 
 $R_k = a_0R_0 + a_1R_1 + \cdots + a_{k-1}R_{k-1}$
+
+Remark: We assume $a_0 \neq 0$. Otherwise, the LFSR behaves like a different LFSR with the leading zero-multipliers cut off.
 	
 new sequence is $R_1, \dots, R_k$
 
@@ -2062,13 +2064,140 @@ Therefore:
 
 Notation: $F[n] := F[\{1,\dots, n\}]$, $\tilde{F}[n]$ is the set of isomorphism classes in $F[n]$
 
+($f_1\in F[U_1], f_2\in F[U_2]$ are isomorphic if $\exists \sigma: U_1\rightarrow U_2: F[\sigma](f_1) = f(2)$.)
+
 :::example
 	$S[\{1,a,\heartsuit\}] = TODO$
 	
-	$\tilde{S}[3] = $
+	$\tilde{S}[3] = TODO$
 	
-	Remark: $|\tilde{S}[n]| = $ number of integer partitions
+	Remark: $|\tilde{S}[n]| =$ number of integer partitions
 	
 	$\tilde{\mathcal{L}} = \{TODO\}$
+:::
+
+:::comment
+	---------------------------------------------------------
+	------------------ lecture 23 ---------------------------
+	---------------------------------------------------------
+:::
+
+:::definition
+	The exponential generating function of a species $F$ is $F(x) = \sum\limits_{n\geq 0} |F[n]|\cdot \frac{x^n}{n!}$
+	
+	The ordinary generating function of a species $F$ is $\tilde{F}(x) = \sum\limits_{n\geq 0} |\tilde{F}[n]|\cdot x^n$
+:::
+
+## Operations on Species
+
+$F,G$ combinatorial species
+
+Addition:\newline
+$(F+G)[U] := F[U] \cup G[U]$\newline
+$(F+G)[\sigma:U\rightarrow V](s) := \begin{array}{ll}F[\sigma](s) & s\in F[U] \\ G[\sigma](s) & s\in G[U]\end{array}$
+
+:::example
+	$F=G=X$
+	
+	$(F+G)[\{\heartsuit\}] = \{(left, \heartsuit), (right, \heartsuit)\}$
+:::
+
+Multiplication:\newline
+$(F\cdot G)[U] := \bigcup\limits_{V,W, V\cup W = U} F[V] \times G[W]$\newline
+$(F\cdot G)[\sigma:U\rightarrow U'](f_v, g_w) := (F[\sigma|_V](f_V), G[\sigma|_W](g_W))$ where $\sigma$ is restricted to $V$ or $W$ respectively.
+
+:::example
+	$\mathcal{L}$ ... linear orders\newline
+	$\mathcal{L} = 1 + X\cdot \mathcal{L}$ (say out loud: "A linear oder is either the empty order or a first element concatenated with a linear order.")
+	
+	$\mathcal{L}[\{a,b\}] = 1[\{a,b\}] \cup (X\cdot \mathcal{L})[\{a,b\}]$\newline
+	$1[\{a,b\}] = \emptyset$ TODO{replace varnothing by emptyset in whole document}\newline
+	$(X\cdot \mathcal{L})[\{a,b\}] = X[\emptyset] \times \mathcal{L}[\{a,b\}] \cup X[\{a\}] \times \mathcal{L}[\{b\}] \cup X[\{b\}] \times \mathcal{L}[\{a\}] \cup X[\{a,b\}] \times \mathcal{L}[\emptyset]$\newline
+	$= \emptyset \cup \{(a,b)\} \cup (\{b,a\}) \cup \emptyset$\newline
+	$= \{(a,b), (b,a)\}$
+:::
+
+:::example
+	binary (rooted ordered) trees
+	
+	TODO
+	
+	$\mathcal{B} = 1 + X\cdot\mathcal{B}\cdot\mathcal{B}$
+	
+	e.g. $\mathcal{B}[\{a\}] = 1[\{a\}] \cup (X\cdot\mathcal{B}\cdot\mathcal{B})[\{a\}] \cup \dots$\newline
+	$= \emptyset \cup (a, \emptyset, \emptyset)$
+:::
+
+:::theorem
+	$F,G$ comb. species
+
+	$(F+G)(x) = F(x)+G(x)$\newline
+	$(F\cdot G)(x) = F(x) \cdot G(x)$
+	
+	$(\widetilde{F+G})(x) = \tilde{F}(x)+\tilde{G}(x)$\newline
+	$(\widetilde{F\cdot G})(x) = \tilde{F}(x) \cdot \tilde{G}(x)$
+	
+	(This theorem is the reason why combinatorial species work. In the original article the author said that species are a liftig of generating functions.)
+:::
+
+:::example
+	$\mathcal{B} = 1 + X\cdot \mathcal{B}\cdot \mathcal{B} \Rightarrow \mathcal{B}(x) = 1 + X\cdot \mathcal{B}^2(x)$ and $\tilde{\mathcal{B}}(x) = 1 + \tilde{\mathcal{B}}^2(x)$
+	
+	$\mathcal{L} = 1 + X\cdot\mathcal{L} \Rightarrow \mathcal{L}(x) = \tilde{\mathcal{L}}(x) = \frac{1}{1-x}$
+:::
+
+Substitution:\newline
+$G[\emptyset] = \emptyset$\newline
+$(F\circ G)[U] := \bigcup\limits_{P=\{B_1,\dots,B_k\}, partition} F[P]\times\prod\limits_{i=1}^k G[B_i]$
+
+:::theorem
+	$(F\circ G)(x) = F(G(x))$
+	
+	WARNING: $(\widetilde{F\circ G})(x) \neq \tilde{F}(\tilde{G}(x))$!
+:::
+
+
+:::example
+	rooted (but unordered) trees:
+	
+	TODO{illustration}
+	
+	$\mathcal{A} = X\cdot(\mathcal{E}\circ\mathcal{A})$\newline
+	$\mathcal{A}(x) = x\cdot exp(\mathcal{A}(x))$
+	
+	$A[\{1,2,3\}] = X[\{1\}]\times(\mathcal{E}\circ\mathcal{A})[\{2,3\}] \cup TODO$
+:::
+
+:::example
+	ordered rooted trees (order of successors matters):
+	
+	TODO{illustration}
+	
+	$\mathcal{A}_\mathcal{L} = X \cdot (\mathcal{L} \circ \mathcal{A}_\mathcal{L})$\newline
+	$\mathcal{A}_\mathcal{L}(x) = x\cdot\frac{1}{1-\mathcal{A}_\mathcal{L}(x)}$
+:::
+
+:::example
+	plane rooted trees:
+	
+	TODO{illustration}
+	
+	$F = X + X\cdot(\mathcal{C}\circ\mathcal{A}_\mathcal{L})$ with $\mathcal{C}$ being the cycle structure
+:::
+
+:::example
+	Permutation:
+	
+	$S = \mathcal{E}\circ\mathcal{C}$\newline
+	$\Rightarrow TODO$
+	
+	A permutation is just a set of cycles (of labels).
+:::
+
+:::example
+	Involutions:
+	
+	$I = \mathcal{E}\circ(X+\mathcal{E}_2)$\newline
+	$I(x) = exp(x+\frac{x^2}{2})$
 :::
 
