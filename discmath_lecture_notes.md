@@ -1871,7 +1871,7 @@ Corollary: The number of primitive polynomials is $\frac{1}{n}\phi(p^n-1)$, beca
 	
 	$C=f(K^k)$ is an $(n,k)$-linear code
 	
-	Let $\{c_1,\dots,c_k\}$ be a basis of $C$, then $G=TODO\in M_{k\times n}$ is the generator matrix.
+	Let $\{c_1,\dots,c_k\}$ be a basis of $C$, then $$G=\left( \begin{array}{c} c_1 \\ \\ c_2 \\ \vdots \\ c_k \end{array} \right)\in M_{k\times n}$$ (with the $c_i$'s as row vectors) is the generator matrix.
 	
 	Codewords are elements of $C$, i.e. linear combinations of $\{c_1,\dots,c_k\}$.
 :::
