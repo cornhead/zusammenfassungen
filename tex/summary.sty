@@ -24,6 +24,17 @@
 
 \newcommand\summaryLang{english}
 
+%% ----------- colors -----------------------
+
+\definecolor{mygreen}{rgb}{0.01, 0.75, 0.24}
+\definecolor{myred}{rgb}{0.76, 0.23, 0.13}
+\definecolor{myblue}{rgb}{0.47, 0.62, 0.8}
+\definecolor{mypurple}{rgb}{0.59, 0.44, 0.84}
+\definecolor{myorange}{rgb}{1.0, 0.7, 0.28}
+\definecolor{mybrown}{rgb}{0.51, 0.41, 0.33}
+\definecolor{mymagenta}{rgb}{0.96, 0.6, 0.76}
+
+%% -----------------------------------------
 
 %% TODO: automatically detect language as given by yml-variables
 \DeclareOption{english}{ \renewcommand\summaryLang{english}}
@@ -33,7 +44,7 @@
 
 \newcommand{\Github}{\href{https://github.com/cornhead/zusammenfassungen.git}{Github} }
 
-%% german strings
+%%  --------- german strings ---------------
 \newcommand\summaryStrDisclaimer{An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf \Github mitgewirkt werden!}
 \newcommand\summaryStrExample{Beispiel}
 \newcommand\summaryStrNote{Notiz}
@@ -44,7 +55,7 @@
 \newcommand\summaryStrDefinition{Definition}
 
 \ifthenelse{ \equal{\summaryLang}{english} }
-{ %% english strings
+{ %% ------------- english strings -----------
 	\renewcommand\summaryStrDisclaimer{Contributions to this summary and the corresponding formula sheet are welcome on \Github. }
 	\renewcommand\summaryStrExample{Example}
 	\renewcommand\summaryStrNote{Note}
@@ -75,13 +86,13 @@
 \newcommand\summaryLeftbarExtraLength{-5pt} % defines the extra length that the left bar laps above and below the text
 \newcommand\summaryLeftbarTopBotSpacing{7pt} % spacing of the bars at the top and the bottom end of the left bar to the text
 
-\newcommand\summaryExampleColor{violet}
-\newcommand\summaryNoteColor{blue}
-\newcommand\summaryRemarkColor{blue}
-\newcommand\summaryTheoremColor{red}
-\newcommand\summaryLemmaColor{red}
-\newcommand\summaryProofColor{red!50}
-\newcommand\summaryDefinitionColor{green}
+\newcommand\summaryExampleColor{mypurple}
+\newcommand\summaryNoteColor{myblue}
+\newcommand\summaryRemarkColor{myblue}
+\newcommand\summaryTheoremColor{myred}
+\newcommand\summaryLemmaColor{myred}
+\newcommand\summaryProofColor{myred!50}
+\newcommand\summaryDefinitionColor{mygreen}
 
 %% TODO: the following code is pure code duplication. I tried to solve this by introducing a new
 %% macro that defines those new environments , but it failed because then this macro would be
