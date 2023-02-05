@@ -84,7 +84,7 @@ class SummaryType:
 			'blank_line': re.compile('^\s*$'),
 			'yml_start_end': re.compile('\s*---\s*'),
 			'bullet_list_item': re.compile('^\s*(\*|#\.)\s'),
-			'special_block_start' : re.compile('\s*:::(theorem|lemma|remark|proof|definition|note|example|comment)(\s+([a-zA-Z].*)|\s*)'),
+			'special_block_start' : re.compile('\s*:::(theorem|lemma|remark|proof|corollary|definition|note|example|comment)(\s+([a-zA-Z].*)|\s*)'),
 			'special_block_end' : re.compile('\s*:::(\n|$)')
 		}
 		

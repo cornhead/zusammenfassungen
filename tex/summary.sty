@@ -52,6 +52,7 @@
 \newcommand\summaryStrTheorem{Satz}
 \newcommand\summaryStrLemma{Lemma}
 \newcommand\summaryStrProof{Beweis}
+\newcommand\summaryStrCorollary{Folgesatz}
 \newcommand\summaryStrDefinition{Definition}
 
 \ifthenelse{ \equal{\summaryLang}{english} }
@@ -63,6 +64,7 @@
 	\renewcommand\summaryStrTheorem{Theorem}
 	\renewcommand\summaryStrLemma{Lemma}
 	\renewcommand\summaryStrProof{Proof}
+	\renewcommand\summaryStrCorollary{Corollary}
 	\renewcommand\summaryStrDefinition{Definition}
 }
 {}
@@ -92,6 +94,7 @@
 \newcommand\summaryTheoremColor{myred}
 \newcommand\summaryLemmaColor{myred}
 \newcommand\summaryProofColor{myred!50}
+\newcommand\summaryCorollaryColor{myred}
 \newcommand\summaryDefinitionColor{mygreen}
 
 %% TODO: the following code is pure code duplication. I tried to solve this by introducing a new
@@ -254,6 +257,33 @@
 	% left bar
 	overlay unbroken={
 		\draw[\summaryProofColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
+
+\newtcolorbox[auto counter, number within=section]{corollary}[1]{
+	empty,
+	title={\summaryStrCorollary ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryCorollaryColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryCorollaryColor,line width=\summaryLeftbarThikness]
 		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
 		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
 		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
