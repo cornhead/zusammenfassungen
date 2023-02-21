@@ -1051,9 +1051,9 @@ $\Rightarrow a_n = \frac{f^{(n)(0)}}{n!}$
 	
 	\begin{align}
 		f(z) & \\
-		& = \sum a_n z^n
-		& = \sum b_n z^n
-		\Rightarrow a_n &= b_n \forall n$
+		& = \sum a_n z^n \\
+		& = \sum b_n z^n \\
+		\Rightarrow a_n &= b_n \forall n
 	\end{align}
 :::
 
