@@ -11,13 +11,30 @@
 
 \RequirePackage{ifthen}
 
+\RequirePackage{todonotes}
+
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+\RequirePackage{algorithmicx}
+
+\RequirePackage{soul} % required for \st (strike through)
+
 \tcbuselibrary{skins,breakable}
 
 
+\newcommand\summaryLang{english}
 
+%% ----------- colors -----------------------
 
-\newcommand\summaryLang{german}
+\definecolor{mygreen}{rgb}{0.01, 0.75, 0.24}
+\definecolor{myred}{rgb}{0.76, 0.23, 0.13}
+\definecolor{myblue}{rgb}{0.47, 0.62, 0.8}
+\definecolor{mypurple}{rgb}{0.59, 0.44, 0.84}
+\definecolor{myorange}{rgb}{1.0, 0.7, 0.28}
+\definecolor{mybrown}{rgb}{0.51, 0.41, 0.33}
+\definecolor{mymagenta}{rgb}{0.96, 0.6, 0.76}
 
+%% -----------------------------------------
 
 %% TODO: automatically detect language as given by yml-variables
 \DeclareOption{english}{ \renewcommand\summaryLang{english}}
@@ -27,18 +44,28 @@
 
 \newcommand{\Github}{\href{https://github.com/cornhead/zusammenfassungen.git}{Github} }
 
-%% german strings
+%%  --------- german strings ---------------
 \newcommand\summaryStrDisclaimer{An dieser Zusammenfassung und der zugehörigen Formelsammlung kann gerne auf \Github mitgewirkt werden!}
 \newcommand\summaryStrExample{Beispiel}
-\newcommand\summaryStrNote{Bemerkung}
+\newcommand\summaryStrNote{Notiz}
+\newcommand\summaryStrRemark{Bemerkung}
 \newcommand\summaryStrTheorem{Satz}
+\newcommand\summaryStrLemma{Lemma}
+\newcommand\summaryStrProof{Beweis}
+\newcommand\summaryStrCorollary{Folgesatz}
+\newcommand\summaryStrDefinition{Definition}
 
 \ifthenelse{ \equal{\summaryLang}{english} }
-{ %% english strings
-	\renewcommand\summaryStrDisclaimer{Contributions to this summary and the corresponding formula sheet are welcomed on \Github. }
+{ %% ------------- english strings -----------
+	\renewcommand\summaryStrDisclaimer{Contributions to this summary and the corresponding formula sheet are welcome on \Github. }
 	\renewcommand\summaryStrExample{Example}
 	\renewcommand\summaryStrNote{Note}
+	\renewcommand\summaryStrRemark{Remark}
 	\renewcommand\summaryStrTheorem{Theorem}
+	\renewcommand\summaryStrLemma{Lemma}
+	\renewcommand\summaryStrProof{Proof}
+	\renewcommand\summaryStrCorollary{Corollary}
+	\renewcommand\summaryStrDefinition{Definition}
 }
 {}
 
@@ -60,41 +87,20 @@
 \newcommand\summaryLeftbarSpacing{10pt} % defines the horizontal gap between the left bar and text
 \newcommand\summaryLeftbarExtraLength{-5pt} % defines the extra length that the left bar laps above and below the text
 \newcommand\summaryLeftbarTopBotSpacing{7pt} % spacing of the bars at the top and the bottom end of the left bar to the text
-\newcommand\summaryNoteColor{blue}
-\newcommand\summaryExampleColor{green}
-\newcommand\summaryTheoremColor{red}
+
+\newcommand\summaryExampleColor{mypurple}
+\newcommand\summaryNoteColor{myblue}
+\newcommand\summaryRemarkColor{myblue}
+\newcommand\summaryTheoremColor{myred}
+\newcommand\summaryLemmaColor{myred}
+\newcommand\summaryProofColor{myred!50}
+\newcommand\summaryCorollaryColor{myred}
+\newcommand\summaryDefinitionColor{mygreen}
 
 %% TODO: the following code is pure code duplication. I tried to solve this by introducing a new
 %% macro that defines those new environments , but it failed because then this macro would be
 %% expanded only at call time, not on definition, so all boxes had the same colors and titles.
 %% If someone could change this, that would be cool!
-
-\newtcolorbox[auto counter, number within=section]{note}[1]{
-	empty,
-	title={\summaryStrNote ~\thetcbcounter: #1},attach boxed title to top left,
-	boxed title style={
-		empty,
-		size=minimal,toprule=2pt,top=4pt,
-		%overlay={
-		%	\draw[\summaryNoteColor,line width=2pt]
-		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
-		%}
-	},
-	coltitle=\summaryNoteColor,
-	fonttitle=\bfseries,
-	before=\par\medskip\noindent,
-	parbox=false,
-	boxsep=0pt,left=0pt,right=3mm,top=4pt,
-	breakable,pad at break*=0mm,vfill before first,
-	% left bar
-	overlay unbroken={
-		\draw[\summaryNoteColor,line width=\summaryLeftbarThikness]
-		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
-		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
-		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
-		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
-	}
-}
 
 \newtcolorbox[auto counter, number within=section]{example}[1]{
 	empty,
@@ -123,6 +129,60 @@
 	}
 }
 
+\newtcolorbox[auto counter, number within=section]{note}[1]{
+	empty,
+	title={\summaryStrNote ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryNoteColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryNoteColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
+
+\newtcolorbox[auto counter, number within=section]{remark}[1]{
+	empty,
+	title={\summaryStrRemark ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryRemarkColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryRemarkColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
+
 \newtcolorbox[auto counter, number within=section]{theorem}[1]{
 	empty,
 	title={\summaryStrTheorem ~\thetcbcounter: #1},attach boxed title to top left,
@@ -143,6 +203,114 @@
 	% left bar
 	overlay unbroken={
 		\draw[\summaryTheoremColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
+
+\newtcolorbox[auto counter, number within=section]{lemma}[1]{
+	empty,
+	title={\summaryStrLemma ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryLemmaColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryLemmaColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
+
+\newtcolorbox[auto counter, number within=section]{myFancyProof}[1]{
+	empty,
+	title={\summaryStrProof ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryProofColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryProofColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
+
+\newtcolorbox[auto counter, number within=section]{corollary}[1]{
+	empty,
+	title={\summaryStrCorollary ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryCorollaryColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryCorollaryColor,line width=\summaryLeftbarThikness]
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
+		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
+		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
+		([xshift=-\summaryLeftbarTopBotSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west);
+	}
+}
+
+\newtcolorbox[auto counter, number within=section]{definition}[1]{
+	empty,
+	title={\summaryStrDefinition ~\thetcbcounter: #1},attach boxed title to top left,
+	boxed title style={
+		empty,
+		size=minimal,toprule=2pt,top=4pt,
+		%overlay={
+		%	\draw[\summaryNoteColor,line width=2pt]
+		%	([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);
+		%}
+	},
+	coltitle=\summaryDefinitionColor,
+	fonttitle=\bfseries,
+	before=\par\medskip\noindent,
+	parbox=false,
+	boxsep=0pt,left=0pt,right=3mm,top=4pt,
+	breakable,pad at break*=0mm,vfill before first,
+	% left bar
+	overlay unbroken={
+		\draw[\summaryDefinitionColor,line width=\summaryLeftbarThikness]
 		([xshift=-\summaryLeftbarTopBotSpacing, yshift=\summaryLeftbarExtraLength]title.north west)--
 		([xshift=-\summaryLeftbarSpacing,yshift=\summaryLeftbarExtraLength]title.north-|frame.west)--
 		([xshift=-\summaryLeftbarSpacing, yshift=-\summaryLeftbarExtraLength]frame.south west)--
